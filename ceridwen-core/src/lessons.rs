@@ -436,7 +436,7 @@ mod tests {
 
         for lesson in results {
             let difficulty = lesson.value1.max(lesson.value2);
-            assert!(difficulty >= 5 && difficulty <= 10);
+            assert!((5..=10).contains(&difficulty));
         }
     }
 
