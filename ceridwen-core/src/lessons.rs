@@ -1,0 +1,357 @@
+/// Types of lessons available in the educational system
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum LessonType {
+    /// Counting exercises (e.g., count to 5)
+    Counting,
+    /// Addition exercises (e.g., 2 + 3 = ?)
+    Addition,
+    /// Subtraction exercises (e.g., 5 - 2 = ?)
+    Subtraction,
+    /// Multiplication exercises (e.g., 3 × 4 = ?)
+    Multiplication,
+}
+
+/// Represents a single lesson with question and answer
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Lesson {
+    /// Unique identifier for the lesson
+    pub id: usize,
+    /// Type of lesson
+    pub lesson_type: LessonType,
+    /// First operand or value
+    pub value1: u8,
+    /// Second operand (0 for counting exercises)
+    pub value2: u8,
+    /// Correct answer
+    pub answer: u8,
+    /// Human-readable question text
+    pub question: String,
+}
+
+impl Lesson {
+    /// Create a new counting lesson
+    pub fn new_counting(id: usize, count_to: u8) -> Self {
+        Self {
+            id,
+            lesson_type: LessonType::Counting,
+            value1: count_to,
+            value2: 0,
+            answer: count_to,
+            question: format!("Count to {}", count_to),
+        }
+    }
+
+    /// Create a new addition lesson
+    pub fn new_addition(id: usize, a: u8, b: u8) -> Self {
+        Self {
+            id,
+            lesson_type: LessonType::Addition,
+            value1: a,
+            value2: b,
+            answer: a.saturating_add(b),
+            question: format!("{} + {} = ?", a, b),
+        }
+    }
+
+    /// Create a new subtraction lesson
+    pub fn new_subtraction(id: usize, a: u8, b: u8) -> Self {
+        Self {
+            id,
+            lesson_type: LessonType::Subtraction,
+            value1: a,
+            value2: b,
+            answer: a.saturating_sub(b),
+            question: format!("{} - {} = ?", a, b),
+        }
+    }
+
+    /// Create a new multiplication lesson
+    pub fn new_multiplication(id: usize, a: u8, b: u8) -> Self {
+        Self {
+            id,
+            lesson_type: LessonType::Multiplication,
+            value1: a,
+            value2: b,
+            answer: a.saturating_mul(b),
+            question: format!("{} × {} = ?", a, b),
+        }
+    }
+
+    /// Check if a given answer is correct
+    pub fn check_answer(&self, user_answer: u8) -> bool {
+        self.answer == user_answer
+    }
+}
+
+/// Query parameters for filtering lessons
+#[derive(Debug, Clone, Default)]
+pub struct LessonQuery {
+    /// Filter by lesson type
+    pub lesson_type: Option<LessonType>,
+    /// Filter by minimum difficulty (based on operand values)
+    pub min_difficulty: Option<u8>,
+    /// Filter by maximum difficulty
+    pub max_difficulty: Option<u8>,
+    /// Limit number of results
+    pub limit: Option<usize>,
+}
+
+/// Manages a collection of lessons in memory
+#[derive(Debug, Clone)]
+pub struct LessonManager {
+    lessons: Vec<Lesson>,
+    next_id: usize,
+}
+
+impl LessonManager {
+    /// Create a new empty lesson manager
+    pub fn new() -> Self {
+        Self {
+            lessons: Vec::new(),
+            next_id: 1,
+        }
+    }
+
+    /// Create a lesson manager with default lessons
+    pub fn with_defaults() -> Self {
+        let mut manager = Self::new();
+        
+        // Add counting lessons
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_counting(id, 3));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_counting(id, 5));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_counting(id, 10));
+        
+        // Add addition lessons
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_addition(id, 1, 1));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_addition(id, 2, 3));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_addition(id, 5, 4));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_addition(id, 7, 8));
+        
+        // Add subtraction lessons
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_subtraction(id, 5, 2));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_subtraction(id, 10, 3));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_subtraction(id, 8, 5));
+        
+        // Add multiplication lessons
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_multiplication(id, 2, 2));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_multiplication(id, 2, 3));
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_multiplication(id, 3, 4));
+        
+        manager
+    }
+
+    /// Get the next available ID
+    fn next_id(&mut self) -> usize {
+        let id = self.next_id;
+        self.next_id += 1;
+        id
+    }
+
+    /// Add a lesson to the manager
+    pub fn add_lesson(&mut self, lesson: Lesson) {
+        self.lessons.push(lesson);
+    }
+
+    /// Get a lesson by ID
+    pub fn get_lesson(&self, id: usize) -> Option<&Lesson> {
+        self.lessons.iter().find(|l| l.id == id)
+    }
+
+    /// Get all lessons
+    pub fn get_all_lessons(&self) -> &[Lesson] {
+        &self.lessons
+    }
+
+    /// Query lessons based on criteria
+    pub fn query_lessons(&self, query: &LessonQuery) -> Vec<&Lesson> {
+        let mut results: Vec<&Lesson> = self.lessons
+            .iter()
+            .filter(|lesson| {
+                // Filter by lesson type
+                if let Some(lesson_type) = query.lesson_type {
+                    if lesson.lesson_type != lesson_type {
+                        return false;
+                    }
+                }
+
+                // Filter by difficulty (max of value1 and value2)
+                let difficulty = lesson.value1.max(lesson.value2);
+                
+                if let Some(min) = query.min_difficulty {
+                    if difficulty < min {
+                        return false;
+                    }
+                }
+
+                if let Some(max) = query.max_difficulty {
+                    if difficulty > max {
+                        return false;
+                    }
+                }
+
+                true
+            })
+            .collect();
+
+        // Apply limit
+        if let Some(limit) = query.limit {
+            results.truncate(limit);
+        }
+
+        results
+    }
+
+    /// Get total number of lessons
+    pub fn count(&self) -> usize {
+        self.lessons.len()
+    }
+
+    /// Get lessons by type
+    pub fn get_by_type(&self, lesson_type: LessonType) -> Vec<&Lesson> {
+        self.query_lessons(&LessonQuery {
+            lesson_type: Some(lesson_type),
+            ..Default::default()
+        })
+    }
+}
+
+impl Default for LessonManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_lesson_creation() {
+        let lesson = Lesson::new_addition(1, 2, 3);
+        assert_eq!(lesson.id, 1);
+        assert_eq!(lesson.lesson_type, LessonType::Addition);
+        assert_eq!(lesson.value1, 2);
+        assert_eq!(lesson.value2, 3);
+        assert_eq!(lesson.answer, 5);
+        assert_eq!(lesson.question, "2 + 3 = ?");
+    }
+
+    #[test]
+    fn test_check_answer() {
+        let lesson = Lesson::new_counting(1, 5);
+        assert!(lesson.check_answer(5));
+        assert!(!lesson.check_answer(4));
+    }
+
+    #[test]
+    fn test_lesson_manager_add_and_get() {
+        let mut manager = LessonManager::new();
+        let lesson = Lesson::new_counting(1, 5);
+        manager.add_lesson(lesson.clone());
+        
+        assert_eq!(manager.count(), 1);
+        assert_eq!(manager.get_lesson(1), Some(&lesson));
+        assert_eq!(manager.get_lesson(999), None);
+    }
+
+    #[test]
+    fn test_lesson_manager_with_defaults() {
+        let manager = LessonManager::with_defaults();
+        assert!(manager.count() > 0);
+        
+        // Check we have different types of lessons
+        assert!(!manager.get_by_type(LessonType::Counting).is_empty());
+        assert!(!manager.get_by_type(LessonType::Addition).is_empty());
+        assert!(!manager.get_by_type(LessonType::Subtraction).is_empty());
+        assert!(!manager.get_by_type(LessonType::Multiplication).is_empty());
+    }
+
+    #[test]
+    fn test_query_by_type() {
+        let manager = LessonManager::with_defaults();
+        
+        let query = LessonQuery {
+            lesson_type: Some(LessonType::Addition),
+            ..Default::default()
+        };
+        
+        let results = manager.query_lessons(&query);
+        assert!(!results.is_empty());
+        
+        for lesson in results {
+            assert_eq!(lesson.lesson_type, LessonType::Addition);
+        }
+    }
+
+    #[test]
+    fn test_query_by_difficulty() {
+        let manager = LessonManager::with_defaults();
+        
+        let query = LessonQuery {
+            min_difficulty: Some(5),
+            max_difficulty: Some(10),
+            ..Default::default()
+        };
+        
+        let results = manager.query_lessons(&query);
+        
+        for lesson in results {
+            let difficulty = lesson.value1.max(lesson.value2);
+            assert!(difficulty >= 5 && difficulty <= 10);
+        }
+    }
+
+    #[test]
+    fn test_query_with_limit() {
+        let manager = LessonManager::with_defaults();
+        
+        let query = LessonQuery {
+            limit: Some(3),
+            ..Default::default()
+        };
+        
+        let results = manager.query_lessons(&query);
+        assert!(results.len() <= 3);
+    }
+
+    #[test]
+    fn test_query_combined_filters() {
+        let manager = LessonManager::with_defaults();
+        
+        let query = LessonQuery {
+            lesson_type: Some(LessonType::Addition),
+            max_difficulty: Some(5),
+            limit: Some(2),
+            ..Default::default()
+        };
+        
+        let results = manager.query_lessons(&query);
+        
+        assert!(results.len() <= 2);
+        for lesson in results {
+            assert_eq!(lesson.lesson_type, LessonType::Addition);
+            let difficulty = lesson.value1.max(lesson.value2);
+            assert!(difficulty <= 5);
+        }
+    }
+
+    #[test]
+    fn test_get_all_lessons() {
+        let manager = LessonManager::with_defaults();
+        let all_lessons = manager.get_all_lessons();
+        assert_eq!(all_lessons.len(), manager.count());
+    }
+}
