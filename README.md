@@ -1,6 +1,6 @@
 # ceridwen
 
-A Rust-based educational system for teaching counting and arithmetic. The system is designed to work with ESP32 devices and terminal user interfaces (TUI).
+A Rust-based educational system for teaching subitizing and arithmetic. The system is designed to work with ESP32 devices and terminal user interfaces (TUI).
 
 ## Architecture
 
@@ -12,7 +12,7 @@ The core library containing shared types and business logic for both ESP32 firmw
 
 **Key Components:**
 
-- **Lesson Types**: Counting, Addition, Subtraction, Multiplication
+- **Lesson Types**: Subitizing (dice patterns 1-6), Addition, Subtraction, Multiplication
 - **LessonManager**: In-memory lesson storage and querying
 - **LessonQuery**: Flexible query system for filtering lessons by type, difficulty, and more
 
@@ -23,7 +23,7 @@ A terminal user interface (TUI) application built with Ratatui for browsing and 
 **Features:**
 
 - 📚 Browse all available lessons
-- 🔍 Filter lessons by type (Counting, Addition, Subtraction, Multiplication)
+- 🔍 Filter lessons by type (Subitizing, Addition, Subtraction, Multiplication)
 - 📖 View detailed information about each lesson
 - ⌨️ Keyboard-driven navigation
 - 🎨 Beautiful terminal UI with emoji icons
@@ -45,7 +45,7 @@ cargo run --package ceridwen-tui
 - **Lesson List:**
   - `↑/↓` - Navigate through lessons
   - `Enter` - View lesson details
-  - `C` - Filter by Counting lessons
+  - `C` - Filter by Subitizing lessons
   - `A` - Filter by Addition lessons
   - `S` - Filter by Subtraction lessons
   - `M` - Filter by Multiplication lessons
@@ -94,7 +94,7 @@ for lesson in results {
 └──────────────────────────────────────────────────────────────┘
 ┌Welcome────────────────────────────────────────────────────────┐
 │                    Welcome to Ceridwen!                        │
-│        An educational system for teaching counting            │
+│        An educational system for teaching subitizing           │
 │                   and arithmetic.                              │
 │                       Main Menu:                               │
 │                   1. View Lessons                              │
@@ -107,12 +107,12 @@ for lesson in results {
 │                     📚 Lesson Library                         │
 └──────────────────────────────────────────────────────────────┘
 ┌Lessons────────────────────────────────────────────────────────┐
-│ → 🔢 1 - Count to 3                                            │
-│   🔢 2 - Count to 5                                            │
-│   ➕ 4 - 1 + 1 = ?                                             │
-│   ➕ 5 - 2 + 3 = ?                                             │
-│   ➖ 8 - 5 - 2 = ?                                             │
-│   ✖️ 11 - 2 × 2 = ?                                            │
+│ → 🎲 1 - What number do you see? (⚀)                          │
+│   🎲 2 - What number do you see? (⚁)                          │
+│   ➕ 7 - 1 + 1 = ?                                             │
+│   ➕ 8 - 2 + 3 = ?                                             │
+│   ➖ 11 - 5 - 2 = ?                                            │
+│   ✖️ 14 - 2 × 2 = ?                                            │
 └────────────────────────────────────────────────────────────────┘
 ```
 

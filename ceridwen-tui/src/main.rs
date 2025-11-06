@@ -74,7 +74,7 @@ fn run_app<B: ratatui::backend::Backend>(
                     app.select_item();
                 }
                 KeyCode::Char('c') if app.current_page == app::Page::LessonList => {
-                    app.filter_by_type(LessonType::Counting);
+                    app.filter_by_type(LessonType::Subitizing);
                 }
                 KeyCode::Char('a') if app.current_page == app::Page::LessonList => {
                     app.filter_by_type(LessonType::Addition);

@@ -1,8 +1,8 @@
 /// Types of lessons available in the educational system
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LessonType {
-    /// Counting exercises (e.g., count to 5)
-    Counting,
+    /// Subitizing exercises - recognizing quantities on dice (1-6)
+    Subitizing,
     /// Addition exercises (e.g., 2 + 3 = ?)
     Addition,
     /// Subtraction exercises (e.g., 5 - 2 = ?)
@@ -29,15 +29,32 @@ pub struct Lesson {
 }
 
 impl Lesson {
-    /// Create a new counting lesson
-    pub fn new_counting(id: usize, count_to: u8) -> Self {
+    /// Get the dice pattern for a subitizing lesson
+    pub fn get_dice_pattern(&self) -> String {
+        if self.lesson_type != LessonType::Subitizing {
+            return String::new();
+        }
+        
+        match self.value1 {
+            1 => "⚀".to_string(),
+            2 => "⚁".to_string(),
+            3 => "⚂".to_string(),
+            4 => "⚃".to_string(),
+            5 => "⚄".to_string(),
+            6 => "⚅".to_string(),
+            _ => "?".to_string(),
+        }
+    }
+
+    /// Create a new subitizing lesson (recognizing dice patterns 1-6)
+    pub fn new_subitizing(id: usize, dice_value: u8) -> Self {
         Self {
             id,
-            lesson_type: LessonType::Counting,
-            value1: count_to,
+            lesson_type: LessonType::Subitizing,
+            value1: dice_value,
             value2: 0,
-            answer: count_to,
-            question: format!("Count to {}", count_to),
+            answer: dice_value,
+            question: format!("What number do you see?"),
         }
     }
 
@@ -116,13 +133,11 @@ impl LessonManager {
     pub fn with_defaults() -> Self {
         let mut manager = Self::new();
         
-        // Add counting lessons
-        let id = manager.next_id();
-        manager.add_lesson(Lesson::new_counting(id, 3));
-        let id = manager.next_id();
-        manager.add_lesson(Lesson::new_counting(id, 5));
-        let id = manager.next_id();
-        manager.add_lesson(Lesson::new_counting(id, 10));
+        // Add subitizing lessons (dice 1-6)
+        for dice_value in 1..=6 {
+            let id = manager.next_id();
+            manager.add_lesson(Lesson::new_subitizing(id, dice_value));
+        }
         
         // Add addition lessons
         let id = manager.next_id();
@@ -251,7 +266,7 @@ mod tests {
 
     #[test]
     fn test_check_answer() {
-        let lesson = Lesson::new_counting(1, 5);
+        let lesson = Lesson::new_subitizing(1, 5);
         assert!(lesson.check_answer(5));
         assert!(!lesson.check_answer(4));
     }
@@ -259,7 +274,7 @@ mod tests {
     #[test]
     fn test_lesson_manager_add_and_get() {
         let mut manager = LessonManager::new();
-        let lesson = Lesson::new_counting(1, 5);
+        let lesson = Lesson::new_subitizing(1, 5);
         manager.add_lesson(lesson.clone());
         
         assert_eq!(manager.count(), 1);
@@ -273,7 +288,7 @@ mod tests {
         assert!(manager.count() > 0);
         
         // Check we have different types of lessons
-        assert!(!manager.get_by_type(LessonType::Counting).is_empty());
+        assert!(!manager.get_by_type(LessonType::Subitizing).is_empty());
         assert!(!manager.get_by_type(LessonType::Addition).is_empty());
         assert!(!manager.get_by_type(LessonType::Subtraction).is_empty());
         assert!(!manager.get_by_type(LessonType::Multiplication).is_empty());
@@ -353,5 +368,21 @@ mod tests {
         let manager = LessonManager::with_defaults();
         let all_lessons = manager.get_all_lessons();
         assert_eq!(all_lessons.len(), manager.count());
+    }
+
+    #[test]
+    fn test_dice_pattern() {
+        let lesson1 = Lesson::new_subitizing(1, 1);
+        assert_eq!(lesson1.get_dice_pattern(), "⚀");
+        
+        let lesson2 = Lesson::new_subitizing(2, 2);
+        assert_eq!(lesson2.get_dice_pattern(), "⚁");
+        
+        let lesson6 = Lesson::new_subitizing(6, 6);
+        assert_eq!(lesson6.get_dice_pattern(), "⚅");
+        
+        // Non-subitizing lesson should return empty string
+        let addition_lesson = Lesson::new_addition(7, 1, 1);
+        assert_eq!(addition_lesson.get_dice_pattern(), "");
     }
 }

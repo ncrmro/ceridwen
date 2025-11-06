@@ -41,7 +41,7 @@ fn draw_home(f: &mut Frame, _app: &App) {
             Span::styled("Welcome to Ceridwen!", Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)),
         ]),
         Line::from(""),
-        Line::from("An educational system for teaching counting and arithmetic."),
+        Line::from("An educational system for teaching subitizing and arithmetic."),
         Line::from(""),
         Line::from("Main Menu:"),
         Line::from(""),
@@ -95,7 +95,7 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
     // Filter info
     let filter_text = if let Some(filter_type) = app.current_filter {
         let type_name = match filter_type {
-            LessonType::Counting => "Counting",
+            LessonType::Subitizing => "Subitizing",
             LessonType::Addition => "Addition",
             LessonType::Subtraction => "Subtraction",
             LessonType::Multiplication => "Multiplication",
@@ -118,7 +118,7 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
         .enumerate()
         .map(|(idx, lesson)| {
             let type_icon = match lesson.lesson_type {
-                LessonType::Counting => "🔢",
+                LessonType::Subitizing => "🎲",
                 LessonType::Addition => "➕",
                 LessonType::Subtraction => "➖",
                 LessonType::Multiplication => "✖️",
@@ -131,9 +131,15 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
             };
 
             let prefix = if idx == app.selected_index { "→ " } else { "  " };
-            let content = format!("{}{} {} - {}", prefix, type_icon, lesson.id, lesson.question);
             
-            ListItem::new(content).style(style)
+            // For subitizing lessons, show the dice pattern
+            let display_text = if lesson.lesson_type == LessonType::Subitizing {
+                format!("{}{} {} - {} ({})", prefix, type_icon, lesson.id, lesson.question, lesson.get_dice_pattern())
+            } else {
+                format!("{}{} {} - {}", prefix, type_icon, lesson.id, lesson.question)
+            };
+            
+            ListItem::new(display_text).style(style)
         })
         .collect();
 
@@ -171,20 +177,20 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
     // Lesson details
     if let Some(lesson) = app.get_current_lesson() {
         let type_name = match lesson.lesson_type {
-            LessonType::Counting => "Counting",
+            LessonType::Subitizing => "Subitizing",
             LessonType::Addition => "Addition",
             LessonType::Subtraction => "Subtraction",
             LessonType::Multiplication => "Multiplication",
         };
 
         let type_icon = match lesson.lesson_type {
-            LessonType::Counting => "🔢",
+            LessonType::Subitizing => "🎲",
             LessonType::Addition => "➕",
             LessonType::Subtraction => "➖",
             LessonType::Multiplication => "✖️",
         };
 
-        let detail_text = vec![
+        let mut detail_text = vec![
             Line::from(""),
             Line::from(vec![
                 Span::styled("Lesson ID: ", Style::default().fg(Color::Gray)),
@@ -196,6 +202,25 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
                 Span::raw(format!("{} {}", type_icon, type_name)),
             ]),
             Line::from(""),
+        ];
+
+        // For subitizing lessons, show the dice pattern prominently
+        if lesson.lesson_type == LessonType::Subitizing {
+            detail_text.extend(vec![
+                Line::from(vec![
+                    Span::styled("Dice Pattern: ", Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)),
+                ]),
+                Line::from(""),
+                Line::from(vec![
+                    Span::styled(format!("          {}", lesson.get_dice_pattern()), 
+                        Style::default().fg(Color::White).add_modifier(Modifier::BOLD)),
+                ]),
+                Line::from(""),
+                Line::from(""),
+            ]);
+        }
+
+        detail_text.extend(vec![
             Line::from(vec![
                 Span::styled("Question: ", Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)),
             ]),
@@ -207,12 +232,18 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
                 Span::styled("Answer: ", Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)),
                 Span::styled(format!("{}", lesson.answer), Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)),
             ]),
-            Line::from(""),
-            Line::from(vec![
-                Span::styled("Values: ", Style::default().fg(Color::Gray)),
-                Span::raw(format!("value1={}, value2={}", lesson.value1, lesson.value2)),
-            ]),
-        ];
+        ]);
+
+        // Only show values for non-subitizing lessons
+        if lesson.lesson_type != LessonType::Subitizing {
+            detail_text.extend(vec![
+                Line::from(""),
+                Line::from(vec![
+                    Span::styled("Values: ", Style::default().fg(Color::Gray)),
+                    Span::raw(format!("value1={}, value2={}", lesson.value1, lesson.value2)),
+                ]),
+            ]);
+        }
 
         let details = Paragraph::new(detail_text)
             .block(Block::default().borders(Borders::ALL).title("Details"))
