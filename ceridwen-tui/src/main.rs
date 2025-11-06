@@ -1,6 +1,6 @@
 use ceridwen_core::{LessonManager, LessonType};
 use crossterm::{
-    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyModifiers},
+    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode},
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
@@ -56,9 +56,7 @@ fn run_app<B: ratatui::backend::Backend>(
         if let Event::Key(key) = event::read()? {
             match key.code {
                 KeyCode::Char('q') | KeyCode::Char('Q') => {
-                    if key.modifiers.contains(KeyModifiers::CONTROL) || app.current_page == app::Page::Home {
-                        return Ok(());
-                    }
+                    return Ok(());
                 }
                 KeyCode::Esc => {
                     app.go_home();

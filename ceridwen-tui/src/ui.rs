@@ -66,7 +66,7 @@ fn draw_home(f: &mut Frame, _app: &App) {
     f.render_widget(content, chunks[1]);
 
     // Help
-    let help = Paragraph::new("Q: Quit | 1: View Lessons")
+    let help = Paragraph::new("1: View Lessons | Q: Quit")
         .style(Style::default().fg(Color::Gray))
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
