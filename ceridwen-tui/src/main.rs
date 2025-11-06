@@ -56,7 +56,12 @@ fn run_app<B: ratatui::backend::Backend>(
                     return Ok(());
                 }
                 KeyCode::Esc => {
-                    app.go_home();
+                    if app.current_page == app::Page::SubitizingInteractive {
+                        app.current_page = app::Page::LessonList;
+                        app.clear_feedback();
+                    } else {
+                        app.go_home();
+                    }
                 }
                 KeyCode::Char('1') => {
                     app.view_lessons();
@@ -67,11 +72,23 @@ fn run_app<B: ratatui::backend::Backend>(
                 KeyCode::Down => {
                     app.next_item();
                 }
+                KeyCode::Left => {
+                    if app.current_page == app::Page::SubitizingInteractive {
+                        app.previous_item();
+                        app.clear_feedback();
+                    }
+                }
+                KeyCode::Right => {
+                    if app.current_page == app::Page::SubitizingInteractive {
+                        app.next_item();
+                        app.clear_feedback();
+                    }
+                }
                 KeyCode::Enter => {
                     app.select_item();
                 }
                 KeyCode::Char('c') if app.current_page == app::Page::LessonList => {
-                    app.filter_by_type(LessonType::Counting);
+                    app.filter_by_type(LessonType::Subitizing);
                 }
                 KeyCode::Char('a') if app.current_page == app::Page::LessonList => {
                     app.filter_by_type(LessonType::Addition);

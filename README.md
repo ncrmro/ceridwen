@@ -1,6 +1,6 @@
 # ceridwen
 
-A Rust-based educational system for teaching counting and arithmetic. The system is designed to work with ESP32 devices and terminal user interfaces (TUI).
+A Rust-based educational system for teaching subitizing and arithmetic. The system is designed to work with ESP32 devices and terminal user interfaces (TUI).
 
 ## Architecture
 
@@ -12,7 +12,7 @@ The core library containing shared types and business logic for both ESP32 firmw
 
 **Key Components:**
 
-- **Lesson Types**: Counting, Addition, Subtraction, Multiplication
+- **Lesson Types**: Subitizing (dice patterns 1-6), Addition, Subtraction, Multiplication
 - **LessonManager**: In-memory lesson storage and querying
 - **LessonQuery**: Flexible query system for filtering lessons by type, difficulty, and more
 
@@ -23,7 +23,7 @@ A terminal user interface (TUI) application built with Ratatui for browsing and 
 **Features:**
 
 - 📚 Browse all available lessons
-- 🔍 Filter lessons by type (Counting, Addition, Subtraction, Multiplication)
+- 🔍 Filter lessons by type (Subitizing, Addition, Subtraction, Multiplication)
 - 📖 View detailed information about each lesson
 - ⌨️ Keyboard-driven navigation
 - 🎨 Beautiful terminal UI with emoji icons
@@ -44,13 +44,19 @@ cargo run --package ceridwen-tui
 
 - **Lesson List:**
   - `↑/↓` - Navigate through lessons
-  - `Enter` - View lesson details
-  - `C` - Filter by Counting lessons
+  - `Enter` - View lesson details or start interactive subitizing
+  - `C` - Filter by Subitizing lessons
   - `A` - Filter by Addition lessons
   - `S` - Filter by Subtraction lessons
   - `M` - Filter by Multiplication lessons
   - `X` - Clear filter (show all)
   - `Esc` - Return to home
+  - `Q` - Quit
+
+- **Interactive Subitizing:**
+  - `←/→` - Navigate between dice
+  - `Enter` - Select the highlighted die
+  - `Esc` - Return to lesson list
   - `Q` - Quit
 
 - **Lesson Detail:**
@@ -94,7 +100,7 @@ for lesson in results {
 └──────────────────────────────────────────────────────────────┘
 ┌Welcome────────────────────────────────────────────────────────┐
 │                    Welcome to Ceridwen!                        │
-│        An educational system for teaching counting            │
+│        An educational system for teaching subitizing           │
 │                   and arithmetic.                              │
 │                       Main Menu:                               │
 │                   1. View Lessons                              │
@@ -107,12 +113,40 @@ for lesson in results {
 │                     📚 Lesson Library                         │
 └──────────────────────────────────────────────────────────────┘
 ┌Lessons────────────────────────────────────────────────────────┐
-│ → 🔢 1 - Count to 3                                            │
-│   🔢 2 - Count to 5                                            │
-│   ➕ 4 - 1 + 1 = ?                                             │
-│   ➕ 5 - 2 + 3 = ?                                             │
-│   ➖ 8 - 5 - 2 = ?                                             │
-│   ✖️ 11 - 2 × 2 = ?                                            │
+│ → 🎲 1 - Select the die showing 1 (⚀)                         │
+│   🎲 2 - Select the die showing 2 (⚁)                         │
+│   ➕ 5 - 1 + 1 = ?                                             │
+│   ➕ 6 - 2 + 3 = ?                                             │
+│   ➖ 9 - 5 - 2 = ?                                             │
+│   ✖️ 12 - 2 × 2 = ?                                            │
+└────────────────────────────────────────────────────────────────┘
+```
+
+### Interactive Subitizing
+```
+┌──────────────────────────────────────────────────────────────┐
+│              🎲 Subitizing Exercise                           │
+└──────────────────────────────────────────────────────────────┘
+┌Task───────────────────────────────────────────────────────────┐
+│                                                                │
+│              Select the die showing 1                          │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+┌Dice───────────────────────────────────────────────────────────┐
+│                                                                │
+│         ┌─────┐          ┌─────┐                              │
+│         │     │          │ ●   │                              │
+│         │  ●  │          │     │                              │
+│         │     │          │   ● │                              │
+│         └─────┘          └─────┘                              │
+│                                                                │
+│          ↑ ↑ ↑                                                │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+┌Result─────────────────────────────────────────────────────────┐
+│                                                                │
+│                      ✅ Correct!                              │
+│                                                                │
 └────────────────────────────────────────────────────────────────┘
 ```
 

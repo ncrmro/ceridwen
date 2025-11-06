@@ -1,8 +1,8 @@
 /// Types of lessons available in the educational system
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LessonType {
-    /// Counting exercises (e.g., count to 5)
-    Counting,
+    /// Subitizing exercises - recognizing quantities on dice (1-6)
+    Subitizing,
     /// Addition exercises (e.g., 2 + 3 = ?)
     Addition,
     /// Subtraction exercises (e.g., 5 - 2 = ?)
@@ -20,24 +20,107 @@ pub struct Lesson {
     pub lesson_type: LessonType,
     /// First operand or value
     pub value1: u8,
-    /// Second operand (0 for counting exercises)
+    /// Second operand (0 for subitizing exercises)
     pub value2: u8,
     /// Correct answer
     pub answer: u8,
     /// Human-readable question text
     pub question: String,
+    /// For subitizing: dice faces to display (e.g., [1, 2] shows dice with 1 and 2 dots)
+    pub dice_options: Vec<u8>,
+    /// For subitizing: which target number to select
+    pub target_number: Option<u8>,
 }
 
 impl Lesson {
-    /// Create a new counting lesson
-    pub fn new_counting(id: usize, count_to: u8) -> Self {
+    /// Get a larger ASCII art dice pattern for a subitizing lesson (3x3 grid)
+    pub fn get_dice_art(value: u8) -> Vec<String> {
+        match value {
+            1 => vec![
+                "┌─────┐".to_string(),
+                "│     │".to_string(),
+                "│  ●  │".to_string(),
+                "│     │".to_string(),
+                "└─────┘".to_string(),
+            ],
+            2 => vec![
+                "┌─────┐".to_string(),
+                "│ ●   │".to_string(),
+                "│     │".to_string(),
+                "│   ● │".to_string(),
+                "└─────┘".to_string(),
+            ],
+            3 => vec![
+                "┌─────┐".to_string(),
+                "│ ●   │".to_string(),
+                "│  ●  │".to_string(),
+                "│   ● │".to_string(),
+                "└─────┘".to_string(),
+            ],
+            4 => vec![
+                "┌─────┐".to_string(),
+                "│ ● ● │".to_string(),
+                "│     │".to_string(),
+                "│ ● ● │".to_string(),
+                "└─────┘".to_string(),
+            ],
+            5 => vec![
+                "┌─────┐".to_string(),
+                "│ ● ● │".to_string(),
+                "│  ●  │".to_string(),
+                "│ ● ● │".to_string(),
+                "└─────┘".to_string(),
+            ],
+            6 => vec![
+                "┌─────┐".to_string(),
+                "│ ● ● │".to_string(),
+                "│ ● ● │".to_string(),
+                "│ ● ● │".to_string(),
+                "└─────┘".to_string(),
+            ],
+            _ => vec![
+                "┌─────┐".to_string(),
+                "│  ?  │".to_string(),
+                "│  ?  │".to_string(),
+                "│  ?  │".to_string(),
+                "└─────┘".to_string(),
+            ],
+        }
+    }
+
+    /// Get the dice pattern for a subitizing lesson (single Unicode character)
+    pub fn get_dice_pattern(&self) -> String {
+        if self.lesson_type != LessonType::Subitizing {
+            return String::new();
+        }
+
+        match self.value1 {
+            1 => "⚀".to_string(),
+            2 => "⚁".to_string(),
+            3 => "⚂".to_string(),
+            4 => "⚃".to_string(),
+            5 => "⚄".to_string(),
+            6 => "⚅".to_string(),
+            _ => "?".to_string(),
+        }
+    }
+
+    /// Create a new subitizing lesson with multiple dice options
+    pub fn new_subitizing(
+        id: usize,
+        dice_options: Vec<u8>,
+        target_number: u8,
+        question: String,
+    ) -> Self {
         Self {
             id,
-            lesson_type: LessonType::Counting,
-            value1: count_to,
+            lesson_type: LessonType::Subitizing,
+            value1: target_number,
             value2: 0,
-            answer: count_to,
-            question: format!("Count to {}", count_to),
+            answer: target_number,
+            question,
+            dice_options,
+            target_number: Some(target_number),
         }
     }
 
@@ -50,6 +133,8 @@ impl Lesson {
             value2: b,
             answer: a.saturating_add(b),
             question: format!("{} + {} = ?", a, b),
+            dice_options: vec![],
+            target_number: None,
         }
     }
 
@@ -62,6 +147,8 @@ impl Lesson {
             value2: b,
             answer: a.saturating_sub(b),
             question: format!("{} - {} = ?", a, b),
+            dice_options: vec![],
+            target_number: None,
         }
     }
 
@@ -74,6 +161,8 @@ impl Lesson {
             value2: b,
             answer: a.saturating_mul(b),
             question: format!("{} × {} = ?", a, b),
+            dice_options: vec![],
+            target_number: None,
         }
     }
 
@@ -116,13 +205,39 @@ impl LessonManager {
     pub fn with_defaults() -> Self {
         let mut manager = Self::new();
 
-        // Add counting lessons
+        // Lesson 1 - Introduce 1 and 2 (two parts)
         let id = manager.next_id();
-        manager.add_lesson(Lesson::new_counting(id, 3));
+        manager.add_lesson(Lesson::new_subitizing(
+            id,
+            vec![1, 2],
+            1,
+            "Select the die showing 1".to_string(),
+        ));
         let id = manager.next_id();
-        manager.add_lesson(Lesson::new_counting(id, 5));
+        manager.add_lesson(Lesson::new_subitizing(
+            id,
+            vec![1, 2],
+            2,
+            "Select the die showing 2".to_string(),
+        ));
+
+        // Lesson 2 - Introduce 3
         let id = manager.next_id();
-        manager.add_lesson(Lesson::new_counting(id, 10));
+        manager.add_lesson(Lesson::new_subitizing(
+            id,
+            vec![1, 2, 3],
+            3,
+            "Select the die showing 3".to_string(),
+        ));
+
+        // Lesson 3 - Introduce 1-6
+        let id = manager.next_id();
+        manager.add_lesson(Lesson::new_subitizing(
+            id,
+            vec![1, 2, 3, 4, 5, 6],
+            5,
+            "Select the die showing 5".to_string(),
+        ));
 
         // Add addition lessons
         let id = manager.next_id();
@@ -252,7 +367,12 @@ mod tests {
 
     #[test]
     fn test_check_answer() {
-        let lesson = Lesson::new_counting(1, 5);
+        let lesson = Lesson::new_subitizing(
+            1,
+            vec![1, 2, 3, 4, 5],
+            5,
+            "Select the die showing 5".to_string(),
+        );
         assert!(lesson.check_answer(5));
         assert!(!lesson.check_answer(4));
     }
@@ -260,7 +380,12 @@ mod tests {
     #[test]
     fn test_lesson_manager_add_and_get() {
         let mut manager = LessonManager::new();
-        let lesson = Lesson::new_counting(1, 5);
+        let lesson = Lesson::new_subitizing(
+            1,
+            vec![1, 2, 3, 4, 5],
+            5,
+            "Select the die showing 5".to_string(),
+        );
         manager.add_lesson(lesson.clone());
 
         assert_eq!(manager.count(), 1);
@@ -274,7 +399,7 @@ mod tests {
         assert!(manager.count() > 0);
 
         // Check we have different types of lessons
-        assert!(!manager.get_by_type(LessonType::Counting).is_empty());
+        assert!(!manager.get_by_type(LessonType::Subitizing).is_empty());
         assert!(!manager.get_by_type(LessonType::Addition).is_empty());
         assert!(!manager.get_by_type(LessonType::Subtraction).is_empty());
         assert!(!manager.get_by_type(LessonType::Multiplication).is_empty());
@@ -354,5 +479,34 @@ mod tests {
         let manager = LessonManager::with_defaults();
         let all_lessons = manager.get_all_lessons();
         assert_eq!(all_lessons.len(), manager.count());
+    }
+
+    #[test]
+    fn test_dice_pattern() {
+        let lesson1 = Lesson::new_subitizing(1, vec![1], 1, "Select the die showing 1".to_string());
+        assert_eq!(lesson1.get_dice_pattern(), "⚀");
+
+        let lesson2 = Lesson::new_subitizing(2, vec![2], 2, "Select the die showing 2".to_string());
+        assert_eq!(lesson2.get_dice_pattern(), "⚁");
+
+        let lesson6 = Lesson::new_subitizing(6, vec![6], 6, "Select the die showing 6".to_string());
+        assert_eq!(lesson6.get_dice_pattern(), "⚅");
+
+        // Non-subitizing lesson should return empty string
+        let addition_lesson = Lesson::new_addition(7, 1, 1);
+        assert_eq!(addition_lesson.get_dice_pattern(), "");
+    }
+
+    #[test]
+    fn test_dice_art() {
+        let art = Lesson::get_dice_art(1);
+        assert_eq!(art.len(), 5); // 5 lines
+        assert!(art[2].contains("●")); // center dot
+
+        let art3 = Lesson::get_dice_art(3);
+        assert_eq!(art3.len(), 5);
+        assert!(art3[1].contains("●")); // top corner
+        assert!(art3[2].contains("●")); // center
+        assert!(art3[3].contains("●")); // bottom corner
     }
 }
