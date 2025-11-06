@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "ceridwen-core",
     "ceridwen-tui",
+    "ceridwen-esp32",
 ]
 
 [workspace.package]
