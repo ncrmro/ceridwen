@@ -31,6 +31,32 @@ jobs:
       rust-components: rustfmt,clippy
 ```
 
+### copilot-setup-steps.yml
+
+A reusable workflow designed for GitHub Copilot-generated workflows. This workflow sets up Rust, caches dependencies, and runs build and test steps.
+
+**Features:**
+- Installs Rust toolchain (configurable version)
+- Installs rustfmt and clippy components
+- Caches Cargo registry index
+- Caches Cargo registry cache
+- Caches Cargo git dependencies
+- Caches build artifacts (target directory)
+- Builds the project
+- Runs tests
+
+**Inputs:**
+- `rust-toolchain`: Rust toolchain version (default: 'stable')
+
+**Usage Example:**
+```yaml
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/copilot-setup-steps.yml
+    with:
+      rust-toolchain: stable
+```
+
 ### ci.yml
 
 Main CI workflow that runs on pushes and pull requests to `main` and `develop` branches.
