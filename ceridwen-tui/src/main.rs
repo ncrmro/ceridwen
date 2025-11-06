@@ -4,14 +4,11 @@ use crossterm::{
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
-use ratatui::{
-    backend::CrosstermBackend,
-    Terminal,
-};
+use ratatui::{backend::CrosstermBackend, Terminal};
 use std::io;
 
-mod ui;
 mod app;
+mod ui;
 
 use app::App;
 
@@ -93,4 +90,3 @@ fn run_app<B: ratatui::backend::Backend>(
         }
     }
 }
-
