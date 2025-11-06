@@ -11,12 +11,14 @@ fn get_completion_path() -> PathBuf {
     // Try to use user's data directory, fall back to current directory
     if let Some(data_dir) = dirs::data_local_dir() {
         let app_dir = data_dir.join("ceridwen");
-        // Create directory if it doesn't exist
-        let _ = fs::create_dir_all(&app_dir);
-        app_dir.join(COMPLETION_FILE)
-    } else {
-        PathBuf::from(COMPLETION_FILE)
+        // Try to create directory if it doesn't exist
+        // If creation fails, we'll fall back to current directory
+        if fs::create_dir_all(&app_dir).is_ok() {
+            return app_dir.join(COMPLETION_FILE);
+        }
     }
+    // Fallback to current directory
+    PathBuf::from(COMPLETION_FILE)
 }
 
 /// Load completion state from JSON file

@@ -54,7 +54,9 @@ impl CompletionState {
             &mut self.completions[pos]
         } else {
             self.completions.push(LessonCompletion::new(lesson_id));
-            self.completions.last_mut().unwrap()
+            self.completions
+                .last_mut()
+                .expect("Vec should have at least one element after push")
         }
     }
 
