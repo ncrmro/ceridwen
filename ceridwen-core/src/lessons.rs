@@ -20,7 +20,7 @@ pub struct Lesson {
     pub lesson_type: LessonType,
     /// First operand or value
     pub value1: u8,
-    /// Second operand (0 for counting exercises)
+    /// Second operand (0 for subitizing exercises)
     pub value2: u8,
     /// Correct answer
     pub answer: u8,
