@@ -115,7 +115,7 @@ impl LessonManager {
     /// Create a lesson manager with default lessons
     pub fn with_defaults() -> Self {
         let mut manager = Self::new();
-        
+
         // Add counting lessons
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_counting(id, 3));
@@ -123,7 +123,7 @@ impl LessonManager {
         manager.add_lesson(Lesson::new_counting(id, 5));
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_counting(id, 10));
-        
+
         // Add addition lessons
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_addition(id, 1, 1));
@@ -133,7 +133,7 @@ impl LessonManager {
         manager.add_lesson(Lesson::new_addition(id, 5, 4));
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_addition(id, 7, 8));
-        
+
         // Add subtraction lessons
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_subtraction(id, 5, 2));
@@ -141,7 +141,7 @@ impl LessonManager {
         manager.add_lesson(Lesson::new_subtraction(id, 10, 3));
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_subtraction(id, 8, 5));
-        
+
         // Add multiplication lessons
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_multiplication(id, 2, 2));
@@ -149,7 +149,7 @@ impl LessonManager {
         manager.add_lesson(Lesson::new_multiplication(id, 2, 3));
         let id = manager.next_id();
         manager.add_lesson(Lesson::new_multiplication(id, 3, 4));
-        
+
         manager
     }
 
@@ -177,7 +177,8 @@ impl LessonManager {
 
     /// Query lessons based on criteria
     pub fn query_lessons(&self, query: &LessonQuery) -> Vec<&Lesson> {
-        let mut results: Vec<&Lesson> = self.lessons
+        let mut results: Vec<&Lesson> = self
+            .lessons
             .iter()
             .filter(|lesson| {
                 // Filter by lesson type
@@ -189,7 +190,7 @@ impl LessonManager {
 
                 // Filter by difficulty (max of value1 and value2)
                 let difficulty = lesson.value1.max(lesson.value2);
-                
+
                 if let Some(min) = query.min_difficulty {
                     if difficulty < min {
                         return false;
@@ -261,7 +262,7 @@ mod tests {
         let mut manager = LessonManager::new();
         let lesson = Lesson::new_counting(1, 5);
         manager.add_lesson(lesson.clone());
-        
+
         assert_eq!(manager.count(), 1);
         assert_eq!(manager.get_lesson(1), Some(&lesson));
         assert_eq!(manager.get_lesson(999), None);
@@ -271,7 +272,7 @@ mod tests {
     fn test_lesson_manager_with_defaults() {
         let manager = LessonManager::with_defaults();
         assert!(manager.count() > 0);
-        
+
         // Check we have different types of lessons
         assert!(!manager.get_by_type(LessonType::Counting).is_empty());
         assert!(!manager.get_by_type(LessonType::Addition).is_empty());
@@ -282,15 +283,15 @@ mod tests {
     #[test]
     fn test_query_by_type() {
         let manager = LessonManager::with_defaults();
-        
+
         let query = LessonQuery {
             lesson_type: Some(LessonType::Addition),
             ..Default::default()
         };
-        
+
         let results = manager.query_lessons(&query);
         assert!(!results.is_empty());
-        
+
         for lesson in results {
             assert_eq!(lesson.lesson_type, LessonType::Addition);
         }
@@ -299,30 +300,30 @@ mod tests {
     #[test]
     fn test_query_by_difficulty() {
         let manager = LessonManager::with_defaults();
-        
+
         let query = LessonQuery {
             min_difficulty: Some(5),
             max_difficulty: Some(10),
             ..Default::default()
         };
-        
+
         let results = manager.query_lessons(&query);
-        
+
         for lesson in results {
             let difficulty = lesson.value1.max(lesson.value2);
-            assert!(difficulty >= 5 && difficulty <= 10);
+            assert!((5..=10).contains(&difficulty));
         }
     }
 
     #[test]
     fn test_query_with_limit() {
         let manager = LessonManager::with_defaults();
-        
+
         let query = LessonQuery {
             limit: Some(3),
             ..Default::default()
         };
-        
+
         let results = manager.query_lessons(&query);
         assert!(results.len() <= 3);
     }
@@ -330,16 +331,16 @@ mod tests {
     #[test]
     fn test_query_combined_filters() {
         let manager = LessonManager::with_defaults();
-        
+
         let query = LessonQuery {
             lesson_type: Some(LessonType::Addition),
             max_difficulty: Some(5),
             limit: Some(2),
             ..Default::default()
         };
-        
+
         let results = manager.query_lessons(&query);
-        
+
         assert!(results.len() <= 2);
         for lesson in results {
             assert_eq!(lesson.lesson_type, LessonType::Addition);

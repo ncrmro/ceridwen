@@ -20,7 +20,7 @@ impl App {
     pub fn new(lesson_manager: LessonManager) -> Self {
         let total_lessons = lesson_manager.count();
         let filtered_lessons: Vec<usize> = (0..total_lessons).collect();
-        
+
         Self {
             current_page: Page::Home,
             lesson_manager,
@@ -85,7 +85,9 @@ impl App {
             }
             Page::LessonList => {
                 // On lesson list, Enter shows lesson detail
-                if !self.filtered_lessons.is_empty() && self.selected_index < self.filtered_lessons.len() {
+                if !self.filtered_lessons.is_empty()
+                    && self.selected_index < self.filtered_lessons.len()
+                {
                     let lesson_index = self.filtered_lessons[self.selected_index];
                     let all_lessons = self.lesson_manager.get_all_lessons();
                     if lesson_index < all_lessons.len() {
@@ -115,7 +117,7 @@ impl App {
 
     fn apply_filter(&mut self) {
         let all_lessons = self.lesson_manager.get_all_lessons();
-        
+
         if let Some(filter_type) = self.current_filter {
             self.filtered_lessons = all_lessons
                 .iter()
@@ -137,6 +139,7 @@ impl App {
     }
 
     pub fn get_current_lesson(&self) -> Option<&Lesson> {
-        self.current_lesson_id.and_then(|id| self.lesson_manager.get_lesson(id))
+        self.current_lesson_id
+            .and_then(|id| self.lesson_manager.get_lesson(id))
     }
 }

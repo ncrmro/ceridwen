@@ -21,15 +21,19 @@ fn draw_home(f: &mut Frame, _app: &App) {
         .direction(Direction::Vertical)
         .margin(2)
         .constraints([
-            Constraint::Length(3),  // Title
-            Constraint::Min(10),    // Content
-            Constraint::Length(3),  // Help
+            Constraint::Length(3), // Title
+            Constraint::Min(10),   // Content
+            Constraint::Length(3), // Help
         ])
         .split(f.area());
 
     // Title
     let title = Paragraph::new("🎓 Ceridwen - Educational System")
-        .style(Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD))
+        .style(
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
+        )
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(title, chunks[0]);
@@ -37,9 +41,12 @@ fn draw_home(f: &mut Frame, _app: &App) {
     // Content
     let welcome_text = vec![
         Line::from(""),
-        Line::from(vec![
-            Span::styled("Welcome to Ceridwen!", Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)),
-        ]),
+        Line::from(vec![Span::styled(
+            "Welcome to Ceridwen!",
+            Style::default()
+                .fg(Color::Yellow)
+                .add_modifier(Modifier::BOLD),
+        )]),
         Line::from(""),
         Line::from("An educational system for teaching counting and arithmetic."),
         Line::from(""),
@@ -53,9 +60,17 @@ fn draw_home(f: &mut Frame, _app: &App) {
         Line::from(""),
         Line::from(vec![
             Span::styled("Press ", Style::default().fg(Color::Gray)),
-            Span::styled("1", Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)),
+            Span::styled(
+                "1",
+                Style::default()
+                    .fg(Color::Green)
+                    .add_modifier(Modifier::BOLD),
+            ),
             Span::styled(" to view lessons or ", Style::default().fg(Color::Gray)),
-            Span::styled("Q", Style::default().fg(Color::Red).add_modifier(Modifier::BOLD)),
+            Span::styled(
+                "Q",
+                Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
+            ),
             Span::styled(" to quit", Style::default().fg(Color::Gray)),
         ]),
     ];
@@ -78,16 +93,20 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
         .direction(Direction::Vertical)
         .margin(2)
         .constraints([
-            Constraint::Length(3),  // Title
-            Constraint::Length(3),  // Filter info
-            Constraint::Min(5),     // Lesson list
-            Constraint::Length(3),  // Help
+            Constraint::Length(3), // Title
+            Constraint::Length(3), // Filter info
+            Constraint::Min(5),    // Lesson list
+            Constraint::Length(3), // Help
         ])
         .split(f.area());
 
     // Title
     let title = Paragraph::new("📚 Lesson Library")
-        .style(Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD))
+        .style(
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
+        )
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(title, chunks[0]);
@@ -100,7 +119,11 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
             LessonType::Subtraction => "Subtraction",
             LessonType::Multiplication => "Multiplication",
         };
-        format!("Filter: {} ({} lessons)", type_name, app.filtered_lessons.len())
+        format!(
+            "Filter: {} ({} lessons)",
+            type_name,
+            app.filtered_lessons.len()
+        )
     } else {
         format!("Showing all lessons ({} total)", app.filtered_lessons.len())
     };
@@ -123,23 +146,36 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
                 LessonType::Subtraction => "➖",
                 LessonType::Multiplication => "✖️",
             };
-            
+
             let style = if idx == app.selected_index {
-                Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)
+                Style::default()
+                    .fg(Color::Yellow)
+                    .add_modifier(Modifier::BOLD)
             } else {
                 Style::default()
             };
 
-            let prefix = if idx == app.selected_index { "→ " } else { "  " };
-            let content = format!("{}{} {} - {}", prefix, type_icon, lesson.id, lesson.question);
-            
+            let prefix = if idx == app.selected_index {
+                "→ "
+            } else {
+                "  "
+            };
+            let content = format!(
+                "{}{} {} - {}",
+                prefix, type_icon, lesson.id, lesson.question
+            );
+
             ListItem::new(content).style(style)
         })
         .collect();
 
     let list = List::new(items)
         .block(Block::default().borders(Borders::ALL).title("Lessons"))
-        .highlight_style(Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD));
+        .highlight_style(
+            Style::default()
+                .fg(Color::Yellow)
+                .add_modifier(Modifier::BOLD),
+        );
     f.render_widget(list, chunks[2]);
 
     // Help
@@ -155,15 +191,19 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
         .direction(Direction::Vertical)
         .margin(2)
         .constraints([
-            Constraint::Length(3),  // Title
-            Constraint::Min(10),    // Lesson details
-            Constraint::Length(3),  // Help
+            Constraint::Length(3), // Title
+            Constraint::Min(10),   // Lesson details
+            Constraint::Length(3), // Help
         ])
         .split(f.area());
 
     // Title
     let title = Paragraph::new("📖 Lesson Details")
-        .style(Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD))
+        .style(
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
+        )
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(title, chunks[0]);
@@ -188,7 +228,12 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
             Line::from(""),
             Line::from(vec![
                 Span::styled("Lesson ID: ", Style::default().fg(Color::Gray)),
-                Span::styled(format!("{}", lesson.id), Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD)),
+                Span::styled(
+                    format!("{}", lesson.id),
+                    Style::default()
+                        .fg(Color::Cyan)
+                        .add_modifier(Modifier::BOLD),
+                ),
             ]),
             Line::from(""),
             Line::from(vec![
@@ -196,21 +241,40 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
                 Span::raw(format!("{} {}", type_icon, type_name)),
             ]),
             Line::from(""),
-            Line::from(vec![
-                Span::styled("Question: ", Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)),
-            ]),
-            Line::from(vec![
-                Span::styled(format!("  {}", lesson.question), Style::default().fg(Color::White).add_modifier(Modifier::BOLD)),
-            ]),
+            Line::from(vec![Span::styled(
+                "Question: ",
+                Style::default()
+                    .fg(Color::Yellow)
+                    .add_modifier(Modifier::BOLD),
+            )]),
+            Line::from(vec![Span::styled(
+                format!("  {}", lesson.question),
+                Style::default()
+                    .fg(Color::White)
+                    .add_modifier(Modifier::BOLD),
+            )]),
             Line::from(""),
             Line::from(vec![
-                Span::styled("Answer: ", Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)),
-                Span::styled(format!("{}", lesson.answer), Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)),
+                Span::styled(
+                    "Answer: ",
+                    Style::default()
+                        .fg(Color::Green)
+                        .add_modifier(Modifier::BOLD),
+                ),
+                Span::styled(
+                    format!("{}", lesson.answer),
+                    Style::default()
+                        .fg(Color::Green)
+                        .add_modifier(Modifier::BOLD),
+                ),
             ]),
             Line::from(""),
             Line::from(vec![
                 Span::styled("Values: ", Style::default().fg(Color::Gray)),
-                Span::raw(format!("value1={}, value2={}", lesson.value1, lesson.value2)),
+                Span::raw(format!(
+                    "value1={}, value2={}",
+                    lesson.value1, lesson.value2
+                )),
             ]),
         ];
 
