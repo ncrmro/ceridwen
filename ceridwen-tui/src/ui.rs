@@ -426,16 +426,18 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
             // Add indicator below selected die
             dice_lines.push(Line::from(""));
             let mut indicator_parts = vec![];
+            const INDICATOR_TEXT: &str = "  ↑ ↑ ↑";
+            const INDICATOR_WIDTH: usize = 7; // Width of "  ↑ ↑ ↑"
             for (dice_idx, _) in dice_arts.iter().enumerate() {
                 if dice_idx == app.selected_dice_index {
                     indicator_parts.push(Span::styled(
-                        "  ↑ ↑ ↑",
+                        INDICATOR_TEXT,
                         Style::default()
                             .fg(Color::Yellow)
                             .add_modifier(Modifier::BOLD),
                     ));
                 } else {
-                    indicator_parts.push(Span::raw("       "));
+                    indicator_parts.push(Span::raw(" ".repeat(INDICATOR_WIDTH)));
                 }
 
                 if dice_idx < dice_arts.len() - 1 {
