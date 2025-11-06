@@ -1,5 +1,5 @@
 use crate::app::{App, Page};
-use ceridwen_core::LessonType;
+use ceridwen_core::{Lesson, LessonType};
 use ratatui::{
     layout::{Alignment, Constraint, Direction, Layout},
     style::{Color, Modifier, Style},
@@ -13,6 +13,7 @@ pub fn draw(f: &mut Frame, app: &App) {
         Page::Home => draw_home(f, app),
         Page::LessonList => draw_lesson_list(f, app),
         Page::LessonDetail => draw_lesson_detail(f, app),
+        Page::SubitizingInteractive => draw_subitizing_interactive(f, app),
     }
 }
 
@@ -340,4 +341,148 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(help, chunks[2]);
+}
+
+fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
+    let chunks = Layout::default()
+        .direction(Direction::Vertical)
+        .margin(2)
+        .constraints([
+            Constraint::Length(3), // Title
+            Constraint::Length(5), // Question
+            Constraint::Min(10),   // Dice display area
+            Constraint::Length(4), // Feedback
+            Constraint::Length(3), // Help
+        ])
+        .split(f.area());
+
+    // Title
+    let title = Paragraph::new("🎲 Subitizing Exercise")
+        .style(
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
+        )
+        .alignment(Alignment::Center)
+        .block(Block::default().borders(Borders::ALL));
+    f.render_widget(title, chunks[0]);
+
+    if let Some(lesson) = app.get_current_lesson() {
+        // Question
+        let question_text = vec![
+            Line::from(""),
+            Line::from(vec![Span::styled(
+                &lesson.question,
+                Style::default()
+                    .fg(Color::Yellow)
+                    .add_modifier(Modifier::BOLD),
+            )]),
+        ];
+        let question = Paragraph::new(question_text)
+            .block(Block::default().borders(Borders::ALL).title("Task"))
+            .alignment(Alignment::Center);
+        f.render_widget(question, chunks[1]);
+
+        // Dice display
+        let mut dice_lines: Vec<Line> = vec![Line::from("")];
+
+        if !lesson.dice_options.is_empty() {
+            // Create horizontal layout for dice
+            let _num_dice = lesson.dice_options.len();
+            let _dice_width = 9; // Width per die including spacing
+
+            // Get all dice art
+            let dice_arts: Vec<Vec<String>> = lesson
+                .dice_options
+                .iter()
+                .map(|&val| Lesson::get_dice_art(val))
+                .collect();
+
+            // Render each line of all dice horizontally
+            for line_idx in 0..5 {
+                let mut line_parts = vec![];
+                for (dice_idx, dice_art) in dice_arts.iter().enumerate() {
+                    let is_selected = dice_idx == app.selected_dice_index;
+
+                    if is_selected {
+                        line_parts.push(Span::styled(
+                            dice_art[line_idx].clone(),
+                            Style::default()
+                                .fg(Color::Yellow)
+                                .add_modifier(Modifier::BOLD),
+                        ));
+                    } else {
+                        line_parts.push(Span::raw(dice_art[line_idx].clone()));
+                    }
+
+                    // Add spacing between dice
+                    if dice_idx < dice_arts.len() - 1 {
+                        line_parts.push(Span::raw("  "));
+                    }
+                }
+                dice_lines.push(Line::from(line_parts));
+            }
+
+            // Add indicator below selected die
+            dice_lines.push(Line::from(""));
+            let mut indicator_parts = vec![];
+            for (dice_idx, _) in dice_arts.iter().enumerate() {
+                if dice_idx == app.selected_dice_index {
+                    indicator_parts.push(Span::styled(
+                        "  ↑ ↑ ↑",
+                        Style::default()
+                            .fg(Color::Yellow)
+                            .add_modifier(Modifier::BOLD),
+                    ));
+                } else {
+                    indicator_parts.push(Span::raw("       "));
+                }
+
+                if dice_idx < dice_arts.len() - 1 {
+                    indicator_parts.push(Span::raw("  "));
+                }
+            }
+            dice_lines.push(Line::from(indicator_parts));
+        }
+
+        let dice_display = Paragraph::new(dice_lines)
+            .block(Block::default().borders(Borders::ALL).title("Dice"))
+            .alignment(Alignment::Center);
+        f.render_widget(dice_display, chunks[2]);
+
+        // Feedback
+        let feedback_text = if app.show_feedback {
+            if let Some(msg) = &app.feedback_message {
+                vec![
+                    Line::from(""),
+                    Line::from(vec![Span::styled(
+                        msg,
+                        Style::default()
+                            .fg(if msg.contains("✅") {
+                                Color::Green
+                            } else {
+                                Color::Red
+                            })
+                            .add_modifier(Modifier::BOLD),
+                    )]),
+                ]
+            } else {
+                vec![Line::from("")]
+            }
+        } else {
+            vec![Line::from("")]
+        };
+
+        let feedback = Paragraph::new(feedback_text)
+            .block(Block::default().borders(Borders::ALL).title("Result"))
+            .alignment(Alignment::Center);
+        f.render_widget(feedback, chunks[3]);
+    }
+
+    // Help
+    let help = Paragraph::new("←/→: Navigate | Enter: Select | Esc: Back | Q: Quit")
+        .style(Style::default().fg(Color::Gray))
+        .alignment(Alignment::Center)
+        .block(Block::default().borders(Borders::ALL));
+    f.render_widget(help, chunks[4]);
 }
