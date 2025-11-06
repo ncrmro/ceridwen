@@ -17,7 +17,7 @@ pub fn draw(f: &mut Frame, app: &App) {
     }
 }
 
-fn draw_home(f: &mut Frame, _app: &App) {
+fn draw_home(f: &mut Frame, app: &App) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
         .margin(2)
@@ -39,7 +39,10 @@ fn draw_home(f: &mut Frame, _app: &App) {
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(title, chunks[0]);
 
-    // Content
+    // Content with completion stats
+    let total_lessons = app.lesson_manager.count();
+    let completed_lessons = app.completion_state.total_completed();
+    
     let welcome_text = vec![
         Line::from(""),
         Line::from(vec![Span::styled(
@@ -50,6 +53,16 @@ fn draw_home(f: &mut Frame, _app: &App) {
         )]),
         Line::from(""),
         Line::from("An educational system for teaching subitizing and arithmetic."),
+        Line::from(""),
+        Line::from(vec![
+            Span::styled("Progress: ", Style::default().fg(Color::Gray)),
+            Span::styled(
+                format!("{}/{} lessons completed", completed_lessons, total_lessons),
+                Style::default()
+                    .fg(Color::Green)
+                    .add_modifier(Modifier::BOLD),
+            ),
+        ]),
         Line::from(""),
         Line::from("Main Menu:"),
         Line::from(""),
@@ -148,6 +161,9 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
                 LessonType::Multiplication => "✖️",
             };
 
+            let is_completed = app.completion_state.is_completed(lesson.id);
+            let completion_icon = if is_completed { "✅" } else { "  " };
+
             let style = if idx == app.selected_index {
                 Style::default()
                     .fg(Color::Yellow)
@@ -165,8 +181,9 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
             // For subitizing lessons, show the dice pattern
             let display_text = if lesson.lesson_type == LessonType::Subitizing {
                 format!(
-                    "{}{} {} - {} ({})",
+                    "{}{} {} {} - {} ({})",
                     prefix,
+                    completion_icon,
                     type_icon,
                     lesson.id,
                     lesson.question,
@@ -174,8 +191,8 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
                 )
             } else {
                 format!(
-                    "{}{} {} - {}",
-                    prefix, type_icon, lesson.id, lesson.question
+                    "{}{} {} {} - {}",
+                    prefix, completion_icon, type_icon, lesson.id, lesson.question
                 )
             };
 
@@ -253,6 +270,20 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
             Line::from(vec![
                 Span::styled("Type: ", Style::default().fg(Color::Gray)),
                 Span::raw(format!("{} {}", type_icon, type_name)),
+            ]),
+            Line::from(""),
+            Line::from(vec![
+                Span::styled("Status: ", Style::default().fg(Color::Gray)),
+                if app.completion_state.is_completed(lesson.id) {
+                    Span::styled(
+                        "✅ Completed",
+                        Style::default()
+                            .fg(Color::Green)
+                            .add_modifier(Modifier::BOLD),
+                    )
+                } else {
+                    Span::styled("⬜ Not completed", Style::default().fg(Color::Gray))
+                },
             ]),
             Line::from(""),
         ];
