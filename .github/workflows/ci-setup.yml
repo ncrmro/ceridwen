@@ -1,18 +1,13 @@
 name: CI Setup
 
 on:
-  workflow_call:
-    inputs:
-      rust-toolchain:
-        description: 'Rust toolchain to use'
-        required: false
-        type: string
-        default: 'stable'
-      rust-components:
-        description: 'Rust components to install (comma-separated)'
-        required: false
-        type: string
-        default: 'rustfmt,clippy'
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.ymll
 
 jobs:
   setup:
