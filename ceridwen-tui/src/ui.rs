@@ -387,10 +387,6 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
         let mut dice_lines: Vec<Line> = vec![Line::from("")];
 
         if !lesson.dice_options.is_empty() {
-            // Create horizontal layout for dice
-            let _num_dice = lesson.dice_options.len();
-            let _dice_width = 9; // Width per die including spacing
-
             // Get all dice art
             let dice_arts: Vec<Vec<String>> = lesson
                 .dice_options
@@ -427,7 +423,7 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
             dice_lines.push(Line::from(""));
             let mut indicator_parts = vec![];
             const INDICATOR_TEXT: &str = "  ↑ ↑ ↑";
-            const INDICATOR_WIDTH: usize = 7; // Width of "  ↑ ↑ ↑"
+            let indicator_width = INDICATOR_TEXT.len();
             for (dice_idx, _) in dice_arts.iter().enumerate() {
                 if dice_idx == app.selected_dice_index {
                     indicator_parts.push(Span::styled(
@@ -437,7 +433,7 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
                             .add_modifier(Modifier::BOLD),
                     ));
                 } else {
-                    indicator_parts.push(Span::raw(" ".repeat(INDICATOR_WIDTH)));
+                    indicator_parts.push(Span::raw(" ".repeat(indicator_width)));
                 }
 
                 if dice_idx < dice_arts.len() - 1 {
