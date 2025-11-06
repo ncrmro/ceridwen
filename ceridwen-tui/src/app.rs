@@ -1,4 +1,4 @@
-use ceridwen_core::{Lesson, LessonManager, LessonType};
+use ceridwen_core::{CompletionState, Lesson, LessonManager, LessonType};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Page {
@@ -11,6 +11,7 @@ pub enum Page {
 pub struct App {
     pub current_page: Page,
     pub lesson_manager: LessonManager,
+    pub completion_state: CompletionState,
     pub selected_index: usize,
     pub filtered_lessons: Vec<usize>, // Indices of lessons in the manager
     pub current_filter: Option<LessonType>,
@@ -22,13 +23,14 @@ pub struct App {
 }
 
 impl App {
-    pub fn new(lesson_manager: LessonManager) -> Self {
+    pub fn new(lesson_manager: LessonManager, completion_state: CompletionState) -> Self {
         let total_lessons = lesson_manager.count();
         let filtered_lessons: Vec<usize> = (0..total_lessons).collect();
 
         Self {
             current_page: Page::Home,
             lesson_manager,
+            completion_state,
             selected_index: 0,
             filtered_lessons,
             current_filter: None,
@@ -146,12 +148,17 @@ impl App {
                 if let Some(lesson) = self.get_current_lesson() {
                     if self.selected_dice_index < lesson.dice_options.len() {
                         let selected_value = lesson.dice_options[self.selected_dice_index];
+                        let lesson_id = lesson.id;
                         if lesson.check_answer(selected_value) {
                             self.feedback_message = Some("✅ Correct!".to_string());
                             self.show_feedback = true;
+                            // Mark the lesson as completed
+                            self.completion_state.mark_completed(lesson_id);
                         } else {
                             self.feedback_message = Some("❌ Incorrect. Try again!".to_string());
                             self.show_feedback = true;
+                            // Record the attempt even if incorrect
+                            self.completion_state.record_attempt(lesson_id);
                         }
                     }
                 }

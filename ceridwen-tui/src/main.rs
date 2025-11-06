@@ -8,6 +8,7 @@ use ratatui::{backend::CrosstermBackend, Terminal};
 use std::io;
 
 mod app;
+mod storage;
 mod ui;
 
 use app::App;
@@ -22,10 +23,19 @@ fn main() -> Result<(), io::Error> {
 
     // Create app state
     let lesson_manager = LessonManager::with_defaults();
-    let mut app = App::new(lesson_manager);
+    
+    // Load completion state from disk
+    let completion_state = storage::load_completion_state().unwrap_or_default();
+    
+    let mut app = App::new(lesson_manager, completion_state);
 
     // Run the app
     let res = run_app(&mut terminal, &mut app);
+
+    // Save completion state before exiting
+    if let Err(e) = storage::save_completion_state(&app.completion_state) {
+        eprintln!("Warning: Failed to save completion state: {}", e);
+    }
 
     // Restore terminal
     disable_raw_mode()?;
