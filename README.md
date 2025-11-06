@@ -15,6 +15,7 @@ The core library containing shared types and business logic for both ESP32 firmw
 - **Lesson Types**: Subitizing (dice patterns 1-6), Addition, Subtraction, Multiplication
 - **LessonManager**: In-memory lesson storage and querying
 - **LessonQuery**: Flexible query system for filtering lessons by type, difficulty, and more
+- **CompletionState**: Track completion status for lessons, with JSON persistence support
 
 ### ceridwen-tui
 
@@ -27,6 +28,8 @@ A terminal user interface (TUI) application built with Ratatui for browsing and 
 - 📖 View detailed information about each lesson
 - ⌨️ Keyboard-driven navigation
 - 🎨 Beautiful terminal UI with emoji icons
+- ✅ Track lesson completion with persistent storage
+- 📊 View progress statistics
 
 ## Usage
 
@@ -149,6 +152,31 @@ for lesson in results {
 │                                                                │
 └────────────────────────────────────────────────────────────────┘
 ```
+
+## Completion Tracking
+
+The TUI application now tracks lesson completion and persists progress to disk:
+
+- **Automatic Persistence**: Progress is saved to `~/.local/share/ceridwen/ceridwen_completion.json` (or platform-specific location)
+- **Visual Indicators**: Completed lessons are marked with ✅ in the lesson list
+- **Progress Display**: Home screen shows completion statistics (e.g., "3/14 lessons completed")
+- **ESP32 Compatible**: Uses simple JSON format designed to work with embedded systems
+
+### Example Completion Data
+
+```json
+{
+  "completions": [
+    {
+      "lesson_id": 1,
+      "completed": true,
+      "attempts": 1
+    }
+  ]
+}
+```
+
+For more details, see [COMPLETION_TRACKING.md](COMPLETION_TRACKING.md).
 
 ## Future Components
 
