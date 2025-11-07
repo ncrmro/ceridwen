@@ -161,35 +161,18 @@ ESP32 firmware that uses the core library with ESP32 HAL and SSD1306 OLED displa
 - 🔧 ESP32 hardware abstraction layer
 - ✅ Testable display utilities without hardware
 
-**Building:**
+**Quick Start:**
 
-Prerequisites:
 ```bash
-# Install ESP32 Rust toolchain
-cargo install espup
-espup install
-. $HOME/export-esp.sh
-
-# Install tools
-cargo install ldproxy espflash
-```
-
-Build and flash:
-```bash
-cd ceridwen-esp32
-cargo run --features esp32
-```
-
-Run tests (no hardware required):
-```bash
-cargo test --package ceridwen-esp32
+make build-esp32  # Build firmware
+make upload-esp32 # Flash to device
 ```
 
 **Hardware:**
 - ESP32 development board
 - SSD1306 OLED (I2C): SDA=GPIO21, SCL=GPIO22
 
-See [ceridwen-esp32/README.md](ceridwen-esp32/README.md) for more details.
+See [ceridwen-esp32/README.md](ceridwen-esp32/README.md) for complete build instructions, NixOS setup, and development details.
 
 ## License
 
