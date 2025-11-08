@@ -1,4 +1,5 @@
 use ceridwen_core::{Lesson, LessonManager, LessonType};
+use crate::persistence::ProgressManager;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Page {
@@ -19,10 +20,12 @@ pub struct App {
     pub selected_dice_index: usize,
     pub feedback_message: Option<String>,
     pub show_feedback: bool,
+    // Progress tracking
+    pub progress_manager: ProgressManager,
 }
 
 impl App {
-    pub fn new(lesson_manager: LessonManager) -> Self {
+    pub fn new(lesson_manager: LessonManager, progress_manager: ProgressManager) -> Self {
         let total_lessons = lesson_manager.count();
         let filtered_lessons: Vec<usize> = (0..total_lessons).collect();
 
@@ -36,6 +39,7 @@ impl App {
             selected_dice_index: 0,
             feedback_message: None,
             show_feedback: false,
+            progress_manager,
         }
     }
 
@@ -146,7 +150,15 @@ impl App {
                 if let Some(lesson) = self.get_current_lesson() {
                     if self.selected_dice_index < lesson.dice_options.len() {
                         let selected_value = lesson.dice_options[self.selected_dice_index];
-                        if lesson.check_answer(selected_value) {
+                        let is_correct = lesson.check_answer(selected_value);
+
+                        // Record the answer in progress
+                        self.progress_manager.record_answer(lesson.id, is_correct);
+
+                        // Save progress to disk (ignore errors for now)
+                        let _ = self.progress_manager.save();
+
+                        if is_correct {
                             self.feedback_message = Some("✅ Correct!".to_string());
                             self.show_feedback = true;
                         } else {
