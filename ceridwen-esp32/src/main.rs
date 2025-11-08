@@ -23,25 +23,30 @@ fn main() -> anyhow::Result<()> {
     let peripherals = Peripherals::take()?;
 
     // Configure I2C for the SSD1306 display
-    // ESP32-C3 pins: SDA=GPIO8, SCL=GPIO9
-    let sda = peripherals.pins.gpio8;
-    let scl = peripherals.pins.gpio9;
+    // ESP32-C3 pins: SDA=GPIO6, SCL=GPIO7
+    log::info!("Configuring I2C on GPIO6 (SDA) and GPIO7 (SCL)");
+    let sda = peripherals.pins.gpio6;
+    let scl = peripherals.pins.gpio7;
 
     let i2c = I2cDriver::new(
         peripherals.i2c0,
         sda,
         scl,
-        &I2cConfig::new().baudrate(400.kHz().into()),
+        &I2cConfig::new().baudrate(100.kHz().into()),
     )?;
+    
+    log::info!("I2C driver initialized");
 
     // Create the display interface
     let interface = I2CDisplayInterface::new(i2c);
 
     // Create the display driver
+    log::info!("Creating SSD1306 display driver");
     let mut display = Ssd1306::new(interface, DisplaySize128x64, DisplayRotation::Rotate0)
         .into_buffered_graphics_mode();
 
     // Initialize the display
+    log::info!("Initializing display...");
     display.init().map_err(|e| anyhow::anyhow!("Display init error: {:?}", e))?;
 
     log::info!("Display initialized");
