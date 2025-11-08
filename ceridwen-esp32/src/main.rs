@@ -22,8 +22,12 @@ fn main() -> anyhow::Result<()> {
     // Create peripherals
     let peripherals = Peripherals::take()?;
 
-    // Configure I2C for the SSD1306 display
-    // ESP32-C3 pins: SDA=GPIO6, SCL=GPIO7
+    // Hardware Configuration
+    // Current breadboard test setup:
+    // - SDA: GPIO6
+    // - SCL: GPIO7  
+    // - Button: GPIO0 (other pin to GND)
+    // - Display VCC: 3.3V, GND: GND
     log::info!("Configuring I2C on GPIO6 (SDA) and GPIO7 (SCL)");
     let sda = peripherals.pins.gpio6;
     let scl = peripherals.pins.gpio7;

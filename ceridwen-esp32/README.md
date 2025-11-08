@@ -13,12 +13,19 @@ ESP32 firmware for the Ceridwen educational system with SSD1306 OLED display sup
 
 - ESP32-C3 development board (or ESP32)
 - SSD1306 128x64 OLED display (I2C)
-- Connections for ESP32-C3:
-  - SDA: GPIO8
-  - SCL: GPIO9
-  - VCC: 3.3V
-  - GND: GND
-- Connections for ESP32:
+
+### Current Breadboard Test Setup
+
+**ESP32-C3 Pin Configuration:**
+- **SDA:** GPIO6 (I2C Data)
+- **SCL:** GPIO7 (I2C Clock)
+- **Button:** GPIO0 (other pin to GND)
+- **VCC:** 3.3V (to display)
+- **GND:** GND (to display and button)
+
+**Note:** GPIO8 and GPIO9 are alternative I2C pins if needed.
+
+### Alternative Connections for ESP32 (non-C3):
   - SDA: GPIO21
   - SCL: GPIO22
   - VCC: 3.3V
