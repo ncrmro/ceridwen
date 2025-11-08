@@ -11,9 +11,14 @@ ESP32 firmware for the Ceridwen educational system with SSD1306 OLED display sup
 
 ## Hardware Requirements
 
-- ESP32 development board
+- ESP32-C3 development board (or ESP32)
 - SSD1306 128x64 OLED display (I2C)
-- Connections:
+- Connections for ESP32-C3:
+  - SDA: GPIO8
+  - SCL: GPIO9
+  - VCC: 3.3V
+  - GND: GND
+- Connections for ESP32:
   - SDA: GPIO21
   - SCL: GPIO22
   - VCC: 3.3V
@@ -38,6 +43,102 @@ make upload-esp32
 # Clean build artifacts
 make clean-esp32
 ```
+
+## Uploading to ESP32
+
+### Prerequisites
+
+1. **Connect your ESP32** via USB cable to your computer
+2. **Verify the device is detected**:
+   ```bash
+   ls /dev/ttyUSB* /dev/ttyACM*
+   # Should show something like /dev/ttyUSB0 or /dev/ttyACM0
+   ```
+
+3. **Set proper permissions** (if needed):
+   ```bash
+   # Add your user to the dialout group (one-time setup)
+   sudo usermod -a -G dialout $USER
+   # Log out and back in for changes to take effect
+   
+   # Or use sudo with espflash (not recommended for regular use)
+   ```
+
+### Upload Methods
+
+#### Method 1: Using Make (Simplest)
+
+From the project root:
+```bash
+make upload-esp32
+```
+
+This will:
+- Build the firmware with optimized settings
+- Automatically detect your ESP32 device
+- Flash the firmware to the device
+- Open a serial monitor to view output
+
+#### Method 2: Using espflash Directly
+
+From the project root:
+```bash
+# In Nix shell
+source ~/export-esp.sh
+espflash flash --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32
+
+# Specify device manually if auto-detection fails
+espflash flash --monitor --port /dev/ttyUSB0 target/riscv32imc-esp-espidf/debug/ceridwen-esp32
+```
+
+> **Note:** The target path will be `target/xtensa-esp32-espidf/debug/ceridwen-esp32` for original ESP32, or `target/riscv32imc-esp-espidf/debug/ceridwen-esp32` for ESP32-C3. Check your `.cargo/config.toml` for the configured target.
+
+#### Method 3: Build and Flash Separately
+
+```bash
+# Build only
+make build-esp32
+
+# Flash manually (from project root)
+source ~/export-esp.sh
+espflash flash --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32
+# Or for ESP32: target/xtensa-esp32-espidf/debug/ceridwen-esp32
+```
+
+### Monitoring Serial Output
+
+After flashing, the monitor will automatically start. You can also run:
+
+```bash
+# Using espflash
+espflash monitor
+
+# Or specify port
+espflash monitor --port /dev/ttyUSB0
+```
+
+To exit the monitor, press `Ctrl+C`.
+
+### Troubleshooting Upload Issues
+
+**Device not found:**
+- Ensure USB cable is properly connected
+- Try a different USB cable (some are charge-only)
+- Check `dmesg | tail` for connection messages
+
+**Permission denied:**
+- Run `sudo chmod 666 /dev/ttyUSB0` (temporary fix)
+- Or add yourself to dialout group (permanent fix, requires re-login)
+
+**Flash fails:**
+- Hold the BOOT button on ESP32 while flashing
+- Press EN (reset) button after flash completes
+- Try a different USB port
+
+**Build errors:**
+- Ensure you're in the Nix shell: `nix develop`
+- Source ESP environment: `source ~/export-esp.sh`
+- Clean and rebuild: `make clean-esp32 && make build-esp32`
 
 ### NixOS Setup
 

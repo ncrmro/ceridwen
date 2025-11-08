@@ -118,7 +118,7 @@ impl App {
                     && self.selected_index < self.filtered_lessons.len()
                 {
                     let lesson_index = self.filtered_lessons[self.selected_index];
-                    let all_lessons = self.lesson_manager.get_all_lessons();
+                    let all_lessons = self.lesson_manager.get_all_lessons_vec();
                     if lesson_index < all_lessons.len() {
                         let lesson = &all_lessons[lesson_index];
                         self.current_lesson_id = Some(lesson.id);
@@ -177,7 +177,7 @@ impl App {
     }
 
     fn apply_filter(&mut self) {
-        let all_lessons = self.lesson_manager.get_all_lessons();
+        let all_lessons = self.lesson_manager.get_all_lessons_vec();
 
         if let Some(filter_type) = self.current_filter {
             self.filtered_lessons = all_lessons
@@ -192,10 +192,10 @@ impl App {
     }
 
     pub fn get_filtered_lessons(&self) -> Vec<&Lesson> {
-        let all_lessons = self.lesson_manager.get_all_lessons();
+        let all_lessons = self.lesson_manager.get_all_lessons_vec();
         self.filtered_lessons
             .iter()
-            .filter_map(|&idx| all_lessons.get(idx))
+            .filter_map(|&idx| all_lessons.get(idx).copied())
             .collect()
     }
 

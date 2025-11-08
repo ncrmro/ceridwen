@@ -12,7 +12,7 @@ build-esp32:
 
 upload-esp32: build-esp32
 	@echo "Uploading to device..."
-	@nix develop --command bash -c "source ~/export-esp.sh && cd ceridwen-esp32 && espflash flash --monitor"
+	@nix develop --command bash -c "source ~/export-esp.sh && espflash flash --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32"
 
 clean-esp32:
 	@cd ceridwen-esp32 && cargo clean

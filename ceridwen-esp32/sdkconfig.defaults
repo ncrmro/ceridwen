@@ -1,0 +1,2 @@
+# Increase main task stack size for LessonManager with fixed arrays
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192

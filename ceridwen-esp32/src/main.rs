@@ -23,9 +23,9 @@ fn main() -> anyhow::Result<()> {
     let peripherals = Peripherals::take()?;
 
     // Configure I2C for the SSD1306 display
-    // Using default pins: SDA=GPIO21, SCL=GPIO22
-    let sda = peripherals.pins.gpio21;
-    let scl = peripherals.pins.gpio22;
+    // ESP32-C3 pins: SDA=GPIO8, SCL=GPIO9
+    let sda = peripherals.pins.gpio8;
+    let scl = peripherals.pins.gpio9;
 
     let i2c = I2cDriver::new(
         peripherals.i2c0,

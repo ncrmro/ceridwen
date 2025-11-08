@@ -15,7 +15,7 @@ pub mod display {
         let question = truncate_string(&lesson.question, 20);
         
         let additional_info = match lesson.lesson_type {
-            LessonType::Subitizing => lesson.get_dice_pattern(),
+            LessonType::Subitizing => lesson.get_dice_pattern().to_string(),
             _ => format!("= {}", lesson.answer),
         };
 
