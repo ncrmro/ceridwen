@@ -372,7 +372,7 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
         let question_text = vec![
             Line::from(""),
             Line::from(vec![Span::styled(
-                &lesson.question,
+                lesson.question,
                 Style::default()
                     .fg(Color::Yellow)
                     .add_modifier(Modifier::BOLD),
@@ -386,11 +386,12 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
         // Dice display
         let mut dice_lines: Vec<Line> = vec![Line::from("")];
 
-        if !lesson.dice_options.is_empty() {
+        if lesson.dice_options_count > 0 {
             // Get all dice art
-            let dice_arts: Vec<Vec<String>> = lesson
+            let dice_arts: Vec<[&str; 5]> = lesson
                 .dice_options
                 .iter()
+                .take(lesson.dice_options_count as usize)
                 .map(|&val| Lesson::get_dice_art(val))
                 .collect();
 
@@ -402,13 +403,13 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
 
                     if is_selected {
                         line_parts.push(Span::styled(
-                            dice_art[line_idx].clone(),
+                            dice_art[line_idx],
                             Style::default()
                                 .fg(Color::Yellow)
                                 .add_modifier(Modifier::BOLD),
                         ));
                     } else {
-                        line_parts.push(Span::raw(dice_art[line_idx].clone()));
+                        line_parts.push(Span::raw(dice_art[line_idx]));
                     }
 
                     // Add spacing between dice

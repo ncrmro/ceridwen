@@ -150,9 +150,29 @@ for lesson in results {
 └────────────────────────────────────────────────────────────────┘
 ```
 
-## Future Components
+### ceridwen-esp32
 
-- **ESP32 Firmware**: Will use the core library with ESP32 HAL, OLED display (SSD1306), and serial communication
+ESP32 firmware that uses the core library with ESP32 HAL and SSD1306 OLED display.
+
+**Features:**
+
+- 📟 SSD1306 128x64 OLED display support via I2C
+- 🎓 Displays lessons from the core library
+- 🔧 ESP32 hardware abstraction layer
+- ✅ Testable display utilities without hardware
+
+**Quick Start:**
+
+```bash
+make build-esp32  # Build firmware
+make upload-esp32 # Flash to device
+```
+
+**Hardware:**
+- ESP32 development board
+- SSD1306 OLED (I2C): SDA=GPIO21, SCL=GPIO22
+
+See [ceridwen-esp32/README.md](ceridwen-esp32/README.md) for complete build instructions, NixOS setup, and development details.
 
 ## License
 

@@ -15,3 +15,8 @@ Cargo.lock
 # OS files
 .DS_Store
 Thumbs.db
+
+# ESP-IDF build artifacts
+.embuild/
+sdkconfig
+sdkconfig.old
