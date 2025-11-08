@@ -1,3 +1,4 @@
+use ceridwen_core::{LessonProgress, ProgressSummary};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -5,68 +6,19 @@ use std::fs;
 use std::io;
 use std::path::PathBuf;
 
-/// Progress tracking for a single lesson
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct LessonProgress {
-    pub lesson_id: usize,
-    pub completed_count: usize,
-    pub correct_count: usize,
-    pub incorrect_count: usize,
-    pub last_attempted: DateTime<Utc>,
-    pub first_attempted: DateTime<Utc>,
-}
-
-impl LessonProgress {
-    pub fn new(lesson_id: usize) -> Self {
-        let now = Utc::now();
-        Self {
-            lesson_id,
-            completed_count: 0,
-            correct_count: 0,
-            incorrect_count: 0,
-            last_attempted: now,
-            first_attempted: now,
-        }
-    }
-
-    pub fn record_answer(&mut self, is_correct: bool) {
-        self.completed_count += 1;
-        if is_correct {
-            self.correct_count += 1;
-        } else {
-            self.incorrect_count += 1;
-        }
-        self.last_attempted = Utc::now();
-    }
-
-    pub fn accuracy(&self) -> f64 {
-        if self.completed_count == 0 {
-            0.0
-        } else {
-            (self.correct_count as f64 / self.completed_count as f64) * 100.0
-        }
-    }
-}
-
 /// Overall progress tracking for all lessons
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProgressData {
     pub lessons: HashMap<usize, LessonProgress>,
-    pub total_attempts: usize,
-    pub total_correct: usize,
-    pub last_session: DateTime<Utc>,
-    pub first_session: DateTime<Utc>,
+    pub summary: ProgressSummary,
 }
 
 impl Default for ProgressData {
     fn default() -> Self {
-        let now = Utc::now();
+        let timestamp = Utc::now().timestamp() as u64;
         Self {
             lessons: HashMap::new(),
-            total_attempts: 0,
-            total_correct: 0,
-            last_session: now,
-            first_session: now,
+            summary: ProgressSummary::new(timestamp),
         }
     }
 }
@@ -88,8 +40,9 @@ impl ProgressManager {
 
     /// Get the default storage path for progress data
     fn get_default_path() -> io::Result<PathBuf> {
-        let data_dir = dirs::data_local_dir()
-            .ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "Could not find data directory"))?;
+        let data_dir = dirs::data_local_dir().ok_or_else(|| {
+            io::Error::new(io::ErrorKind::NotFound, "Could not find data directory")
+        })?;
 
         let app_dir = data_dir.join("ceridwen");
 
@@ -123,17 +76,16 @@ impl ProgressManager {
 
     /// Record an answer for a lesson
     pub fn record_answer(&mut self, lesson_id: usize, is_correct: bool) {
-        let lesson_progress = self.data.lessons
+        let timestamp = Utc::now().timestamp() as u64;
+
+        let lesson_progress = self
+            .data
+            .lessons
             .entry(lesson_id)
-            .or_insert_with(|| LessonProgress::new(lesson_id));
+            .or_insert_with(|| LessonProgress::new(lesson_id, timestamp));
 
-        lesson_progress.record_answer(is_correct);
-
-        self.data.total_attempts += 1;
-        if is_correct {
-            self.data.total_correct += 1;
-        }
-        self.data.last_session = Utc::now();
+        lesson_progress.record_answer(is_correct, timestamp);
+        self.data.summary.record_answer(is_correct, timestamp);
     }
 
     /// Get progress for a specific lesson
@@ -143,21 +95,17 @@ impl ProgressManager {
 
     /// Get overall accuracy percentage
     pub fn overall_accuracy(&self) -> f64 {
-        if self.data.total_attempts == 0 {
-            0.0
-        } else {
-            (self.data.total_correct as f64 / self.data.total_attempts as f64) * 100.0
-        }
+        self.data.summary.overall_accuracy()
     }
 
     /// Get total number of attempts across all lessons
     pub fn total_attempts(&self) -> usize {
-        self.data.total_attempts
+        self.data.summary.total_attempts
     }
 
     /// Get total number of correct answers across all lessons
     pub fn total_correct(&self) -> usize {
-        self.data.total_correct
+        self.data.summary.total_correct
     }
 
     /// Get the number of unique lessons attempted
@@ -168,6 +116,16 @@ impl ProgressManager {
     /// Get all lesson progress data
     pub fn all_progress(&self) -> &HashMap<usize, LessonProgress> {
         &self.data.lessons
+    }
+
+    /// Get the last session timestamp as a DateTime
+    pub fn last_session(&self) -> Option<DateTime<Utc>> {
+        DateTime::from_timestamp(self.data.summary.last_session_timestamp as i64, 0)
+    }
+
+    /// Get the first session timestamp as a DateTime
+    pub fn first_session(&self) -> Option<DateTime<Utc>> {
+        DateTime::from_timestamp(self.data.summary.first_session_timestamp as i64, 0)
     }
 }
 
