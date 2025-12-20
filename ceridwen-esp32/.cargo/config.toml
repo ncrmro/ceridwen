@@ -6,7 +6,7 @@ build-std = ["std", "panic_abort"]
 
 [target.riscv32imc-esp-espidf]
 linker = "ldproxy"
-runner = "espflash flash --monitor"
+runner = "espflash flash --baud 921600 --monitor"
 
 [env]
 MCU = "esp32c3"

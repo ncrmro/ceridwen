@@ -23,16 +23,14 @@ fn main() -> anyhow::Result<()> {
     let peripherals = Peripherals::take()?;
 
     // Hardware Configuration
-    // Current breadboard test setup:
-    // - SDA: GPIO6
-    // - SCL: GPIO7  
-    // - Button: GPIO0 (other pin to GND)
-    // - Display VCC: 3.3V, GND: GND
-    log::info!("Configuring I2C on GPIO6 (SDA) and GPIO7 (SCL)");
-    let sda = peripherals.pins.gpio6;
-    let scl = peripherals.pins.gpio7;
+    // Standard ESP32-C3 I2C pins:
+    // - SDA: GPIO8
+    // - SCL: GPIO9
+    log::info!("Configuring I2C on GPIO8 (SDA) and GPIO9 (SCL)");
+    let sda = peripherals.pins.gpio8;
+    let scl = peripherals.pins.gpio9;
 
-    let i2c = I2cDriver::new(
+    let mut i2c = I2cDriver::new(
         peripherals.i2c0,
         sda,
         scl,
@@ -40,6 +38,23 @@ fn main() -> anyhow::Result<()> {
     )?;
     
     log::info!("I2C driver initialized");
+
+    // Scan for I2C devices to verify connection
+    log::info!("Scanning I2C bus...");
+    let mut found_devices = false;
+    for addr in 1..127 {
+        // Try to write 0 bytes to the address to check for ACK
+        match i2c.write(addr, &[], 10) {
+            Ok(_) => {
+                log::info!("Found I2C device at address 0x{:02x}", addr);
+                found_devices = true;
+            }
+            Err(_) => {}
+        }
+    }
+    if !found_devices {
+        log::warn!("No I2C devices found! Check wiring and pull-up resistors.");
+    }
 
     // Create the display interface
     let interface = I2CDisplayInterface::new(i2c);
