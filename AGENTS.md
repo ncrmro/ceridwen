@@ -60,6 +60,15 @@ nix develop
 source ~/export-esp.sh  # Sourced automatically by Makefile targets
 ```
 
+## Design Philosophy
+
+*   **Target Audience:** Children (Pre-K to Early Elementary).
+*   **UI Principles:**
+    *   **Minimalist:** Remove technical jargon (e.g., "Lesson 1/24"). Focus on the immediate task.
+    *   **Visual:** Prefer graphics (dice, icons) over text where possible.
+    *   **Forgiving:** Navigation should be simple and robust.
+    *   **Clear Feedback:** "Correct!" or "Try Again" should be immediate and obvious.
+
 ## Codebase Conventions
 
 *   **Error Handling:**
