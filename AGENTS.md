@@ -20,7 +20,16 @@ The project is organized into a Cargo workspace with three main members:
 
 3.  **`ceridwen-esp32`**: Firmware for ESP32 microcontrollers.
     *   Built on `esp-idf-hal` and `esp-idf-svc`.
-    *   Target hardware: ESP32 development board + SSD1306 OLED display (I2C).
+**Hardware:**
+- ESP32 development board (ESP32-C3 recommended)
+- SSD1306 OLED (I2C): SDA=GPIO4, SCL=GPIO5
+  - *Note: Moved from GPIO8/9 to avoid conflict with onboard LED on GPIO8.*
+- Button 1 (Left/Prev): GPIO0
+- Button 2 (Right/Next): GPIO1
+- Action (Select/Show): Press Both Buttons
+- Onboard LED: GPIO8 (Software disabled)
+
+See [ceridwen-esp32/README.md](ceridwen-esp32/README.md) for complete build instructions, NixOS setup, and development details.
     *   Displays lessons and interacts via simple inputs (currently set up for I2C display output).
 
 ## Build & Development Environment
