@@ -12,6 +12,11 @@ Cargo.lock
 *.swo
 *~
 
+# Devenv / direnv
+.direnv/
+.devenv/
+.devenv.flake.nix
+
 # OS files
 .DS_Store
 Thumbs.db
