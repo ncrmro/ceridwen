@@ -17,12 +17,13 @@ pub fn draw(f: &mut Frame, app: &App) {
     }
 }
 
-fn draw_home(f: &mut Frame, _app: &App) {
+fn draw_home(f: &mut Frame, app: &App) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
         .margin(2)
         .constraints([
             Constraint::Length(3), // Title
+            Constraint::Length(7), // Progress stats
             Constraint::Min(10),   // Content
             Constraint::Length(3), // Help
         ])
@@ -38,6 +39,35 @@ fn draw_home(f: &mut Frame, _app: &App) {
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(title, chunks[0]);
+
+    // Progress stats
+    let total_attempts = app.progress_manager.total_attempts();
+    let total_correct = app.progress_manager.total_correct();
+    let accuracy = app.progress_manager.overall_accuracy();
+    let lessons_attempted = app.progress_manager.lessons_attempted();
+
+    let progress_text = vec![
+        Line::from(""),
+        Line::from(vec![
+            Span::styled("📊 Your Progress: ", Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD)),
+        ]),
+        Line::from(""),
+        Line::from(vec![
+            Span::styled("  Total Attempts: ", Style::default().fg(Color::Gray)),
+            Span::styled(format!("{}", total_attempts), Style::default().fg(Color::White).add_modifier(Modifier::BOLD)),
+            Span::styled("  |  Correct: ", Style::default().fg(Color::Gray)),
+            Span::styled(format!("{}", total_correct), Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)),
+            Span::styled("  |  Accuracy: ", Style::default().fg(Color::Gray)),
+            Span::styled(format!("{:.1}%", accuracy), Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)),
+            Span::styled("  |  Lessons: ", Style::default().fg(Color::Gray)),
+            Span::styled(format!("{}", lessons_attempted), Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD)),
+        ]),
+    ];
+
+    let progress = Paragraph::new(progress_text)
+        .block(Block::default().borders(Borders::ALL).title("Statistics"))
+        .alignment(Alignment::Center);
+    f.render_widget(progress, chunks[1]);
 
     // Content
     let welcome_text = vec![
@@ -79,14 +109,14 @@ fn draw_home(f: &mut Frame, _app: &App) {
     let content = Paragraph::new(welcome_text)
         .block(Block::default().borders(Borders::ALL).title("Welcome"))
         .alignment(Alignment::Center);
-    f.render_widget(content, chunks[1]);
+    f.render_widget(content, chunks[2]);
 
     // Help
     let help = Paragraph::new("1: View Lessons | Q: Quit")
         .style(Style::default().fg(Color::Gray))
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
-    f.render_widget(help, chunks[2]);
+    f.render_widget(help, chunks[3]);
 }
 
 fn draw_lesson_list(f: &mut Frame, app: &App) {
@@ -162,20 +192,28 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
                 "  "
             };
 
+            // Get progress for this lesson
+            let progress_str = if let Some(progress) = app.progress_manager.get_lesson_progress(lesson.id) {
+                format!(" [{}✓ {:.0}%]", progress.completed_count, progress.accuracy())
+            } else {
+                String::new()
+            };
+
             // For subitizing lessons, show the dice pattern
             let display_text = if lesson.lesson_type == LessonType::Subitizing {
                 format!(
-                    "{}{} {} - {} ({})",
+                    "{}{} {} - {} ({}){}",
                     prefix,
                     type_icon,
                     lesson.id,
                     lesson.question,
-                    lesson.get_dice_pattern()
+                    lesson.get_dice_pattern(),
+                    progress_str
                 )
             } else {
                 format!(
-                    "{}{} {} - {}",
-                    prefix, type_icon, lesson.id, lesson.question
+                    "{}{} {} - {}{}",
+                    prefix, type_icon, lesson.id, lesson.question, progress_str
                 )
             };
 
@@ -319,6 +357,64 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
                         lesson.value1, lesson.value2
                     )),
                 ]),
+            ]);
+        }
+
+        // Show progress for this lesson
+        if let Some(progress) = app.progress_manager.get_lesson_progress(lesson.id) {
+            detail_text.extend(vec![
+                Line::from(""),
+                Line::from(""),
+                Line::from(vec![Span::styled(
+                    "📊 Your Progress:",
+                    Style::default()
+                        .fg(Color::Cyan)
+                        .add_modifier(Modifier::BOLD),
+                )]),
+                Line::from(""),
+                Line::from(vec![
+                    Span::styled("  Attempts: ", Style::default().fg(Color::Gray)),
+                    Span::styled(
+                        format!("{}", progress.completed_count),
+                        Style::default()
+                            .fg(Color::White)
+                            .add_modifier(Modifier::BOLD),
+                    ),
+                ]),
+                Line::from(vec![
+                    Span::styled("  Correct: ", Style::default().fg(Color::Gray)),
+                    Span::styled(
+                        format!("{}", progress.correct_count),
+                        Style::default()
+                            .fg(Color::Green)
+                            .add_modifier(Modifier::BOLD),
+                    ),
+                ]),
+                Line::from(vec![
+                    Span::styled("  Incorrect: ", Style::default().fg(Color::Gray)),
+                    Span::styled(
+                        format!("{}", progress.incorrect_count),
+                        Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
+                    ),
+                ]),
+                Line::from(vec![
+                    Span::styled("  Accuracy: ", Style::default().fg(Color::Gray)),
+                    Span::styled(
+                        format!("{:.1}%", progress.accuracy()),
+                        Style::default()
+                            .fg(Color::Yellow)
+                            .add_modifier(Modifier::BOLD),
+                    ),
+                ]),
+            ]);
+        } else {
+            detail_text.extend(vec![
+                Line::from(""),
+                Line::from(""),
+                Line::from(vec![Span::styled(
+                    "📊 No attempts yet",
+                    Style::default().fg(Color::Gray),
+                )]),
             ]);
         }
 

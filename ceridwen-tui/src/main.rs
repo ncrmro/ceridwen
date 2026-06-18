@@ -8,9 +8,11 @@ use ratatui::{backend::CrosstermBackend, Terminal};
 use std::io;
 
 mod app;
+mod persistence;
 mod ui;
 
 use app::App;
+use persistence::ProgressManager;
 
 fn main() -> Result<(), io::Error> {
     // Setup terminal
@@ -22,7 +24,8 @@ fn main() -> Result<(), io::Error> {
 
     // Create app state
     let lesson_manager = LessonManager::with_defaults();
-    let mut app = App::new(lesson_manager);
+    let progress_manager = ProgressManager::new()?;
+    let mut app = App::new(lesson_manager, progress_manager);
 
     // Run the app
     let res = run_app(&mut terminal, &mut app);
@@ -53,6 +56,8 @@ fn run_app<B: ratatui::backend::Backend>(
         if let Event::Key(key) = event::read()? {
             match key.code {
                 KeyCode::Char('q') | KeyCode::Char('Q') => {
+                    // Save progress before quitting
+                    let _ = app.progress_manager.save();
                     return Ok(());
                 }
                 KeyCode::Esc => {
