@@ -3,6 +3,8 @@ import wasmUrl from 'replicad-opencascadejs/src/replicad_single.wasm?url';
 import {setOC} from 'replicad';
 import {assemblySTEP} from './step.ts';
 import type {OpenCascadeInstance} from 'replicad-opencascadejs';
+import {physical} from './models/common.ts';
+import * as pushPin from './models/push-pin.ts';
 import {printSolid} from './print.ts';
 import {buildDesign} from './build-design.ts';
 import type {Parameters} from './parameters.ts';
@@ -14,9 +16,11 @@ self.onmessage=async(event:MessageEvent<{type:string;parameters?:Parameters;id?:
    design=buildDesign(event.data.parameters!,await kernel);
    self.postMessage({type:'built',result:{assembly:design.assembly,meshes:design.meshes,report:design.report}});
   }else if(event.data.type==='stl'&&design){
-   const entity=design.entities.find(e=>(e.category==='printed')&&e.id===event.data.id);
+   const entity=design.entities.find(e=>(e.category==='printed'||e.category==='fastener')&&e.id===event.data.id);
    if(!entity)throw new Error('Unknown printed part');
-   self.postMessage({type:'download',name:entity.id+'.stl',blob:printSolid(entity.id,entity.shape).blobSTL()});
+   const clip=design.pushPins.find(p=>p.id===entity.id);
+   const printable=clip?printSolid('PUSH_PIN',physical(pushPin.build(design.layout.params.pushFit,clip.length))):printSolid(entity.id,entity.shape);
+   self.postMessage({type:'download',name:entity.id+'.stl',blob:printable.blobSTL()});
   }else if(event.data.type==='step'&&design){
    self.postMessage({type:'download',name:'ceridwen-assembled.step',blob:assemblySTEP(design.entities.map(e=>e.shape))});
   }
