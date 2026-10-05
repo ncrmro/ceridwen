@@ -1,5 +1,7 @@
 # ceridwen
 
+[**Explore the design history: images, mobile views, tagged source and 3D models**](hardware/snapshots/README.md)
+
 A Rust-based educational system for teaching subitizing and arithmetic. The system is designed to work with ESP32 devices and terminal user interfaces (TUI).
 
 The [parametric mechanical design](docs/hardware/parametric-design.md) now includes

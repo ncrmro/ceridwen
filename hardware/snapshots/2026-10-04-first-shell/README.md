@@ -6,3 +6,5 @@ Original design-study screenshots recovered from session records. Matching sourc
 
 ![Original view](1021-workbench-exploded.png)
 
+
+[Recovered partial source](partial-source.zip) contains the original assembly/enclosure/export/viewer fragments. It is not a complete reproducible build. The original image tag predates this additional recovery.

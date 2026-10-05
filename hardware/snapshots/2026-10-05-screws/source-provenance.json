@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "session_id": "01a1070a-d3fa-78c3-8574-6d98d73a68be",
+  "timestamp_zone": "UTC",
+  "archival_notice": "This is a newly reconstructed historical snapshot, not an original historical commit. Model exports and mobile views generated during archival are reproductions; recovered historical images are identified separately.",
+  "validation": "Recovered TypeScript passed tsc --noEmit. Both reconstructed historical assemblies subsequently rebuilt with digital fit checks passing.",
+  "image_notice": "Historical PNGs were recovered from image-tool outputs and may have been resized by that tool. Recorded image timestamps are observation times, not independently known shutter times. No original historical mobile PNG was recovered.",
+  "milestone": "screws",
+  "milestone_completed_at": "2026-10-05T01:12:35.249Z",
+  "source_files": [
+    {
+      "method": "exact untruncated source read",
+      "observed_at": "2026-10-05T01:12:40.798Z",
+      "files": [
+        "hardware/cad/src/enclosure.ts"
+      ]
+    },
+    {
+      "method": "exact untruncated source read",
+      "observed_at": "2026-10-05T01:12:45.160Z",
+      "files": [
+        "hardware/cad/src/build-design.ts",
+        "hardware/cad/src/parameters.ts",
+        "hardware/cad/scripts/export.ts"
+      ]
+    },
+    {
+      "method": "exact untruncated source read",
+      "observed_at": "2026-10-05T01:12:56.872Z",
+      "files": [
+        "hardware/cad/src/models/fastener.ts",
+        "hardware/cad/src/print.ts",
+        "hardware/cad/tests/workbench.spec.ts"
+      ]
+    },
+    {
+      "method": "exact untruncated source read",
+      "observed_at": "2026-10-05T01:13:08.304Z",
+      "files": [
+        "hardware/cad/src/design.worker.ts",
+        "hardware/cad/src/parameters.test.ts",
+        "docs/hardware/parametric-design.md"
+      ]
+    },
+    {
+      "method": "exact literal source write",
+      "written_at": "2026-10-05T00:39:48.486Z",
+      "files": [
+        "hardware/cad/src/models/cap.ts"
+      ]
+    },
+    {
+      "method": "exact literal source write",
+      "written_at": "2026-10-05T00:50:46.099Z",
+      "files": [
+        "hardware/cad/index.html"
+      ]
+    },
+    {
+      "method": "reconstructed from literal source write and recorded subsequent replacements",
+      "written_at": "2026-10-05T00:50:46.099Z",
+      "last_recorded_change_at": "2026-10-05T01:02:52.596Z",
+      "files": [
+        "hardware/cad/src/main.ts"
+      ]
+    },
+    {
+      "method": "reconstructed by reversing only the recorded later deck-to-wiringDatum and deckThickness-to-upperAllowance identifier renames",
+      "files": [
+        "hardware/cad/src/layout.ts",
+        "hardware/cad/src/harness.ts"
+      ]
+    },
+    {
+      "method": "copied from final working tree; unchanged shared component models, fit helpers, dependencies, styling and support files. This does not claim a byte-for-byte original full repository snapshot.",
+      "files": [
+        "hardware/cad/src/models/ (except cap.ts and fastener.ts listed above)",
+        "hardware/cad/src/assembly.ts",
+        "hardware/cad/src/fit.ts",
+        "hardware/cad/src/fit.test.ts",
+        "hardware/cad/src/fit-coupons.ts",
+        "hardware/cad/src/step.ts",
+        "hardware/cad/src/style.css",
+        "hardware/cad/scripts/kernel.ts",
+        "hardware/cad/scripts/check-design.ts",
+        "hardware/cad/scripts/check-production.ts",
+        "hardware/cad/package.json",
+        "hardware/cad/package-lock.json",
+        "hardware/cad/tsconfig.json",
+        "hardware/cad/vite.config.ts",
+        "hardware/cad/playwright.config.ts",
+        "hardware/cad/public/wiring.svg"
+      ]
+    },
+    {
+      "method": "new archival screenshot harness added during recovery",
+      "files": [
+        "hardware/cad/scripts/capture.ts"
+      ]
+    }
+  ],
+  "historical_image": {
+    "file": "1542-production-closed.png",
+    "observed_at": "2026-10-05T01:11:41.994Z",
+    "note": "Final screw design. Other screw-stage images observed at 00:57:25 precede the final display-height adjustment."
+  }
+}

@@ -223,3 +223,14 @@ explicitly. Hardware details and evidence live in the
   reduce default body width from 94 to 88 mm. Keep the battery loosely restrained.
 - Update assembly/service instructions, editable snap dimensions, five-part
   exports and browser part-count display. Snap force/fatigue remain unverified.
+
+### 2026-10-04 — Shareable, tagged design history
+
+- Commit the project implementation and configure Git LFS for archived PNG,
+  STEP, STL and ZIP files. Add git-lfs to devenv v2 dependencies.
+- Preserve original rendered screenshot evidence, timestamped milestone tags,
+  reconstructed screw/push-pin source checkouts, and current integral-snap source.
+- Archive consistent desktop/mobile/exploded captures, models, parameters, source
+  bundles and SHA-256 manifests; document historical evidence limits.
+- Tag the existing firmware baseline and unmerged devenv experiment without
+  changing their history. Add repeatable capture/archive/verification scripts.
