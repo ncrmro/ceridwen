@@ -2,6 +2,30 @@
 
 A Rust-based educational system for teaching subitizing and arithmetic. The system is designed to work with ESP32 devices and terminal user interfaces (TUI).
 
+The [parametric mechanical design](docs/hardware/parametric-design.md) now includes
+independent component models, mounts, captive buttons, hardware and routed wiring.
+Measurements rebuild the complete case in the browser; save parameters and export
+current STEP/STL files directly.
+
+## Development and hardware design
+
+Use **devenv v2** for all toolchains and the CAD preview server. See
+[the iteration guide](docs/development.md), [hardware BOM](docs/hardware/bom-and-fit.md),
+and [decision changelog](CHANGELOG.md).
+
+```sh
+make setup       # install locked CAD libraries through devenv
+make check       # format, Rust tests, CAD checks, STEP/STL exports, browser build
+make up          # devenv-managed 3D assembly workbench
+make simulate ACTIONS=rrrbrrrr OUTPUT=screen.svg
+make package     # provisional iteration archive with checksums
+```
+
+The CAD workbench edits component-envelope dimensions and placement; it does not
+claim a finished enclosure. Read `hardware/cad/.dev-server.json` for its actual
+URL (preferred port 4310). `npm run release:check` inside the CAD workspace rejects
+unresolved measurements. Do not print the component proxies as functional parts.
+
 ## Architecture
 
 The project consists of a shared core library that contains business logic and types, and a TUI application for interacting with lessons.
@@ -170,7 +194,7 @@ make upload-esp32 # Flash to device
 
 **Hardware:**
 - ESP32 development board
-- SSD1306 OLED (I2C): SDA=GPIO21, SCL=GPIO22
+- SSD1306 OLED (I2C): SDA=GPIO4, SCL=GPIO5 (current C3 firmware)
 
 See [ceridwen-esp32/README.md](ceridwen-esp32/README.md) for complete build instructions, NixOS setup, and development details.
 

@@ -19,7 +19,7 @@ fn main() {
 
         // Show dice art for each option
         println!("\n  Dice Art:");
-        for &dice_val in &lesson.dice_options {
+        for &dice_val in &lesson.dice_options[..lesson.dice_options_count as usize] {
             let art = Lesson::get_dice_art(dice_val);
             for line in art {
                 println!("    {}", line);

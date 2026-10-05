@@ -3,7 +3,9 @@
 **/target
 
 # Cargo.lock for libraries (keep it for binaries)
-Cargo.lock
+# Cargo.lock is tracked for this application workspace.
+**/Cargo.lock
+!/Cargo.lock
 
 # IDE files
 .vscode/
@@ -20,3 +22,17 @@ Thumbs.db
 .embuild/
 sdkconfig
 sdkconfig.old
+
+# Local development and generated packages
+.devenv/
+.direnv/
+node_modules/
+hardware/cad/dist/
+hardware/cad/out/
+hardware/cad/.dev-server.json
+hardware/cad/test-results/
+hardware/cad/playwright-report/
+/screen.svg
+
+# Generated mechanical browser meshes
+hardware/cad/public/generated/

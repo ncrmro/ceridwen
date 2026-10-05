@@ -11,7 +11,7 @@ The project is organized into a Cargo workspace with three main members:
 1.  **`ceridwen-core`**: The heart of the system.
     *   Contains business logic, data structures, and the lesson database.
     *   **Key Types:** `Lesson` (struct), `LessonType` (enum: Subitizing, Addition, Subtraction, Multiplication), `LessonManager` (in-memory database), `LessonQuery`.
-    *   **Design:** `no_std` compatible (implied by usage in ESP32) to support embedded targets.
+    *   **Design:** Uses `std`, supported by the ESP-IDF target; it is not currently a `no_std` crate.
 
 2.  **`ceridwen-tui`**: A Terminal User Interface application.
     *   Built with `ratatui` and `crossterm`.
@@ -34,31 +34,22 @@ See [ceridwen-esp32/README.md](ceridwen-esp32/README.md) for complete build inst
 
 ## Build & Development Environment
 
-The project relies heavily on **Nix** for managing the development environment, especially for the ESP32 toolchain.
+Use **devenv v2** for dependencies and services. The repository retains its root
+Cargo workspace; the `code/` layout on `chore/devenv-2` has not been merged.
 
-### Prerequisites
+- `make setup`: locked npm dependencies for CAD through devenv.
+- `make check`: host formatting/tests and CAD build/exports.
+- `make up`: devenv-managed CAD workbench; actual URL in `hardware/cad/.dev-server.json`.
+- `make simulate ACTIONS=rrrbrrrr OUTPUT=screen.svg`: real firmware renderer on host.
+- `make build-esp32`: pinned project-local nightly, ESP-IDF C3 build, no flashing.
+- `make upload-esp32`: build and flash connected device.
+- `make package`: provisional iteration archive.
 
-*   **Rust Toolchain:** Standard Rust installation for TUI/Core.
-*   **Nix:** Required for ESP32 development to provision the `esp-idf` toolchain, `bindgen` dependencies, and other system tools.
-
-### Key Commands
-
-| Task | Command | Context |
-| :--- | :--- | :--- |
-| **Run TUI** | `cargo run --package ceridwen-tui` | Runs the terminal application on host |
-| **Test Core** | `cargo test --package ceridwen-core` | Runs unit tests for the shared logic |
-| **Build ESP32** | `make build-esp32` | Uses `nix develop` to build firmware |
-| **Upload ESP32**| `make upload-esp32` | Flashes firmware to connected device |
-| **Clean ESP32** | `make clean-esp32` | Cleans ESP32 build artifacts |
-
-### Nix & ESP32 Workflow
-
-The `Makefile` wraps `nix develop` commands. When working with the ESP32 crate manually (outside the Makefile), ensure you are in the nix shell and have sourced the environment:
-
-```bash
-nix develop
-source ~/export-esp.sh  # Sourced automatically by Makefile targets
-```
+See [docs/development.md](docs/development.md), the [hardware BOM](docs/hardware/bom-and-fit.md),
+and [CHANGELOG.md](CHANGELOG.md). Do not infer final fit from provisional box
+models. Resolve all component dimensions and assembly clearances before enclosure
+release. Use selected Teyleten C3, Hosyond OLED, Chanzon 2-pin buttons, EEMB JST
+2.0 mm battery, and ELEGOO 400-point breadboard; do not substitute earlier candidates.
 
 ## Design Philosophy
 
@@ -87,5 +78,23 @@ source ~/export-esp.sh  # Sourced automatically by Makefile targets
 *   `ceridwen-tui/src/main.rs`: Entry point for the TUI, handling the main event loop and terminal setup.
 *   `ceridwen-tui/src/ui.rs`: (Inferred) TUI rendering logic.
 *   `ceridwen-esp32/src/main.rs`: Entry point for ESP32 firmware, handling hardware init (I2C, Display) and main loop.
-*   `flake.nix`: Defines the system dependencies and shell environment for ESP32 development.
+*   `devenv.nix`: Defines system dependencies and CAD server for devenv v2.
 *   `Makefile`: Convenience wrappers for Nix-based build commands.
+
+## Parametric mechanical design
+
+The user has explicitly authorized finishing the digital assembly with editable
+assumed dimensions; do not block CAD iteration on missing physical measurements.
+Keep the distinction between a complete mechanical concept and manufacturing or
+battery-circuit acceptance. Components own parameters, solids and mounting datums
+in `hardware/cad/src/models/`. `parameters.ts`, `layout.ts`, `enclosure.ts` and
+`harness.ts` generate the assembly; the browser worker and CLI share `build-design.ts`.
+See `docs/hardware/parametric-design.md`. Parameter changes must rebuild mounts,
+ports, case, hardware and wire routing, with collision and motion checks.
+
+Use integral snap features and minimize total printed part count (user correction,
+2026-10-04). Replacing screws with loose push-pins did not meet the intent.
+The current concept has five printed pieces: base, captured electronics tray,
+snap lid, and two snap-in button caps. There are no separate fasteners or stop
+plates. Keep clips integral, preserve an assembly/removal path, and never squeeze
+the battery pouch. Snap force and fatigue still need physical validation.

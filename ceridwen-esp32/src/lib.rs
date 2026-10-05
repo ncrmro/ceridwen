@@ -1,5 +1,6 @@
 pub mod display;
 pub mod renderer;
+pub mod session;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum AppMode {
@@ -15,15 +16,10 @@ mod tests {
 
     #[test]
     fn test_format_subitizing_lesson() {
-        let lesson = Lesson::new_subitizing(
-            1,
-            &[1, 2, 3],
-            2,
-            "Select the die showing 2",
-        );
+        let lesson = Lesson::new_subitizing(1, &[1, 2, 3], 2, "Select the die showing 2");
 
         let (title, question, info) = format_lesson_for_display(&lesson);
-        
+
         assert_eq!(title, "Subitizing");
         assert_eq!(question, "Select the die sh...");
         assert_eq!(info, "⚁");
@@ -34,7 +30,7 @@ mod tests {
         let lesson = Lesson::new_addition(1, 2, 3);
 
         let (title, question, info) = format_lesson_for_display(&lesson);
-        
+
         assert_eq!(title, "Addition");
         assert_eq!(question, "2 + 3 = ?");
         assert_eq!(info, "= 5");

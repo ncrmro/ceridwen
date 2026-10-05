@@ -25,10 +25,10 @@ ESP32 firmware for the Ceridwen educational system with SSD1306 OLED display sup
 - **VCC:** 3.3V (to display)
 - **GND:** GND (to display and button)
 
-**Pin Conflict Notes:**
-- **GPIO 6 & 7:** Reserved for JTAG/USB-Serial. Using them for I2C prevents flashing/debugging.
-- **GPIO 8:** Connected to the onboard LED on many C3 boards. Using it for I2C (SDA) holds the line HIGH, keeping the LED stuck ON. We now use it as a dedicated output to turn the LED off.
-- **GPIO 9:** Safe generic GPIO, but paired with 8 often. Since we moved 8, we moved 9 to 5 to keep pairs logical.
+**Board revision:** verify the actual Teyleten board's pin labels. The existing
+firmware drives GPIO8 low for its LED; LED polarity/behavior requires a board
+check. Keep BOOT/RESET accessible. No battery wiring is specified until the
+charging/regulation circuit is selected.
 
 ### Alternative Connections for ESP32 (non-C3):
   - SDA: GPIO21
@@ -36,177 +36,34 @@ ESP32 firmware for the Ceridwen educational system with SSD1306 OLED display sup
   - VCC: 3.3V
   - GND: GND
 
-## Building
+## Development, build and simulation
 
-### Quick Start with Make (Recommended)
+The supported environment is **devenv v2** at the repository root. No global
+espup installation or `export-esp.sh` is required for the RISC-V ESP32-C3.
 
-From the project root:
-
-```bash
-# Enter development shell (auto-installs ESP toolchain on NixOS)
-make shell
-
-# Build ESP32 firmware
+```sh
+make setup
+make check
+make simulate ACTIONS=rrrbrrrr OUTPUT=screen.svg
 make build-esp32
-
-# Build and flash to device
-make upload-esp32
-
-# Clean build artifacts
-make clean-esp32
+make upload-esp32  # only with the intended device connected
 ```
 
-## Uploading to ESP32
+`make build-esp32` installs a pinned nightly plus rust-src under the project's
+`.devenv/state/rustup`; ESP-IDF builds the RISC-V standard library and firmware.
+The host tests use devenv's stable Rust. Host tests do not compile or validate
+the ESP-IDF hardware binary. See [the iteration guide](../docs/development.md)
+for verification status and required physical checks.
 
-### Prerequisites
+The host simulator uses the **same session controller and renderer** as the
+firmware. `l`, `r`, and `b` mean left, right, and both. Each command starts from
+the first lesson, applies the supplied sequence, and writes a 128×64 SVG.
+Wrong answers retry the same lesson; correct answers advance on both buttons.
+Six-choice dice lessons page three dice at a time. Arithmetic selects a numeric
+answer using left/right and checks it with both buttons.
 
-1. **Connect your ESP32** via USB cable to your computer
-2. **Verify the device is detected**:
-   ```bash
-   ls /dev/ttyUSB* /dev/ttyACM*
-   # Should show something like /dev/ttyUSB0 or /dev/ttyACM0
-   ```
-
-3. **Set proper permissions** (if needed):
-   ```bash
-   # Add your user to the dialout group (one-time setup)
-   sudo usermod -a -G dialout $USER
-   # Log out and back in for changes to take effect
-   
-   # Or use sudo with espflash (not recommended for regular use)
-   ```
-
-### Upload Methods
-
-#### Method 1: Using Make (Simplest)
-
-From the project root:
-```bash
-make upload-esp32
-```
-
-This will:
-- Build the firmware with optimized settings
-- Automatically detect your ESP32 device
-- Flash the firmware to the device
-- Open a serial monitor to view output
-
-#### Method 2: Using espflash Directly
-
-From the project root:
-```bash
-# In Nix shell
-source ~/export-esp.sh
-espflash flash --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32
-
-# Specify device manually if auto-detection fails
-espflash flash --monitor --port /dev/ttyUSB0 target/riscv32imc-esp-espidf/debug/ceridwen-esp32
-```
-
-> **Note:** The target path will be `target/xtensa-esp32-espidf/debug/ceridwen-esp32` for original ESP32, or `target/riscv32imc-esp-espidf/debug/ceridwen-esp32` for ESP32-C3. Check your `.cargo/config.toml` for the configured target.
-
-#### Method 3: Build and Flash Separately
-
-```bash
-# Build only
-make build-esp32
-
-# Flash manually (from project root)
-source ~/export-esp.sh
-espflash flash --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32
-# Or for ESP32: target/xtensa-esp32-espidf/debug/ceridwen-esp32
-```
-
-### Monitoring Serial Output
-
-After flashing, the monitor will automatically start. You can also run:
-
-```bash
-# Using espflash
-espflash monitor
-
-# Or specify port
-espflash monitor --port /dev/ttyUSB0
-```
-
-To exit the monitor, press `Ctrl+C`.
-
-### Troubleshooting Upload Issues
-
-**Device not found:**
-- Ensure USB cable is properly connected
-- Try a different USB cable (some are charge-only)
-- Check `dmesg | tail` for connection messages
-
-**Permission denied:**
-- Run `sudo chmod 666 /dev/ttyUSB0` (temporary fix)
-- Or add yourself to dialout group (permanent fix, requires re-login)
-
-**Flash fails:**
-- Hold the BOOT button on ESP32 while flashing
-- Press EN (reset) button after flash completes
-- Try a different USB port
-
-**Build errors:**
-- Ensure you're in the Nix shell: `nix develop`
-- Source ESP environment: `source ~/export-esp.sh`
-- Clean and rebuild: `make clean-esp32 && make build-esp32`
-
-### NixOS Setup
-
-The project includes a Nix flake (`flake.nix`) that provides a complete development environment:
-
-**What it provides:**
-- ESP Rust toolchain (via espup, installed automatically)
-- espflash and ldproxy tools
-- Proper libclang configuration for bindgen
-- Compatible library versions (libxml2_13, zlib) for NixOS
-
-**First-time setup:**
-```bash
-make shell  # Automatically runs espup install and configures environment
-```
-
-**Configuration details:**
-- ESP-IDF v5.2
-- esp-idf-hal v0.45+
-- esp-idf-svc v0.51+
-- esp-idf-sys v0.36+
-- Uses Nix's libclang with libxml2_13 for bindgen compatibility on NixOS
-
-### Manual Setup (Without Nix)
-
-1. Install Rust and the ESP32 toolchain:
-```bash
-cargo install espup
-espup install
-. $HOME/export-esp.sh
-```
-
-2. Install additional tools:
-```bash
-cargo install ldproxy espflash
-```
-
-3. Build and flash:
-```bash
-cd ceridwen-esp32
-cargo build --features esp32
-cargo run --features esp32
-```
-
-## Running Tests
-
-The library tests can be run without ESP32 hardware:
-
-```bash
-cargo test --package ceridwen-esp32
-```
-
-These tests verify:
-- Lesson formatting for small displays
-- Text truncation
-- Display coordinate calculations
+The existing two-button chord detection uses a 50 ms debounce window; physical
+button timing and child usability still need testing.
 
 ## Architecture
 

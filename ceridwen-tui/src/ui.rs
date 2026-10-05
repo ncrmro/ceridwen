@@ -169,13 +169,16 @@ fn draw_lesson_list(f: &mut Frame, app: &App) {
                     prefix,
                     type_icon,
                     lesson.id,
-                    lesson.question,
+                    lesson.question_text(),
                     lesson.get_dice_pattern()
                 )
             } else {
                 format!(
                     "{}{} {} - {}",
-                    prefix, type_icon, lesson.id, lesson.question
+                    prefix,
+                    type_icon,
+                    lesson.id,
+                    lesson.question_text()
                 )
             };
 
@@ -286,7 +289,7 @@ fn draw_lesson_detail(f: &mut Frame, app: &App) {
                     .add_modifier(Modifier::BOLD),
             )]),
             Line::from(vec![Span::styled(
-                format!("  {}", lesson.question),
+                format!("  {}", lesson.question_text()),
                 Style::default()
                     .fg(Color::White)
                     .add_modifier(Modifier::BOLD),
@@ -372,7 +375,7 @@ fn draw_subitizing_interactive(f: &mut Frame, app: &App) {
         let question_text = vec![
             Line::from(""),
             Line::from(vec![Span::styled(
-                lesson.question,
+                lesson.question_text(),
                 Style::default()
                     .fg(Color::Yellow)
                     .add_modifier(Modifier::BOLD),

@@ -84,8 +84,8 @@ pub fn draw_screen<D>(
     target: &mut D,
     app_mode: AppMode,
     lesson: &Lesson,
-    lesson_index: usize,
-    total_lessons: usize,
+    _lesson_index: usize,
+    _total_lessons: usize,
     selected_option_index: usize,
 ) -> Result<(), D::Error>
 where
@@ -101,7 +101,7 @@ where
 
             let q_string = crate::display::get_lesson_question(lesson);
             let lines = crate::display::wrap_text(&q_string, 21);
-            
+
             // Draw up to 3 lines of question
             for (i, line) in lines.iter().take(3).enumerate() {
                 let y = 30 + (i as i32 * 10);
@@ -111,35 +111,34 @@ where
         AppMode::Interactive => {
             // Render Options
             if lesson.lesson_type == LessonType::Subitizing && lesson.dice_options_count > 0 {
-                let start_x = 10;
-                let y = 40; // Moved down to y=40
-                let spacing = 25;
-
-                // Show Target hint (Question)
-                let q_string = crate::display::get_lesson_question(lesson);
-                let lines = crate::display::wrap_text(&q_string, 21);
-                for (i, line) in lines.iter().take(2).enumerate() {
-                    let text_y = 15 + (i as i32 * 10); // Start at y=15
-                    Text::new(line, Point::new(0, text_y), text_style).draw(target)?;
-                }
-
-                for i in 0..lesson.dice_options_count as usize {
-                    let val = lesson.dice_options[i];
-                    let x = start_x + (i as i32 * spacing);
-
-                    draw_dice(target, Point::new(x, y), val)?;
-
-                    // Draw cursor if selected
+                // Three choices per page: all six dice remain visible/selectable.
+                Text::new(
+                    &format!("Select {}", lesson.answer),
+                    Point::new(0, 15),
+                    text_style,
+                )
+                .draw(target)?;
+                let page = selected_option_index / 3;
+                let first = page * 3;
+                let end = (first + 3).min(lesson.dice_options_count as usize);
+                for i in first..end {
+                    let x = 10 + ((i - first) as i32 * 38);
+                    draw_dice(target, Point::new(x, 32), lesson.dice_options[i])?;
                     if i == selected_option_index {
-                        // Underline
-                        Rectangle::new(Point::new(x, y + 22), Size::new(20, 2))
+                        Rectangle::new(Point::new(x, 56), Size::new(20, 2))
                             .into_styled(PrimitiveStyle::with_fill(BinaryColor::On))
                             .draw(target)?;
                     }
                 }
             } else {
-                // Fallback for non-subitizing
-                Text::new("No interactive view", Point::new(0, 30), text_style).draw(target)?;
+                Text::new(&lesson.question_text(), Point::new(0, 15), text_style).draw(target)?;
+                Text::new(
+                    &format!("< {} >", selected_option_index),
+                    Point::new(35, 39),
+                    text_style,
+                )
+                .draw(target)?;
+                Text::new("Both: Check", Point::new(25, 59), text_style).draw(target)?;
             }
         }
         AppMode::Feedback(correct) => {
@@ -151,7 +150,16 @@ where
             // Centered vertically-ish
             Text::new(msg, Point::new(30, 35), text_style).draw(target)?;
 
-            Text::new("Both -> Next", Point::new(20, 55), text_style).draw(target)?;
+            Text::new(
+                if correct {
+                    "Both -> Next"
+                } else {
+                    "Both -> Retry"
+                },
+                Point::new(20, 55),
+                text_style,
+            )
+            .draw(target)?;
         }
     }
 
@@ -162,10 +170,7 @@ where
 mod tests {
     use super::*;
     use ceridwen_core::Lesson;
-    use embedded_graphics::{
-        pixelcolor::BinaryColor,
-        prelude::*,
-    };
+    use embedded_graphics::pixelcolor::BinaryColor;
 
     /// A wrapper around a DrawTarget that asserts all pixels are within bounds
     struct BoundsCheckDisplay<D> {
@@ -176,7 +181,11 @@ mod tests {
 
     impl<D> BoundsCheckDisplay<D> {
         fn new(inner: D, width: i32, height: i32) -> Self {
-            Self { inner, width, height }
+            Self {
+                inner,
+                width,
+                height,
+            }
         }
     }
 
@@ -199,7 +208,10 @@ mod tests {
             for Pixel(pt, color) in pixels {
                 if pt.x < 0 || pt.x >= self.width || pt.y < 0 || pt.y >= self.height {
                     // Panic immediately for easy debugging
-                    panic!("Pixel out of bounds: {:?} (Limits: {}x{})", pt, self.width, self.height);
+                    panic!(
+                        "Pixel out of bounds: {:?} (Limits: {}x{})",
+                        pt, self.width, self.height
+                    );
                 }
                 self.inner.draw_iter(core::iter::once(Pixel(pt, color)))?;
             }
@@ -207,11 +219,34 @@ mod tests {
         }
     }
 
+    #[test]
+    fn every_default_lesson_and_selection_fits_the_oled() {
+        let manager = ceridwen_core::LessonManager::with_defaults();
+        for lesson in manager.get_all_lessons() {
+            let selections = if lesson.lesson_type == LessonType::Subitizing {
+                lesson.dice_options_count as usize
+            } else {
+                256
+            };
+            for selection in 0..selections {
+                for mode in [
+                    AppMode::Browsing,
+                    AppMode::Interactive,
+                    AppMode::Feedback(true),
+                    AppMode::Feedback(false),
+                ] {
+                    let mut display = BoundsCheckDisplay::new(DummyDisplay, 128, 64);
+                    draw_screen(&mut display, mode, lesson, 0, manager.count(), selection).unwrap();
+                }
+            }
+        }
+    }
+
     struct DummyDisplay;
     impl DrawTarget for DummyDisplay {
         type Color = BinaryColor;
         type Error = core::convert::Infallible;
-        
+
         fn draw_iter<I>(&mut self, _pixels: I) -> Result<(), Self::Error>
         where
             I: IntoIterator<Item = Pixel<Self::Color>>,
@@ -229,34 +264,20 @@ mod tests {
     #[test]
     fn test_draw_browsing_fits_screen() {
         let mut display = BoundsCheckDisplay::new(DummyDisplay, 128, 64);
-        
+
         let lesson = Lesson::new_subitizing(1, &[1, 2], 1, "Select the die showing 1");
-        
-        draw_screen(
-            &mut display,
-            AppMode::Browsing,
-            &lesson,
-            0,
-            10,
-            0
-        ).unwrap();
+
+        draw_screen(&mut display, AppMode::Browsing, &lesson, 0, 10, 0).unwrap();
     }
-    
+
     #[test]
     fn test_long_question_truncation() {
         let mut display = BoundsCheckDisplay::new(DummyDisplay, 128, 64);
-        
+
         let long_q = "This is a very long question that might not fit on the screen properly";
         let lesson = Lesson::new_subitizing(1, &[1], 1, long_q);
-        
+
         // This should NOT panic if truncation logic works
-        draw_screen(
-            &mut display,
-            AppMode::Browsing,
-            &lesson,
-            0,
-            10,
-            0
-        ).unwrap();
+        draw_screen(&mut display, AppMode::Browsing, &lesson, 0, 10, 0).unwrap();
     }
 }

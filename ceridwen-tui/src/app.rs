@@ -1,5 +1,23 @@
 use ceridwen_core::{Lesson, LessonManager, LessonType};
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn two_choice_lesson_never_selects_unused_slots() {
+        let mut app = App::new(LessonManager::with_defaults());
+        app.view_lessons();
+        app.select_item();
+        app.previous_item();
+        assert_eq!(app.selected_dice_index, 1);
+        app.next_item();
+        assert_eq!(app.selected_dice_index, 0);
+        app.next_item();
+        app.next_item();
+        assert_eq!(app.selected_dice_index, 0);
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Page {
     Home,
@@ -65,9 +83,9 @@ impl App {
             Page::SubitizingInteractive => {
                 // Navigate right through dice
                 if let Some(lesson) = self.get_current_lesson() {
-                    if !lesson.dice_options.is_empty() {
+                    if lesson.dice_options_count > 0 {
                         self.selected_dice_index =
-                            (self.selected_dice_index + 1) % lesson.dice_options.len();
+                            (self.selected_dice_index + 1) % (lesson.dice_options_count as usize);
                     }
                 }
             }
@@ -94,9 +112,9 @@ impl App {
             Page::SubitizingInteractive => {
                 // Navigate left through dice
                 if let Some(lesson) = self.get_current_lesson() {
-                    if !lesson.dice_options.is_empty() {
+                    if lesson.dice_options_count > 0 {
                         if self.selected_dice_index == 0 {
-                            self.selected_dice_index = lesson.dice_options.len() - 1;
+                            self.selected_dice_index = (lesson.dice_options_count as usize) - 1;
                         } else {
                             self.selected_dice_index -= 1;
                         }
@@ -125,7 +143,7 @@ impl App {
 
                         // If it's a subitizing lesson with dice options, go to interactive mode
                         if lesson.lesson_type == LessonType::Subitizing
-                            && !lesson.dice_options.is_empty()
+                            && lesson.dice_options_count > 0
                         {
                             self.current_page = Page::SubitizingInteractive;
                             self.selected_dice_index = 0;
@@ -144,7 +162,7 @@ impl App {
             Page::SubitizingInteractive => {
                 // Check if the selected dice matches the target
                 if let Some(lesson) = self.get_current_lesson() {
-                    if self.selected_dice_index < lesson.dice_options.len() {
+                    if self.selected_dice_index < (lesson.dice_options_count as usize) {
                         let selected_value = lesson.dice_options[self.selected_dice_index];
                         if lesson.check_answer(selected_value) {
                             self.feedback_message = Some("✅ Correct!".to_string());

@@ -1,0 +1,5 @@
+# Reproducible visual and mechanical milestones. Keep source/docs/metadata diffable.
+hardware/snapshots/**/*.png filter=lfs diff=lfs merge=lfs -text
+hardware/snapshots/**/*.step filter=lfs diff=lfs merge=lfs -text
+hardware/snapshots/**/*.stl filter=lfs diff=lfs merge=lfs -text
+hardware/snapshots/**/*.zip filter=lfs diff=lfs merge=lfs -text

@@ -1,5 +1,8 @@
-use ceridwen_core::{LessonManager, LessonType};
-use ceridwen_esp32::{renderer, AppMode};
+use ceridwen_core::LessonManager;
+use ceridwen_esp32::{
+    renderer,
+    session::{Action, Session},
+};
 use embedded_graphics::{
     mono_font::{ascii::FONT_6X10, MonoTextStyle},
     pixelcolor::BinaryColor,
@@ -86,7 +89,9 @@ fn main() -> anyhow::Result<()> {
 
     // Initialize the display
     log::info!("Initializing display...");
-    display.init().map_err(|e| anyhow::anyhow!("Display init error: {:?}", e))?;
+    display
+        .init()
+        .map_err(|e| anyhow::anyhow!("Display init error: {:?}", e))?;
 
     log::info!("Display initialized");
 
@@ -128,9 +133,7 @@ fn main() -> anyhow::Result<()> {
     FreeRtos::delay_ms(2000);
 
     // App State
-    let mut current_lesson_index = 0;
-    let mut app_mode = AppMode::Browsing;
-    let mut selected_option_index = 0;
+    let mut session = Session::default();
     let mut needs_update = true;
 
     // Main loop
@@ -146,88 +149,14 @@ fn main() -> anyhow::Result<()> {
             let left_stable = btn_left.is_low();
             let right_stable = btn_right.is_low();
 
-            if left_stable && right_stable {
-                // Action: Both Pressed
-                match app_mode {
-                    AppMode::Browsing => {
-                        // Enter Interactive Mode
-                        app_mode = AppMode::Interactive;
-                        selected_option_index = 0;
-                        log::info!("Mode: Browsing -> Interactive");
-                    }
-                    AppMode::Interactive => {
-                        // Check Answer
-                        if let Some(lesson) = lessons.get(current_lesson_index) {
-                            let is_correct = if lesson.lesson_type == LessonType::Subitizing {
-                                let selected_val = lesson.dice_options[selected_option_index];
-                                selected_val == lesson.answer
-                            } else {
-                                // For non-subitizing, just showing answer was the old behavior
-                                // For now, treat "Both" as showing answer/pass
-                                true
-                            };
-
-                            app_mode = AppMode::Feedback(is_correct);
-                            log::info!("Mode: Interactive -> Feedback({})", is_correct);
-                        }
-                    }
-                    AppMode::Feedback(_) => {
-                        // Return to Browsing (Next Lesson)
-                        app_mode = AppMode::Browsing;
-                        current_lesson_index = (current_lesson_index + 1) % lessons.len();
-                        log::info!("Mode: Feedback -> Browsing (Next)");
-                    }
-                }
-                needs_update = true;
-            } else if left_stable {
-                // Action: Left Pressed
-                match app_mode {
-                    AppMode::Browsing => {
-                        if current_lesson_index > 0 {
-                            current_lesson_index -= 1;
-                        } else {
-                            current_lesson_index = lessons.len() - 1;
-                        }
-                        log::info!("Browsing: Prev Lesson -> {}", current_lesson_index);
-                    }
-                    AppMode::Interactive => {
-                        if let Some(lesson) = lessons.get(current_lesson_index) {
-                            if lesson.dice_options_count > 0 {
-                                if selected_option_index > 0 {
-                                    selected_option_index -= 1;
-                                } else {
-                                    selected_option_index =
-                                        (lesson.dice_options_count - 1) as usize;
-                                }
-                                log::info!("Interactive: Selection -> {}", selected_option_index);
-                            }
-                        }
-                    }
-                    AppMode::Feedback(_) => {
-                        // Optional: Allow navigating back/retry? For now do nothing
-                    }
-                }
-                needs_update = true;
-            } else if right_stable {
-                // Action: Right Pressed
-                match app_mode {
-                    AppMode::Browsing => {
-                        current_lesson_index = (current_lesson_index + 1) % lessons.len();
-                        log::info!("Browsing: Next Lesson -> {}", current_lesson_index);
-                    }
-                    AppMode::Interactive => {
-                        if let Some(lesson) = lessons.get(current_lesson_index) {
-                            if lesson.dice_options_count > 0 {
-                                selected_option_index = (selected_option_index + 1)
-                                    % (lesson.dice_options_count as usize);
-                                log::info!("Interactive: Selection -> {}", selected_option_index);
-                            }
-                        }
-                    }
-                    AppMode::Feedback(_) => {
-                        // Do nothing
-                    }
-                }
+            let action = match (left_stable, right_stable) {
+                (true, true) => Some(Action::Both),
+                (true, false) => Some(Action::Left),
+                (false, true) => Some(Action::Right),
+                _ => None,
+            };
+            if let Some(action) = action {
+                session.apply(action, &lessons);
                 needs_update = true;
             }
 
@@ -243,14 +172,14 @@ fn main() -> anyhow::Result<()> {
                     .clear(BinaryColor::Off)
                     .map_err(|e| anyhow::anyhow!("Clear error: {:?}", e))?;
 
-                if let Some(lesson) = lessons.get(current_lesson_index) {
+                if let Some(lesson) = lessons.get(session.lesson_index) {
                     renderer::draw_screen(
                         &mut display,
-                        app_mode,
+                        session.mode,
                         lesson,
-                        current_lesson_index,
+                        session.lesson_index,
                         lessons.len(),
-                        selected_option_index,
+                        session.selection,
                     )
                     .map_err(|e| anyhow::anyhow!("Render error: {:?}", e))?;
                 }

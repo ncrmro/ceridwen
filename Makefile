@@ -1,18 +1,23 @@
-# Makefile for building the ceridwen-esp32 project on NixOS
-
-.PHONY: build-esp32 shell clean-esp32 upload-esp32
-
+# All toolchains enter through devenv v2. Run from the repository root.
+.PHONY: shell setup check cad up simulate build-esp32 upload-esp32 package
 shell:
-	@echo "Entering Nix develop shell..."
-	@nix develop
-
+	devenv shell
+setup:
+	devenv shell -- npm --prefix hardware/cad ci --no-audit --no-fund
+check:
+	devenv shell -- cargo fmt --all -- --check
+	devenv shell -- cargo test --workspace --locked
+	devenv shell -- cargo clippy --workspace --all-targets --locked -- -D warnings
+	devenv shell -- npm --prefix hardware/cad run build
+cad:
+	devenv shell -- npm --prefix hardware/cad run build
+up:
+	devenv up cad
+simulate:
+	devenv shell -- cargo run --locked -p ceridwen-esp32 --example simulator -- "$(ACTIONS)" "$(or $(OUTPUT),screen.svg)"
 build-esp32:
-	@echo "Building ceridwen-esp32..."
-	@nix develop --command bash -c "source ~/export-esp.sh && cd ceridwen-esp32 && cargo build -Zbuild-std=std,panic_abort --features esp32"
-
+	devenv shell -- bash scripts/build-esp32.sh
 upload-esp32: build-esp32
-	@echo "Uploading to device..."
-	@nix develop --command bash -c "source ~/export-esp.sh && espflash flash --baud 921600 --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32"
-
-clean-esp32:
-	@cd ceridwen-esp32 && cargo clean
+	devenv shell -- espflash flash --baud 921600 --monitor target/riscv32imc-esp-espidf/debug/ceridwen-esp32
+package: check build-esp32
+	devenv shell -- python3 scripts/package.py
