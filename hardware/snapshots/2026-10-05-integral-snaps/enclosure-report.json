@@ -1,0 +1,719 @@
+{
+  "headerGridPass": true,
+  "headerGridError": 5.0242958677880805e-15,
+  "status": "five-piece integral-snap mechanical concept",
+  "bounds": {
+    "min": [
+      -3,
+      -3,
+      -2
+    ],
+    "max": [
+      85,
+      58,
+      36.25000000000001
+    ]
+  },
+  "topology": [
+    {
+      "id": "CASE_BASE",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 18520.02326535897
+    },
+    {
+      "id": "CASE_CARRIER",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 8985.503333333327
+    },
+    {
+      "id": "CASE_COVER",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 21746.94359872976
+    },
+    {
+      "id": "CAP1",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 404.81276138239036
+    },
+    {
+      "id": "CAP2",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 404.8127613823905
+    }
+  ],
+  "intersections": [],
+  "contacts": [
+    {
+      "a": "BB1",
+      "b": "CASE_BASE",
+      "distance": 0
+    },
+    {
+      "a": "BB1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "BB1",
+      "b": "CASE_COVER",
+      "distance": 1.2
+    },
+    {
+      "a": "U1",
+      "b": "CASE_BASE",
+      "distance": 5.350000000000002
+    },
+    {
+      "a": "U1",
+      "b": "CASE_CARRIER",
+      "distance": 0.5
+    },
+    {
+      "a": "U1",
+      "b": "CASE_COVER",
+      "distance": 5.350000000000002
+    },
+    {
+      "a": "DISP1",
+      "b": "CASE_COVER",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "CASE_COVER",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "CAP1",
+      "distance": 0.14999999999999858
+    },
+    {
+      "a": "SW1",
+      "b": "W05",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "W06",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "W07",
+      "distance": 4.116163493350308
+    },
+    {
+      "a": "SW1",
+      "b": "W08",
+      "distance": 3.5160843806184383
+    },
+    {
+      "a": "SW2",
+      "b": "CASE_COVER",
+      "distance": 0
+    },
+    {
+      "a": "SW2",
+      "b": "CAP2",
+      "distance": 0.14999999999999858
+    },
+    {
+      "a": "SW2",
+      "b": "W07",
+      "distance": 0
+    },
+    {
+      "a": "SW2",
+      "b": "W08",
+      "distance": 0
+    },
+    {
+      "a": "BAT1",
+      "b": "CASE_BASE",
+      "distance": 5.5901699437494745
+    },
+    {
+      "a": "BAT1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "BAT1",
+      "b": "CASE_COVER",
+      "distance": 0.6000000000000014
+    },
+    {
+      "a": "BAT1",
+      "b": "W03",
+      "distance": 1.9232633672149615
+    },
+    {
+      "a": "BAT1",
+      "b": "W04",
+      "distance": 2.6000000000000014
+    },
+    {
+      "a": "BAT1",
+      "b": "W07",
+      "distance": 14.039107364128354
+    },
+    {
+      "a": "BAT1",
+      "b": "W08",
+      "distance": 14.875308893067054
+    },
+    {
+      "a": "BAT1",
+      "b": "BAT_W0",
+      "distance": 0
+    },
+    {
+      "a": "BAT1",
+      "b": "BAT_W1",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "CASE_BASE",
+      "distance": 6.5
+    },
+    {
+      "a": "PWR2",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "CASE_COVER",
+      "distance": 4.400000000000002
+    },
+    {
+      "a": "PWR2",
+      "b": "W07",
+      "distance": 4.492384004276418
+    },
+    {
+      "a": "PWR2",
+      "b": "W08",
+      "distance": 0.3000000000000007
+    },
+    {
+      "a": "PWR2",
+      "b": "BAT_W0",
+      "distance": 2.4115493725912485
+    },
+    {
+      "a": "PWR2",
+      "b": "BAT_W1",
+      "distance": 1.530983342360053
+    },
+    {
+      "a": "J1",
+      "b": "CASE_BASE",
+      "distance": 7.0178344238090995
+    },
+    {
+      "a": "J1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "J1",
+      "b": "CASE_COVER",
+      "distance": 6.514620309563538
+    },
+    {
+      "a": "J1",
+      "b": "W06",
+      "distance": 0.6999999999999993
+    },
+    {
+      "a": "J1",
+      "b": "W07",
+      "distance": 4.579549159502338
+    },
+    {
+      "a": "J1",
+      "b": "W08",
+      "distance": 3.306937759374286
+    },
+    {
+      "a": "J1",
+      "b": "BAT_W0",
+      "distance": 0
+    },
+    {
+      "a": "J1",
+      "b": "BAT_W1",
+      "distance": 0
+    },
+    {
+      "a": "PWR1",
+      "b": "CASE_BASE",
+      "distance": 1.8027756377319946
+    },
+    {
+      "a": "PWR1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "PWR1",
+      "b": "CASE_COVER",
+      "distance": 2.23606797749979
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "CASE_COVER",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "CASE_COVER",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W01",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W02",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W03",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W04",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W05",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W06",
+      "distance": 0.7088497300281
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W07",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W08",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BAT_W0",
+      "distance": 0.9093386622447802
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BAT_W1",
+      "distance": 1.905107707119995
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "CAP1",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "CAP2",
+      "distance": 0.19999999999999574
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W01",
+      "distance": 4.6936059115633
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W02",
+      "distance": 6.598760758281151
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W03",
+      "distance": 6.5987607582811565
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W04",
+      "distance": 4.693605911563305
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W05",
+      "distance": 3.280851853958772
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W06",
+      "distance": 3.2808518539587714
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W07",
+      "distance": 2.700000000000003
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W08",
+      "distance": 3.280851853958775
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BAT_W0",
+      "distance": 9.546967948448794
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BAT_W1",
+      "distance": 10.04389245454105
+    },
+    {
+      "a": "W01",
+      "b": "W02",
+      "distance": 0.842220510185595
+    },
+    {
+      "a": "W01",
+      "b": "W03",
+      "distance": 1
+    },
+    {
+      "a": "W01",
+      "b": "W04",
+      "distance": 3.726661530556787
+    },
+    {
+      "a": "W01",
+      "b": "W05",
+      "distance": 5.550000000162531
+    },
+    {
+      "a": "W01",
+      "b": "W06",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W01",
+      "b": "W07",
+      "distance": 5.5500000000029335
+    },
+    {
+      "a": "W01",
+      "b": "W08",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W01",
+      "b": "BAT_W0",
+      "distance": 2.5500000001137324
+    },
+    {
+      "a": "W01",
+      "b": "BAT_W1",
+      "distance": 2.589435686763429
+    },
+    {
+      "a": "W02",
+      "b": "W03",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "W02",
+      "b": "W04",
+      "distance": 2.284441020371193
+    },
+    {
+      "a": "W02",
+      "b": "W05",
+      "distance": 6.750000000280305
+    },
+    {
+      "a": "W02",
+      "b": "W07",
+      "distance": 6.750000000030167
+    },
+    {
+      "a": "W02",
+      "b": "BAT_W0",
+      "distance": 3.350000000007102
+    },
+    {
+      "a": "W02",
+      "b": "BAT_W1",
+      "distance": 3.3815198103268576
+    },
+    {
+      "a": "W03",
+      "b": "W04",
+      "distance": 0.8422205101855946
+    },
+    {
+      "a": "W03",
+      "b": "W05",
+      "distance": 7.9710267764128835
+    },
+    {
+      "a": "W03",
+      "b": "W06",
+      "distance": 4.479999999999999
+    },
+    {
+      "a": "W03",
+      "b": "W07",
+      "distance": 7.02
+    },
+    {
+      "a": "W03",
+      "b": "W08",
+      "distance": 4.479999999999999
+    },
+    {
+      "a": "W03",
+      "b": "BAT_W0",
+      "distance": 4.150000000000165
+    },
+    {
+      "a": "W03",
+      "b": "BAT_W1",
+      "distance": 4.176243293635907
+    },
+    {
+      "a": "W04",
+      "b": "W05",
+      "distance": 9.25000000012531
+    },
+    {
+      "a": "W04",
+      "b": "W06",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W04",
+      "b": "W07",
+      "distance": 9.15000000102805
+    },
+    {
+      "a": "W04",
+      "b": "W08",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W04",
+      "b": "BAT_W0",
+      "distance": 4.950000000000039
+    },
+    {
+      "a": "W04",
+      "b": "BAT_W1",
+      "distance": 4.972477007591281
+    },
+    {
+      "a": "W05",
+      "b": "W06",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "W05",
+      "b": "W07",
+      "distance": 0.9999999999999964
+    },
+    {
+      "a": "W05",
+      "b": "W08",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "W06",
+      "b": "W07",
+      "distance": 1.9999999999999962
+    },
+    {
+      "a": "W07",
+      "b": "W08",
+      "distance": 0.19999999999999574
+    },
+    {
+      "a": "W07",
+      "b": "BAT_W0",
+      "distance": 5.149999999999999
+    },
+    {
+      "a": "W07",
+      "b": "BAT_W1",
+      "distance": 5.149999999999999
+    },
+    {
+      "a": "W08",
+      "b": "BAT_W0",
+      "distance": 4.350000000000001
+    },
+    {
+      "a": "W08",
+      "b": "BAT_W1",
+      "distance": 4.350000000000001
+    },
+    {
+      "a": "BAT_W0",
+      "b": "BAT_W1",
+      "distance": 0.3999999999999986
+    }
+  ],
+  "permittedContacts": [
+    {
+      "a": "BB1",
+      "b": "U1",
+      "reason": "Header pins inserted 3 mm into breadboard sockets",
+      "volume": 19.660800000000002
+    },
+    {
+      "a": "U1",
+      "b": "W01",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "U1",
+      "b": "W02",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "U1",
+      "b": "W03",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616325
+    },
+    {
+      "a": "U1",
+      "b": "W04",
+      "reason": "Named wire termination",
+      "volume": 0.0565486677646162
+    },
+    {
+      "a": "U1",
+      "b": "W05",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616325
+    },
+    {
+      "a": "U1",
+      "b": "W06",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "U1",
+      "b": "W07",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616325
+    },
+    {
+      "a": "U1",
+      "b": "W08",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "DISP1",
+      "b": "W01",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461609
+    },
+    {
+      "a": "DISP1",
+      "b": "W02",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616097
+    },
+    {
+      "a": "DISP1",
+      "b": "W03",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461609
+    },
+    {
+      "a": "DISP1",
+      "b": "W04",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616097
+    },
+    {
+      "a": "W02",
+      "b": "W06",
+      "reason": "Common electrical net junction",
+      "volume": 1.4985396957623305
+    },
+    {
+      "a": "W02",
+      "b": "W08",
+      "reason": "Common electrical net junction",
+      "volume": 0.22619467105846502
+    },
+    {
+      "a": "W06",
+      "b": "W08",
+      "reason": "Common electrical net junction",
+      "volume": 0.2261946710584651
+    }
+  ],
+  "interferencePass": true,
+  "footprintPass": true,
+  "wireFootprintViolations": [],
+  "componentFootprintViolations": [],
+  "motionChecks": [
+    {
+      "id": "CAP1",
+      "downTravel": 0.4,
+      "upTravel": 0.2,
+      "actuatorTravel": 0.25,
+      "printedPartIntersections": []
+    },
+    {
+      "id": "CAP2",
+      "downTravel": 0.4,
+      "upTravel": 0.2,
+      "actuatorTravel": 0.25,
+      "printedPartIntersections": []
+    }
+  ],
+  "motionPass": true,
+  "componentCount": 9,
+  "printedCount": 5,
+  "screwCount": 0,
+  "pushPinCount": 0,
+  "snapFeatureCount": 20,
+  "wireCount": 10,
+  "minimumClearanceAccepted": false,
+  "manufacturingReady": false,
+  "blockers": [
+    "Snap deflection, insertion force, fatigue and release need physical print validation; this is seated geometry, not a material simulation.",
+    "Dimensions remain editable assumptions. Battery restraint has clearance and must not squeeze the pouch.",
+    "Power module and power switch are mechanical studies; the battery circuit is not selected or validated."
+  ]
+}

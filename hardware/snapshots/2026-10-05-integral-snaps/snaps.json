@@ -1,0 +1,162 @@
+[
+  {
+    "id": "SHELL_L_8",
+    "owner": "CASE_COVER",
+    "retains": "CASE_BASE",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Press inward through side window; lift lid while holding released."
+  },
+  {
+    "id": "SHELL_L_43",
+    "owner": "CASE_COVER",
+    "retains": "CASE_BASE",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Press inward through side window; lift lid while holding released."
+  },
+  {
+    "id": "SHELL_R_8",
+    "owner": "CASE_COVER",
+    "retains": "CASE_BASE",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Press inward through side window; lift lid while holding released."
+  },
+  {
+    "id": "SHELL_R_43",
+    "owner": "CASE_COVER",
+    "retains": "CASE_BASE",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Press inward through side window; lift lid while holding released."
+  },
+  {
+    "id": "OLED_5_false",
+    "owner": "CASE_COVER",
+    "retains": "DISP1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex exposed clip outward and withdraw from underside."
+  },
+  {
+    "id": "OLED_5_true",
+    "owner": "CASE_COVER",
+    "retains": "DISP1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex exposed clip outward and withdraw from underside."
+  },
+  {
+    "id": "OLED_22_false",
+    "owner": "CASE_COVER",
+    "retains": "DISP1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex exposed clip outward and withdraw from underside."
+  },
+  {
+    "id": "OLED_22_true",
+    "owner": "CASE_COVER",
+    "retains": "DISP1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex exposed clip outward and withdraw from underside."
+  },
+  {
+    "id": "CAP_1_false",
+    "owner": "CASE_COVER",
+    "retains": "CAP1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Pinch the cap ears from the underside and withdraw the cap upward."
+  },
+  {
+    "id": "CAP_1_true",
+    "owner": "CASE_COVER",
+    "retains": "CAP1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Pinch the cap ears from the underside and withdraw the cap upward."
+  },
+  {
+    "id": "SW_1_false",
+    "owner": "CASE_COVER",
+    "retains": "SW1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Flex the front/rear cradle arms outward and withdraw the switch downwards."
+  },
+  {
+    "id": "SW_1_true",
+    "owner": "CASE_COVER",
+    "retains": "SW1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Flex the front/rear cradle arms outward and withdraw the switch downwards."
+  },
+  {
+    "id": "CAP_2_false",
+    "owner": "CASE_COVER",
+    "retains": "CAP2",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Pinch the cap ears from the underside and withdraw the cap upward."
+  },
+  {
+    "id": "CAP_2_true",
+    "owner": "CASE_COVER",
+    "retains": "CAP2",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Pinch the cap ears from the underside and withdraw the cap upward."
+  },
+  {
+    "id": "SW_2_false",
+    "owner": "CASE_COVER",
+    "retains": "SW2",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Flex the front/rear cradle arms outward and withdraw the switch downwards."
+  },
+  {
+    "id": "SW_2_true",
+    "owner": "CASE_COVER",
+    "retains": "SW2",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "Flex the front/rear cradle arms outward and withdraw the switch downwards."
+  },
+  {
+    "id": "POWER_false",
+    "owner": "CASE_CARRIER",
+    "retains": "PWR2",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex side clip outward and lift part."
+  },
+  {
+    "id": "POWER_true",
+    "owner": "CASE_CARRIER",
+    "retains": "PWR2",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex side clip outward and lift part."
+  },
+  {
+    "id": "CONNECTOR_false",
+    "owner": "CASE_CARRIER",
+    "retains": "J1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex side clip outward and lift part."
+  },
+  {
+    "id": "CONNECTOR_true",
+    "owner": "CASE_CARRIER",
+    "retains": "J1",
+    "engagement": 0.6,
+    "clearance": 0.2,
+    "release": "With lid removed, flex side clip outward and lift part."
+  }
+]

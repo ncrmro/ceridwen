@@ -1,0 +1,387 @@
+{
+  "schema": 1,
+  "name": "Ceridwen · parametric assembled handheld",
+  "parameters": {
+    "breadboard": {
+      "length": 82,
+      "width": 55,
+      "height": 9,
+      "pitch": 2.54,
+      "rows": 30,
+      "channel": 7.62
+    },
+    "esp32": {
+      "length": 22.5,
+      "width": 18,
+      "pcbThickness": 1.6,
+      "pitch": 2.54,
+      "rowSpacing": 15.24,
+      "pins": 8,
+      "pcbBase": 7,
+      "usbWidth": 9,
+      "usbHeight": 3.2
+    },
+    "oled": {
+      "width": 27,
+      "depth": 27,
+      "pcbThickness": 1.6,
+      "pcbBase": 4,
+      "glassWidth": 24,
+      "glassDepth": 14,
+      "glassThickness": 2,
+      "glassX": 1.5,
+      "glassY": 6,
+      "holeInset": 2,
+      "holeDiameter": 2.3,
+      "viewWidth": 21.7,
+      "viewDepth": 10.9
+    },
+    "button": {
+      "bodyWidth": 6,
+      "bodyDepth": 6,
+      "bodyHeight": 3.5,
+      "actuatorHeight": 1.5,
+      "actuatorDiameter": 3.4,
+      "leadLength": 3,
+      "leadSpacing": 6.5,
+      "travel": 0.25
+    },
+    "battery": {
+      "length": 32,
+      "width": 20.5,
+      "thickness": 5.3,
+      "leadSpace": 2
+    },
+    "power": {
+      "width": 26,
+      "depth": 18,
+      "height": 7,
+      "pcbThickness": 1.6,
+      "holeInset": 2
+    },
+    "connector": {
+      "width": 8,
+      "depth": 6,
+      "height": 5
+    },
+    "powerSwitch": {
+      "width": 10,
+      "depth": 5,
+      "height": 5,
+      "leverHeight": 3
+    },
+    "snap": {
+      "armThickness": 0.8,
+      "armLength": 8,
+      "width": 5,
+      "engagement": 0.6,
+      "clearance": 0.2,
+      "hookHeight": 1
+    },
+    "case": {
+      "wall": 2,
+      "gap": 1,
+      "floor": 2,
+      "carrierThickness": 2,
+      "wireGap": 3,
+      "layerGap": 2,
+      "upperAllowance": 2,
+      "standoff": 3,
+      "roof": 2,
+      "cornerRadius": 2.5,
+      "screenGap": 0.35,
+      "batteryClearance": 0.6
+    },
+    "cap": {
+      "width": 14,
+      "depth": 12,
+      "latchProjection": 0.7,
+      "flexThickness": 0.7,
+      "flexGap": 0.5,
+      "flangeThickness": 1.2,
+      "stemHeight": 0.6,
+      "stemWidth": 3,
+      "fingerHeight": 4,
+      "sideGap": 0.3,
+      "contactGap": 0.15,
+      "returnGap": 0.2
+    }
+  },
+  "minimumGap": 0.3,
+  "parts": [
+    {
+      "id": "BB1",
+      "name": "ELEGOO 400-point breadboard",
+      "size": [
+        82,
+        55,
+        9
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "color": "#eee8d8",
+      "source": "ELEGOO; assumed outline, parametric 2.54 mm grid",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "U1",
+      "name": "Teyleten ESP32-C3 with headers",
+      "size": [
+        22.5,
+        18,
+        11.8
+      ],
+      "position": [
+        4.350000000000002,
+        19.770000000000003,
+        6
+      ],
+      "color": "#155158",
+      "source": "Teyleten Supermini; header and USB parameters editable",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "DISP1",
+      "name": "Hosyond SSD1306 OLED",
+      "size": [
+        27,
+        27,
+        7.6
+      ],
+      "position": [
+        27.5,
+        5,
+        26.300000000000004
+      ],
+      "color": "#1d687c",
+      "source": "Hosyond; assumed PCB/glass/hole datums, editable separately",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "SW1",
+      "name": "Chanzon left switch",
+      "size": [
+        7,
+        6,
+        8
+      ],
+      "position": [
+        23.833333333333332,
+        41,
+        24.1
+      ],
+      "color": "#aab5c0",
+      "source": "Chanzon 6 × 6 × 5; assumed lead spacing/travel",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "CAP1",
+      "name": "Left printed button",
+      "size": [
+        14,
+        12,
+        5.8
+      ],
+      "position": [
+        20.333333333333332,
+        38,
+        32.25
+      ],
+      "color": "#ecab5e",
+      "source": "Derived from switch actuator datum and cap parameters",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "SW2",
+      "name": "Chanzon right switch",
+      "size": [
+        7,
+        6,
+        8
+      ],
+      "position": [
+        51.166666666666664,
+        41,
+        24.1
+      ],
+      "color": "#aab5c0",
+      "source": "Chanzon 6 × 6 × 5; assumed lead spacing/travel",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "CAP2",
+      "name": "Right printed button",
+      "size": [
+        14,
+        12,
+        5.8
+      ],
+      "position": [
+        47.666666666666664,
+        38,
+        32.25
+      ],
+      "color": "#ecab5e",
+      "source": "Derived from switch actuator datum and cap parameters",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "BAT1",
+      "name": "EEMB protected 250mAh battery",
+      "size": [
+        32,
+        20.5,
+        5.3
+      ],
+      "position": [
+        43,
+        5,
+        14.5
+      ],
+      "color": "#c6cbd0",
+      "source": "EEMB store nominal 32 × 20.5 × 5.3 mm; installed pack assumptions editable",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "PWR2",
+      "name": "Power module mechanical study",
+      "size": [
+        26,
+        18,
+        7
+      ],
+      "position": [
+        47,
+        31,
+        14.5
+      ],
+      "color": "#755e93",
+      "source": "Generic packaging study; charger/regulator circuit not selected",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "J1",
+      "name": "Battery connector",
+      "size": [
+        8,
+        6,
+        5
+      ],
+      "position": [
+        29.85,
+        43,
+        14.5
+      ],
+      "color": "#eee7d4",
+      "source": "JST 2.0 mm selected; mated body and lead exits assumed",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "PWR1",
+      "name": "Power switch mechanical study",
+      "size": [
+        10,
+        8,
+        5
+      ],
+      "position": [
+        6,
+        47,
+        14.5
+      ],
+      "color": "#9aa6b0",
+      "source": "Generic side-actuated switch; electrical part not selected",
+      "evidence": "provisional",
+      "missing": [
+        "Replace assumed dimensions with selected-part measurements"
+      ],
+      "kind": "component"
+    },
+    {
+      "id": "USB1",
+      "name": "External USB plug approach",
+      "size": [
+        20,
+        12,
+        8
+      ],
+      "position": [
+        -15.649999999999999,
+        22.770000000000003,
+        12.6
+      ],
+      "color": "#77b7ee",
+      "source": "Editable cable access allowance, external to board footprint",
+      "evidence": "provisional",
+      "missing": [
+        "Actual cable dimensions"
+      ],
+      "kind": "clearance"
+    }
+  ],
+  "mates": [
+    [
+      "BB1",
+      "U1"
+    ],
+    [
+      "U1",
+      "USB1"
+    ],
+    [
+      "CAP1",
+      "SW1"
+    ],
+    [
+      "CAP2",
+      "SW2"
+    ]
+  ],
+  "unresolved": [
+    "Assumed dimensions require physical verification before manufacturing.",
+    "Power module and switch are mechanical studies, not a completed battery circuit."
+  ]
+}

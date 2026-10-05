@@ -1,0 +1,436 @@
+{
+  "units": "mm",
+  "components": [
+    {
+      "id": "BB1",
+      "name": "ELEGOO 400-point breadboard",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "size": [
+        82,
+        55,
+        9
+      ],
+      "anchors": {
+        "top": [
+          0,
+          0,
+          9
+        ]
+      },
+      "mounts": [],
+      "source": "ELEGOO; assumed outline, parametric 2.54 mm grid",
+      "evidence": "provisional"
+    },
+    {
+      "id": "U1",
+      "name": "Teyleten ESP32-C3 with headers",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        4.350000000000002,
+        19.770000000000003,
+        6
+      ],
+      "size": [
+        22.5,
+        18,
+        11.8
+      ],
+      "anchors": {
+        "usb": [
+          0,
+          9,
+          10.2
+        ],
+        "vcc": [
+          7.4399999999999995,
+          1.38,
+          9.6
+        ],
+        "gnd": [
+          4.8999999999999995,
+          1.38,
+          9.6
+        ],
+        "sda": [
+          9.98,
+          1.38,
+          9.6
+        ],
+        "scl": [
+          2.3599999999999994,
+          16.62,
+          9.6
+        ],
+        "left": [
+          20.14,
+          1.38,
+          9.6
+        ],
+        "right": [
+          17.6,
+          1.38,
+          9.6
+        ]
+      },
+      "mounts": [],
+      "source": "Teyleten Supermini; header and USB parameters editable",
+      "evidence": "provisional"
+    },
+    {
+      "id": "DISP1",
+      "name": "Hosyond SSD1306 OLED",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        27.5,
+        5,
+        26.300000000000004
+      ],
+      "size": [
+        27,
+        27,
+        7.6
+      ],
+      "anchors": {
+        "glass": [
+          1.5,
+          6,
+          5.6
+        ],
+        "header": [
+          13.5,
+          24,
+          4
+        ],
+        "viewport": [
+          2.6500000000000004,
+          7.55,
+          7.6
+        ]
+      },
+      "mounts": [
+        [
+          2,
+          2,
+          4
+        ],
+        [
+          2,
+          25,
+          4
+        ],
+        [
+          25,
+          2,
+          4
+        ],
+        [
+          25,
+          25,
+          4
+        ]
+      ],
+      "source": "Hosyond; assumed PCB/glass/hole datums, editable separately",
+      "evidence": "provisional"
+    },
+    {
+      "id": "SW1",
+      "name": "Chanzon left switch",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        23.833333333333332,
+        41,
+        24.1
+      ],
+      "size": [
+        7,
+        6,
+        8
+      ],
+      "anchors": {
+        "seat": [
+          3.5,
+          3,
+          3
+        ],
+        "actuator": [
+          3.5,
+          3,
+          8
+        ]
+      },
+      "mounts": [],
+      "source": "Chanzon 6 × 6 × 5; assumed lead spacing/travel",
+      "evidence": "provisional"
+    },
+    {
+      "id": "CAP1",
+      "name": "Left printed button",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        20.333333333333332,
+        38,
+        32.25
+      ],
+      "size": [
+        14,
+        12,
+        5.8
+      ],
+      "anchors": {
+        "contact": [
+          7,
+          6,
+          0
+        ],
+        "flangeBottom": [
+          1.3,
+          8,
+          0.6
+        ]
+      },
+      "mounts": [],
+      "source": "Derived from switch actuator datum and cap parameters",
+      "evidence": "provisional"
+    },
+    {
+      "id": "SW2",
+      "name": "Chanzon right switch",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        51.166666666666664,
+        41,
+        24.1
+      ],
+      "size": [
+        7,
+        6,
+        8
+      ],
+      "anchors": {
+        "seat": [
+          3.5,
+          3,
+          3
+        ],
+        "actuator": [
+          3.5,
+          3,
+          8
+        ]
+      },
+      "mounts": [],
+      "source": "Chanzon 6 × 6 × 5; assumed lead spacing/travel",
+      "evidence": "provisional"
+    },
+    {
+      "id": "CAP2",
+      "name": "Right printed button",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        47.666666666666664,
+        38,
+        32.25
+      ],
+      "size": [
+        14,
+        12,
+        5.8
+      ],
+      "anchors": {
+        "contact": [
+          7,
+          6,
+          0
+        ],
+        "flangeBottom": [
+          1.3,
+          8,
+          0.6
+        ]
+      },
+      "mounts": [],
+      "source": "Derived from switch actuator datum and cap parameters",
+      "evidence": "provisional"
+    },
+    {
+      "id": "BAT1",
+      "name": "EEMB protected 250mAh battery",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        43,
+        5,
+        14.5
+      ],
+      "size": [
+        32,
+        20.5,
+        5.3
+      ],
+      "anchors": {
+        "leadExit": [
+          16,
+          20.5,
+          2.65
+        ]
+      },
+      "mounts": [],
+      "source": "EEMB store nominal 32 × 20.5 × 5.3 mm; installed pack assumptions editable",
+      "evidence": "provisional"
+    },
+    {
+      "id": "PWR2",
+      "name": "Power module mechanical study",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        47,
+        31,
+        14.5
+      ],
+      "size": [
+        26,
+        18,
+        7
+      ],
+      "anchors": {
+        "input": [
+          2,
+          9,
+          1.6
+        ],
+        "output": [
+          24,
+          9,
+          1.6
+        ]
+      },
+      "mounts": [
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          16,
+          0
+        ],
+        [
+          24,
+          2,
+          0
+        ],
+        [
+          24,
+          16,
+          0
+        ]
+      ],
+      "source": "Generic packaging study; charger/regulator circuit not selected",
+      "evidence": "provisional"
+    },
+    {
+      "id": "J1",
+      "name": "Battery connector",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        29.85,
+        43,
+        14.5
+      ],
+      "size": [
+        8,
+        6,
+        5
+      ],
+      "anchors": {
+        "input": [
+          4,
+          0,
+          2.5
+        ],
+        "output": [
+          4,
+          6,
+          2.5
+        ]
+      },
+      "mounts": [],
+      "source": "JST 2.0 mm selected; mated body and lead exits assumed",
+      "evidence": "provisional"
+    },
+    {
+      "id": "PWR1",
+      "name": "Power switch mechanical study",
+      "localOrigin": [
+        0,
+        0,
+        0
+      ],
+      "position": [
+        6,
+        47,
+        14.5
+      ],
+      "size": [
+        10,
+        8,
+        5
+      ],
+      "anchors": {
+        "lever": [
+          5,
+          8,
+          2.5
+        ]
+      },
+      "mounts": [],
+      "source": "Generic side-actuated switch; electrical part not selected",
+      "evidence": "provisional"
+    }
+  ]
+}

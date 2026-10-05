@@ -1,0 +1,108 @@
+{
+  "milestone": "2026-10-05-integral-snaps",
+  "archivedAt": "2026-10-05T02:03:03.317495+00:00",
+  "originalObservedAt": "2026-10-05T01:56:02.316Z",
+  "provenance": "Current five-piece source at 50619e4; fresh consistent desktop/mobile/exploded captures. Original session screenshots are also preserved separately.",
+  "capture": {
+    "captures": [
+      {
+        "file": "desktop.png",
+        "capturedAt": "2026-10-05T02:01:38.624Z",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "mode": "closed"
+      },
+      {
+        "file": "exploded.png",
+        "capturedAt": "2026-10-05T02:01:47.778Z",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "mode": "transparent exploded"
+      },
+      {
+        "file": "mobile.png",
+        "capturedAt": "2026-10-05T02:01:56.071Z",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "mode": "closed"
+      }
+    ],
+    "parameterSha256": "f6495dab26d8c0cc5c88fe01fdc968302cad7ab26064360abcec2d353e3d48bf",
+    "report": "Digital assembly: PASSButton travel: PASSHeader grid: PASSBreadboard footprint: PASSCase: 88.0 \u00d7 61.0 \u00d7 38.3 mm5 printed parts \u00b7 no loose fasteners \u00b7 10 routed wires",
+    "browser": "148.0.7778.96"
+  },
+  "printedParts": 5,
+  "screws": 0,
+  "pushPins": 0,
+  "manufacturingReady": false,
+  "sha256": {
+    "assembly-with-case.step": "a00d6f5de214a1e5eeb34c4f6279bbb82fada32d54cc822b0f5724cb7d72577b",
+    "assembly.json": "e3d9b72106cb59c3d3235f180c403ad1139c126f565120729507c8c3ed1080ba",
+    "bom.csv": "4455b9f555d869174a2df6cd031f08f266b451a9d0b80c413cb464534945eb1b",
+    "cad-source.zip": "95b05a55e2b37108650df7225e0f842dad44818b8d41639fa49c71f811c1265c",
+    "captures/capture.json": "bf9045483bbc6933fb8f6c21e9d891d39376af60441a962e1f7edc15aaec9bbd",
+    "captures/desktop.png": "707d87ed4118b64f048afc7076c118f5d95914836464603092babaf2ba4dc5fb",
+    "captures/exploded.png": "a7184211ac5e931cb12bba95536b0d064ad265d958c258151bb88e6cb92dd88f",
+    "captures/mobile.png": "6fad49f9385a7050179d6b984c2133ff1029a54667115c891017869d0bc7b47b",
+    "component-metadata.json": "f23dda9c7552f806a9c163bc7333463187c1aeeba1d9c988647ca96cd07255a3",
+    "components/BAT1.step": "297f6bd3ed560f5a9b679df37619818cfd34021e1187df93bc243bc45cf9bc6c",
+    "components/BAT1.stl": "b3ff4499a8b47959ca235f828119d6f1388668aa5049714ec74a17659672d9e0",
+    "components/BB1.step": "5cb61dd22a013c580775011d12de00ea785360652fc433120ceeb72368b27f60",
+    "components/BB1.stl": "63e9948a153bb98cc727daeb1c21fdb3051770b624f7a66e1f8ee73d42d68d89",
+    "components/CAP1.step": "962f029188c610870c0a99d78572f1ad6a675880dc697fa3bccbb75789a35acd",
+    "components/CAP1.stl": "0cf6383eb3066d8225e2e49291356a2d97f30bf80c65bc9dc027e3bd10510953",
+    "components/CAP2.step": "8b9ff12c3924f3f906f5414635874416560595fee4537791a88cf8c49b32333b",
+    "components/CAP2.stl": "0cf6383eb3066d8225e2e49291356a2d97f30bf80c65bc9dc027e3bd10510953",
+    "components/DISP1.step": "cf1c9b3cc150414325e28eb752d14bb624a42c2ccf0c0ad338d75523b006ac71",
+    "components/DISP1.stl": "c83e558724335e1f2c39ceaa34ca3b240d59f90165716da0793f6d1e414b0568",
+    "components/J1.step": "7fe70427a1572c229f86b25ccc7ac2076c3a69a246bf8f7ac7b99d6487fe79e3",
+    "components/J1.stl": "12cd567a67ac34734b98aac85a8e5ce33c75c6433187c5d6fa74a4f4cefbd5eb",
+    "components/PWR1.step": "3b2f4356c799acb8e1d5cb149a01a03fad6766e0c9995420d19677f76cafb61a",
+    "components/PWR1.stl": "f7f4e00e7000a926190d294d5003aa59546d7a95445c9647aacc99e62f6b4dc8",
+    "components/PWR2.step": "88dc8c99cc950b33a8713f79fdbaad3f2f483abfac85f33d4e83eeab08f07c35",
+    "components/PWR2.stl": "7095e809630b78aad9bf18a3f806a4516f9d7d7110848b5625bd6cc5272decb0",
+    "components/SW1.step": "b8ab6e8cfe05dba3826313b03534471e76fd572555d5686a46a4d4259654c09a",
+    "components/SW1.stl": "3f25526d625456dce6e6d81e98eae1ed0305b37a7122635cb1a337bf8ff6a2fd",
+    "components/SW2.step": "5ebba13d5a5468df424cbf32615f83c1869a3152ccd9bee1c21ad620ae151dff",
+    "components/SW2.stl": "3f25526d625456dce6e6d81e98eae1ed0305b37a7122635cb1a337bf8ff6a2fd",
+    "components/U1.step": "44511529431e24ae5301c34a64a3f82ac83d6ebee0e1e1075816ee0f133d3516",
+    "components/U1.stl": "9e4a3459bf57ed0b15635da931a69354320438ecb5e19542fbfa2e4b075fc088",
+    "enclosure/CAP1.step": "ef138f0b41c6f98bfaf4b456e539d8943bd7360f9fe34d3084eb73dfd0f9133a",
+    "enclosure/CAP1.stl": "fc485457fee638746f81c3aea9d90fde8bf75d60736323cfa1b8a82ebaaa8f09",
+    "enclosure/CAP2.step": "c55e3684a91e6921fa96dcf3653d696679c07fdaf40750680ee82bbf7376fa9d",
+    "enclosure/CAP2.stl": "453042567ff54e5fad2cfe5898030818719e26ccd5a225ff8ea87ebd683b290d",
+    "enclosure/CASE_BASE.step": "0c6ab146df5eacaf3bb47681f7ee3213a2d332e06427e8f6426b5339d726e669",
+    "enclosure/CASE_BASE.stl": "a89a52a9ccef086bb2ec240a0a95888098f6f9c005114995d29154dfb3cd310d",
+    "enclosure/CASE_CARRIER.step": "32d8ff2748e8448232a6e4be89604877222f598c70fdfb99aa8922256fc4dca1",
+    "enclosure/CASE_CARRIER.stl": "47e6082112497ce90f896c73bee5f00c8ef4040820c77c837784e9e4a2cc4f83",
+    "enclosure/CASE_COVER.step": "9c257859ddb0b7183b5ba3ecd6934444da270a63ab2119840ebfb1b9e7da1b74",
+    "enclosure/CASE_COVER.stl": "3e807a886ba7ec1d8a8bb4d960c7e104ed34e2700772641a45a8f8b426ae04e8",
+    "enclosure/README.txt": "f5664625edd56bd7f037ced4c525ded1812a693c355274726c8312532fe083e1",
+    "enclosure-report.json": "8c581a697b9793e6193747b2c5890931f0c995e81cafa279f6b0e0b9cf11601a",
+    "fit-report.json": "74a52acc0ebc7ead8ebe596f803bfde6127e6845f28a932b508e274fa030925e",
+    "harness.json": "bb44f379df9fba6d01daf787e23ac18290bc4f01b17688e140551745e6d199ab",
+    "parameters.json": "f6495dab26d8c0cc5c88fe01fdc968302cad7ab26064360abcec2d353e3d48bf",
+    "snaps.json": "1de20c0a61baff4078d558463bfc6200d27b5dcdba64d90b960097899d87f312",
+    "original-captures/1956-case-closed.png": "143ca977d21c29d9e7ab12dcaee3cc3b0c1df11e6610766fbc316ca8d39ef7ef",
+    "original-captures/1964-workbench-exploded.png": "08a22de9919e8172b736a594ba6192185d5af8a9d3a57a859f8815325bcec129",
+    "README.md": "338e8e49bdaad63355eafb74216f0a0ceec18c37775358f40bde5ce615ae86a4"
+  },
+  "originalCaptures": [
+    {
+      "file": "original-captures/1956-case-closed.png",
+      "recordedAt": "2026-10-05T01:55:54.455Z",
+      "provenance": "Original screenshot image recovered from session output. Timestamp is image-view record, not EXIF capture time."
+    },
+    {
+      "file": "original-captures/1964-workbench-exploded.png",
+      "recordedAt": "2026-10-05T01:56:02.316Z",
+      "provenance": "Original screenshot image recovered from session output. Timestamp is image-view record, not EXIF capture time."
+    }
+  ]
+}
