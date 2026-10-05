@@ -1,0 +1,15 @@
+{
+  "milestone": "2026-10-04-envelope-study",
+  "archivedAt": "2026-10-05T02:03:03.366585+00:00",
+  "provenance": "Original image evidence only. No complete reproducible CAD source or matching model exports have been recovered for this early study.",
+  "originalCaptures": [
+    {
+      "file": "623-workbench.png",
+      "recordedAt": "2026-10-04T22:25:49.481Z",
+      "provenance": "Original screenshot recovered from the session image output; timestamp is the image-view record, not EXIF capture time."
+    }
+  ],
+  "sha256": {
+    "623-workbench.png": "d19a09b5d09eedcc3f718ac71b6ff1d65700f98b322b21145d37e53ff3a0a95a"
+  }
+}
