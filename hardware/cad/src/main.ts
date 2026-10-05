@@ -28,9 +28,10 @@ function redraw(){
  for(const p of result.meshes){
   if(p.category==='printed'&&p.id.startsWith('CASE')&&!el<HTMLInputElement>('case').checked)continue;
   if(p.category==='wire'&&!el<HTMLInputElement>('wires').checked)continue;
+  if(p.category==='fastener'&&!el<HTMLInputElement>('fasteners').checked)continue;
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(p.vertices,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(p.normals,3));geometry.setIndex(p.triangles);
   const transparent=p.id.startsWith('CASE')&&el<HTMLInputElement>('xray').checked;
-  const mesh=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({color:p.color,roughness:.65,metalness:.05,transparent,opacity:transparent?.18:1,depthWrite:!transparent,side:THREE.DoubleSide}));
+  const mesh=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({color:p.color,roughness:.65,metalness:p.category==='fastener'?.5:.05,transparent,opacity:transparent?.18:1,depthWrite:!transparent,side:THREE.DoubleSide}));
   if(el<HTMLInputElement>('explode').checked)mesh.position.z=p.lift;
   group.add(mesh);
  }
@@ -38,7 +39,7 @@ function redraw(){
 function status(text:string){el('status').textContent=text;}
 function report(){
  if(!result)return;const r=result.report;el('report').replaceChildren();
- for(const text of [`Digital assembly: ${r.interferencePass&&r.footprintPass&&r.motionPass&&r.headerGridPass?'PASS':'CHECK FIT'}`,`Button travel: ${r.motionPass?'PASS':'CHECK FIT'}`,`Header grid: ${r.headerGridPass?'PASS':'CHECK ALIGNMENT'}`,`Breadboard footprint: ${r.footprintPass?'PASS':'FAIL'}`,`Case: ${r.bounds.max.map((v,i)=>(v-r.bounds.min[i]).toFixed(1)).join(' × ')} mm`,`${r.printedCount} printed parts · no loose fasteners · ${r.wireCount} routed wires`,...r.intersections.map(v=>`${v.a} / ${v.b}: ${v.volume.toFixed(2)} mm³ interference`)]){const p=document.createElement('p');p.textContent=text;el('report').append(p);}
+ for(const text of [`Digital assembly: ${r.interferencePass&&r.footprintPass&&r.motionPass&&r.headerGridPass?'PASS':'CHECK FIT'}`,`Button travel: ${r.motionPass?'PASS':'CHECK FIT'}`,`Header grid: ${r.headerGridPass?'PASS':'CHECK ALIGNMENT'}`,`Breadboard footprint: ${r.footprintPass?'PASS':'FAIL'}`,`Case: ${r.bounds.max.map((v,i)=>(v-r.bounds.min[i]).toFixed(1)).join(' × ')} mm`,`${r.printedCount} printed parts · ${r.screwCount} screws · ${r.wireCount} routed wires`,...r.intersections.map(v=>`${v.a} / ${v.b}: ${v.volume.toFixed(2)} mm³ interference`)]){const p=document.createElement('p');p.textContent=text;el('report').append(p);}
  el('blockers').replaceChildren(...r.blockers.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
  const select=el<HTMLSelectElement>('print-part');select.replaceChildren(...[...new Map(result.meshes.filter(m=>m.category==='printed').map(m=>[m.id,m])).values()].map(m=>{const option=document.createElement('option');option.value=m.id;option.textContent=m.name;return option;}));
 }
@@ -74,7 +75,7 @@ function editor(){
 }
 const select=el<HTMLSelectElement>('part');for(const [key,label]of Object.entries(parameterLabels)){const o=document.createElement('option');o.value=key;o.textContent=label;select.append(o);}editor();
 select.addEventListener('change',editor);
-for(const id of ['case','xray','wires'])el(id).addEventListener('change',redraw);
+for(const id of ['case','xray','wires','fasteners'])el(id).addEventListener('change',redraw);
 el('explode').addEventListener('change',()=>{redraw();resetView();});el('reset-view').addEventListener('click',resetView);
 el('reset').addEventListener('click',()=>{parameters=structuredClone(defaultParameters);editor();rebuild();});
 el('save').addEventListener('click',()=>download('ceridwen-parameters.json',new Blob([JSON.stringify({schema:2,parameters},null,2)],{type:'application/json'})));

@@ -14,7 +14,7 @@ self.onmessage=async(event:MessageEvent<{type:string;parameters?:Parameters;id?:
    design=buildDesign(event.data.parameters!,await kernel);
    self.postMessage({type:'built',result:{assembly:design.assembly,meshes:design.meshes,report:design.report}});
   }else if(event.data.type==='stl'&&design){
-   const entity=design.entities.find(e=>(e.category==='printed')&&e.id===event.data.id);
+   const entity=design.entities.find(e=>e.category==='printed'&&e.id===event.data.id);
    if(!entity)throw new Error('Unknown printed part');
    self.postMessage({type:'download',name:entity.id+'.stl',blob:printSolid(entity.id,entity.shape).blobSTL()});
   }else if(event.data.type==='step'&&design){

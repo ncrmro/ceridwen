@@ -3,9 +3,7 @@ test('assembled model rebuilds from measurements and exports the current printab
  test.setTimeout(180000);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/');
  await expect(page.locator('#report')).toContainText('Digital assembly: PASS',{timeout:90000});
- await expect(page.locator('#report')).toContainText('5 printed parts');
- await expect(page.locator('#report')).toContainText('no loose fasteners');
- await expect(page.getByText('Screws',{exact:true})).toHaveCount(0);
+ await expect(page.locator('#report')).toContainText('8 printed parts');
  await page.screenshot({path:'out/case-closed.png'});
  await page.locator('#xray').check();await page.screenshot({path:'out/workbench.png'});
  await page.locator('#explode').check();await page.screenshot({path:'out/workbench-exploded.png'});
@@ -20,7 +18,6 @@ test('assembled model rebuilds from measurements and exports the current printab
  await page.getByRole('button',{name:'Reset design'}).click();await expect(page.locator('#report')).toContainText('Digital assembly: PASS',{timeout:90000});
  await page.locator('#load').setInputFiles((await parameters.path())!);await expect(page.locator('#report')).toContainText('Digital assembly: PASS',{timeout:90000});
  await expect(page.getByRole('spinbutton',{name:'battery.thickness',exact:true})).toHaveValue('8.3');
- await page.locator('#print-part').selectOption('CASE_COVER');
  const stl=page.waitForEvent('download');await page.getByRole('button',{name:'Download STL',exact:true}).click();expect((await stl).suggestedFilename()).toMatch(/\.stl$/);
  await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'Fit view'}).click();await page.screenshot({path:'out/workbench-mobile.png',fullPage:true});
  expect(errors).toEqual([]);

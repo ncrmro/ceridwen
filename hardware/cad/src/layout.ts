@@ -1,13 +1,13 @@
 import type {Assembly,Part,Vec3} from './assembly.ts';
 import {defaultParameters,validateParameters,type Parameters} from './parameters.ts';
-export interface Layout { assembly:Assembly; carrier:number; wiringDatum:number; displayPcb:number; switchSeat:number; lid:number; capBottom:number; stopTop:number; params:Parameters }
+export interface Layout { assembly:Assembly; carrier:number; deck:number; displayPcb:number; switchSeat:number; lid:number; capBottom:number; stopTop:number; params:Parameters }
 export function derive(p:Parameters=defaultParameters):Layout {
  validateParameters(p);
  const b=p.breadboard,m=p.esp32,o=p.oled,s=p.button,c=p.case;
  const carrier=b.height+c.wireGap;
  const lowerTop=carrier+c.carrierThickness+.5+Math.max(p.battery.thickness,p.power.height,p.connector.height,p.powerSwitch.height);
- const wiringDatum=lowerTop+c.layerGap;
- const switchReferencePcb=wiringDatum+c.upperAllowance+c.standoff;
+ const deck=lowerTop+c.layerGap;
+ const switchReferencePcb=deck+c.deckThickness+c.standoff;
  const screenTop=switchReferencePcb+o.pcbThickness+o.glassThickness;
  const switchSeat=screenTop-s.bodyHeight-s.actuatorHeight;
  const capBottom=screenTop+p.cap.contactGap;
@@ -32,5 +32,5 @@ export function derive(p:Parameters=defaultParameters):Layout {
  add('J1','Battery connector',[p.connector.width,p.connector.depth,p.connector.height],[mcuX+m.length+3,b.width-p.connector.depth-6,lowerZ],'#eee7d4','JST 2.0 mm selected; mated body and lead exits assumed');
  add('PWR1','Power switch mechanical study',[p.powerSwitch.width,p.powerSwitch.depth+p.powerSwitch.leverHeight,p.powerSwitch.height],[6,b.width-p.powerSwitch.depth-p.powerSwitch.leverHeight,lowerZ],'#9aa6b0','Generic side-actuated switch; electrical part not selected');
  parts.push({id:'USB1',name:'External USB plug approach',size:[20,12,8],position:[mcuX-20,mcuY+m.width/2-6,b.height-3+m.pcbBase+m.pcbThickness-2],color:'#77b7ee',source:'Editable cable access allowance, external to board footprint',evidence:'provisional',missing:['Actual cable dimensions'],kind:'clearance'});
- return {params:p,carrier,wiringDatum,displayPcb,switchSeat,lid,capBottom,stopTop,assembly:{schema:1,name:'Ceridwen · parametric assembled handheld',parameters:p,minimumGap:.3,parts,mates:[['BB1','U1'],['U1','USB1'],['CAP1','SW1'],['CAP2','SW2']],unresolved:['Assumed dimensions require physical verification before manufacturing.','Power module and switch are mechanical studies, not a completed battery circuit.']}};
+ return {params:p,carrier,deck,displayPcb,switchSeat,lid,capBottom,stopTop,assembly:{schema:1,name:'Ceridwen · parametric assembled handheld',parameters:p,minimumGap:.3,parts,mates:[['BB1','U1'],['U1','USB1'],['CAP1','SW1'],['CAP2','SW2']],unresolved:['Assumed dimensions require physical verification before manufacturing.','Power module and switch are mechanical studies, not a completed battery circuit.']}};
 }

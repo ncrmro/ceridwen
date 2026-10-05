@@ -20,7 +20,7 @@ export function harness(l:Layout):HarnessWire[]{
  const starts=[vcc,ground,port('sda'),port('scl')];
  const net=['3V3','GND','SDA','SCL'],colors=['#ee635f','#303a47','#69a7eb','#f0c650'];
  for(let i=0;i<4;i++){
-  const a=starts[i],z=l.wiringDatum-3.2+i*.8,y=15-i*1.2;
+  const a=starts[i],z=l.deck-3.2+i*.8,y=15-i*1.2;
   const end:Vec3=[d.position[0]+p.oled.width/2-3.81+i*2.54,d.position[1]+p.oled.depth-3,d.position[2]];
   add('W0'+(i+1),net[i],`OLED ${net[i]}`,colors[i],[a,[a[0],a[1],z],[a[0],y,z],[end[0],y,z],[end[0],end[1],z],end],['U1','DISP1']);
  }
@@ -28,7 +28,7 @@ export function harness(l:Layout):HarnessWire[]{
   const sw=get('SW'+(i+1)),cx=sw.position[0]+sw.size[0]/2,cy=sw.position[1]+sw.size[1]/2;
   for(let j=0;j<2;j++){
    const a=j===0?port(i===0?'left':'right'):ground;
-   const z=l.wiringDatum-(i===0?(j===0?2.2:3):(j===0?.6:1.4)),y=p.breadboard.width-(j===0?15.5:14.5);
+   const z=l.deck-(i===0?(j===0?2.2:3):(j===0?.6:1.4)),y=p.breadboard.width-(j===0?15.5:14.5);
    const end:Vec3=[cx+(j===0?-1:1)*p.button.leadSpacing/2,cy,sw.position[2]];
    add('W0'+(5+i*2+j),j===0?'GPIO'+i:'GND',`Button ${i+1} ${j===0?'input':'ground'}`,j===0?(i===0?'#69c38c':'#bf8ce7'):'#303a47',[a,[a[0],a[1],z],[a[0],y,z],[end[0],y,z],[end[0],end[1],z],end],['U1',sw.id]);
   }
