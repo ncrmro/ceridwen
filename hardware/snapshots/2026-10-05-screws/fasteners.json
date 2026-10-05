@@ -1,0 +1,250 @@
+[
+  {
+    "id": "BASE_-3.5_6",
+    "center": [
+      -3.5,
+      6
+    ],
+    "headZ": 14,
+    "length": 8,
+    "owner": "CASE_BASE"
+  },
+  {
+    "id": "BASE_-3.5_49",
+    "center": [
+      -3.5,
+      49
+    ],
+    "headZ": 14,
+    "length": 8,
+    "owner": "CASE_BASE"
+  },
+  {
+    "id": "COVER_-3.5_14",
+    "center": [
+      -3.5,
+      14
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_COVER"
+  },
+  {
+    "id": "COVER_-3.5_41",
+    "center": [
+      -3.5,
+      41
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_COVER"
+  },
+  {
+    "id": "BASE_85.5_6",
+    "center": [
+      85.5,
+      6
+    ],
+    "headZ": 14,
+    "length": 8,
+    "owner": "CASE_BASE"
+  },
+  {
+    "id": "BASE_85.5_49",
+    "center": [
+      85.5,
+      49
+    ],
+    "headZ": 14,
+    "length": 8,
+    "owner": "CASE_BASE"
+  },
+  {
+    "id": "COVER_85.5_14",
+    "center": [
+      85.5,
+      14
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_COVER"
+  },
+  {
+    "id": "COVER_85.5_41",
+    "center": [
+      85.5,
+      41
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_COVER"
+  },
+  {
+    "id": "DECK_2.5_2.5",
+    "center": [
+      2.5,
+      2.5
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "DECK_79.5_2.5",
+    "center": [
+      79.5,
+      2.5
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "DECK_2.5_52.5",
+    "center": [
+      2.5,
+      52.5
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "DECK_79.5_52.5",
+    "center": [
+      79.5,
+      52.5
+    ],
+    "headZ": 12,
+    "length": 8,
+    "up": true,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "POWER_49_33",
+    "center": [
+      49,
+      33
+    ],
+    "headZ": 16.1,
+    "length": 4,
+    "owner": "CASE_CARRIER"
+  },
+  {
+    "id": "POWER_49_47",
+    "center": [
+      49,
+      47
+    ],
+    "headZ": 16.1,
+    "length": 4,
+    "owner": "CASE_CARRIER"
+  },
+  {
+    "id": "POWER_71_33",
+    "center": [
+      71,
+      33
+    ],
+    "headZ": 16.1,
+    "length": 4,
+    "owner": "CASE_CARRIER"
+  },
+  {
+    "id": "POWER_71_47",
+    "center": [
+      71,
+      47
+    ],
+    "headZ": 16.1,
+    "length": 4,
+    "owner": "CASE_CARRIER"
+  },
+  {
+    "id": "OLED_29.5_7",
+    "center": [
+      29.5,
+      7
+    ],
+    "headZ": 31.900000000000006,
+    "length": 4,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "OLED_29.5_30",
+    "center": [
+      29.5,
+      30
+    ],
+    "headZ": 31.900000000000006,
+    "length": 4,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "OLED_52.5_7",
+    "center": [
+      52.5,
+      7
+    ],
+    "headZ": 31.900000000000006,
+    "length": 4,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "OLED_52.5_30",
+    "center": [
+      52.5,
+      30
+    ],
+    "headZ": 31.900000000000006,
+    "length": 4,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "STOP_1_17.333333333333332",
+    "center": [
+      17.333333333333332,
+      44
+    ],
+    "headZ": 32.45,
+    "length": 6,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "STOP_1_37.33333333333333",
+    "center": [
+      37.33333333333333,
+      44
+    ],
+    "headZ": 32.45,
+    "length": 6,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "STOP_2_44.666666666666664",
+    "center": [
+      44.666666666666664,
+      44
+    ],
+    "headZ": 32.45,
+    "length": 6,
+    "owner": "CASE_DECK"
+  },
+  {
+    "id": "STOP_2_64.66666666666666",
+    "center": [
+      64.66666666666666,
+      44
+    ],
+    "headZ": 32.45,
+    "length": 6,
+    "owner": "CASE_DECK"
+  }
+]

@@ -1,0 +1,123 @@
+{
+  "milestone": "2026-10-05-screws",
+  "archivedAt": "2026-10-05T02:07:50.538834+00:00",
+  "originalObservedAt": "2026-10-05T01:11:41.994Z",
+  "provenance": "Recovered screw-version CAD source, rebuilt during archival. Historical desktop screenshots recovered separately; desktop/mobile/exploded captures are newly generated. Supporting unchanged files and capture harness come from the current toolchain.",
+  "capture": {
+    "captures": [
+      {
+        "file": "desktop.png",
+        "capturedAt": "2026-10-05T02:07:00.798Z",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "mode": "closed"
+      },
+      {
+        "file": "exploded.png",
+        "capturedAt": "2026-10-05T02:07:10.525Z",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "mode": "transparent exploded"
+      },
+      {
+        "file": "mobile.png",
+        "capturedAt": "2026-10-05T02:07:21.126Z",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "mode": "closed"
+      }
+    ],
+    "parameterSha256": "729dd039dfbfb2d7a79c677eb50476aa6f8f87724905406e4db20e40923adc5e",
+    "report": "Digital assembly: PASSButton travel: PASSHeader grid: PASSBreadboard footprint: PASSCase: 94.0 \u00d7 61.0 \u00d7 38.3 mm8 printed parts \u00b7 24 screws \u00b7 10 routed wires",
+    "browser": "148.0.7778.96"
+  },
+  "printedParts": 8,
+  "screws": 24,
+  "pushPins": 0,
+  "manufacturingReady": false,
+  "sha256": {
+    "assembly-with-case.step": "dba83b0cba060c3fe1975b91dd366295833ca2fdfbdf93b316e61467acbd5608",
+    "assembly.json": "fd3663349e038689cf48a06e8c375428b3ff88e6c07fd2ace3d14f611c3d9817",
+    "bom.csv": "73b4aa6b1ee0c4bf16308c6bd6cacfcd8ec95c8090e8b56b52c30a80bf787a3c",
+    "cad-source.zip": "e937802c3b26a78dd71b77e6e3883b5eb8081a32f645e11f2e1b5bff1a2e0ecb",
+    "captures/capture.json": "56375a4d24c885e76be373fb397923d631458141deeec825d39ca792bf133815",
+    "captures/desktop.png": "d98f0bd8e9c10e66d2699eb3002f1e729066fccf5fbfbd395cbd800307b442c2",
+    "captures/exploded.png": "40816ff02ef202a82bec7aa13eee9d96df9c9ea5af8832402052aac1b0ba3a5e",
+    "captures/mobile.png": "dc25dd4f3ffe1a531d5b03f9e5c3eb005343c291101a7121fb2f13ab86a66a69",
+    "component-metadata.json": "424a2bd9049b8e2ea14eab8226510bc36249a53f4a46730e54b4f22788c58d7c",
+    "components/BAT1.step": "584881fae3e66702026f756cf78deb755cea62ad0e09f2d7be148597f2d68b5d",
+    "components/BAT1.stl": "b3ff4499a8b47959ca235f828119d6f1388668aa5049714ec74a17659672d9e0",
+    "components/BB1.step": "bcb3af1b71745481100193813b04de3ad91e87272a9e2488cd3462bd65d73c9b",
+    "components/BB1.stl": "63e9948a153bb98cc727daeb1c21fdb3051770b624f7a66e1f8ee73d42d68d89",
+    "components/CAP1.step": "c6ec89d6eb0018fae3a30c58fd52a4ef858c89b64c7806654db909deb9d012a0",
+    "components/CAP1.stl": "d16b8f363392e30344094cc24333ad297d2a122f4f671b4fd55de5f8ca922e10",
+    "components/CAP2.step": "e991457f05033d51c803661bec7d9bd48619504427922969efb3820ec9bd30c4",
+    "components/CAP2.stl": "d16b8f363392e30344094cc24333ad297d2a122f4f671b4fd55de5f8ca922e10",
+    "components/DISP1.step": "f960263ce455a3484b51524181c1e70ebf81f86d7c596595bb75b21f752d098a",
+    "components/DISP1.stl": "c83e558724335e1f2c39ceaa34ca3b240d59f90165716da0793f6d1e414b0568",
+    "components/J1.step": "6ef24a0fb0cd943a992461e0035385dfcea2aedeb7644f4b25d399c72b5c281a",
+    "components/J1.stl": "12cd567a67ac34734b98aac85a8e5ce33c75c6433187c5d6fa74a4f4cefbd5eb",
+    "components/M2x4.step": "57ea5221a0b3f2fe46105dd7c4f0af55bb48379d140da90e6c3db0cc69bc4736",
+    "components/M2x6.step": "f9d43d119aeeae25c63a4a3ada7e1b12521788f67bf0cd5ec2718bf448ecc702",
+    "components/M2x8.step": "a3bc9ec360de7a2916f0c9090ff1c341f60a19a90402dca2727aeb7b0990c1c9",
+    "components/PWR1.step": "d9564e019e21f405d7c0d075c6ab00ffcc647f70295c58253501bf039d38c159",
+    "components/PWR1.stl": "f7f4e00e7000a926190d294d5003aa59546d7a95445c9647aacc99e62f6b4dc8",
+    "components/PWR2.step": "e19b05136fd67d26930308185b9ad4b490237c480113c3847ce9806f78b59a90",
+    "components/PWR2.stl": "7095e809630b78aad9bf18a3f806a4516f9d7d7110848b5625bd6cc5272decb0",
+    "components/SW1.step": "c331ec1e6abc1f139f425e0b27fd1174d2d84f0772d025f0a19a96ea3393c5af",
+    "components/SW1.stl": "3f25526d625456dce6e6d81e98eae1ed0305b37a7122635cb1a337bf8ff6a2fd",
+    "components/SW2.step": "a4c0b405c4720c1afaa84ee89a81481a320a50018413442d5066a7673261fb79",
+    "components/SW2.stl": "3f25526d625456dce6e6d81e98eae1ed0305b37a7122635cb1a337bf8ff6a2fd",
+    "components/U1.step": "dcfb762203d66859fb80138b70bd751fab060b93f06e836aeb6427dd5a438750",
+    "components/U1.stl": "9e4a3459bf57ed0b15635da931a69354320438ecb5e19542fbfa2e4b075fc088",
+    "enclosure/CAP1.step": "6405059ab5b8d97c6f3164da59c71e3a6c8f1f34bc5288b1ba40cf2d327e4194",
+    "enclosure/CAP1.stl": "4bb6a1cd46e466489434d6c67c2366e635e1f2ace04c4846f154231768cbca15",
+    "enclosure/CAP2.step": "97179f8fe452b23e95657235efeb9a3e0f96f7fcbad8020f7cd90f63675a6a86",
+    "enclosure/CAP2.stl": "ac098a4911d7e2a399e3495f2168ca91a3218fbe036ed59235c9422ad13e6c67",
+    "enclosure/CASE_BASE.step": "b2512206657af0a3bad26d2cf0db55ff5bd6ede878e70bc6a2ae74cfd1a5dd6b",
+    "enclosure/CASE_BASE.stl": "0b0bdf97c4b4e63e2b515160f82fb820a754c747205a1569ee3045cd16f2e2cc",
+    "enclosure/CASE_CARRIER.step": "eda2d86bc355d501f0e5152bbed545bab0f080fa18057d8ed2d6d6b006590802",
+    "enclosure/CASE_CARRIER.stl": "d12dd8fb69cf9419f7fee6dee63585e68a4c472379ca7ccb2a74d6b17e3cd9af",
+    "enclosure/CASE_COVER.step": "ff1c4f8355a11c07c4f4f340aade1846be65fb8c918158b1828c7e5bf7a4db98",
+    "enclosure/CASE_COVER.stl": "2ad1196f0f1a41402fa00221b9f99e8c8b99efd6a1ad71547df2d42b8975eaaf",
+    "enclosure/CASE_DECK.step": "843575a0b8af3fab7bf51f6962d9d3059568060c420f2ac352050044a00b5be4",
+    "enclosure/CASE_DECK.stl": "6887bb7a0b19ef2626bef034cbd04f314c2fc0bdaf757e7f608f56d328039d9e",
+    "enclosure/CASE_STOP1.step": "60a7bd31e0727c518bbe4f85ea0c14d6be128167304d0779d1c5f7712587107d",
+    "enclosure/CASE_STOP1.stl": "2c47813b85e6ca2382956ae15bc4d71c7b0f2b322ba1843612b3487876e2b121",
+    "enclosure/CASE_STOP2.step": "dc5e10cbe7eda352c2fee9749da314b7c740d7347d11e8451552ac46214593ff",
+    "enclosure/CASE_STOP2.stl": "2463fbf363d7697295fa2b34ec6da5ded4da77185467cae59ab3b96d2f4fbe2d",
+    "enclosure/README.txt": "1241ee6242b189aa6cd114c6c5541e0c504958ba643e60e0fa2b505ad6781e95",
+    "enclosure-report.json": "33e6af3a1dbdd54923acb5919a3e446dfbec34b9b5abbb567bbb98bd901fa838",
+    "fasteners.json": "338ed2061f918eb70c59b315fa019e2adc3307f3f0eb4ecc699339b74ea40107",
+    "fit-report.json": "74a52acc0ebc7ead8ebe596f803bfde6127e6845f28a932b508e274fa030925e",
+    "harness.json": "bb44f379df9fba6d01daf787e23ac18290bc4f01b17688e140551745e6d199ab",
+    "parameters.json": "729dd039dfbfb2d7a79c677eb50476aa6f8f87724905406e4db20e40923adc5e",
+    "original-captures/1412-workbench-exploded.png": "5481496e2fa5cbc8057353ac103bd002e305ab0b6f078d11e18a387cc33bf87b",
+    "original-captures/1412-case-closed.png": "f4f09fbc353d4416abaa512e388867dea02fdbb808aecd58bdb815dbaa73f9de",
+    "original-captures/1542-production-closed.png": "8307f058bc77208ccaeeae6659b472ea42a34b9ef4c6c4aeefab8c98a0d8ba3e",
+    "README.md": "bab50770293dc5ed36ad214a3e0a15079e4452bc768be17de007c1577d5bea82"
+  },
+  "originalCaptures": [
+    {
+      "file": "original-captures/1412-case-closed.png",
+      "recordedAt": "2026-10-05T00:57:25.400Z",
+      "provenance": "Original screenshot image recovered from session output. Timestamp is image-view record, not EXIF capture time."
+    },
+    {
+      "file": "original-captures/1412-workbench-exploded.png",
+      "recordedAt": "2026-10-05T00:57:25.400Z",
+      "provenance": "Original screenshot image recovered from session output. Timestamp is image-view record, not EXIF capture time."
+    },
+    {
+      "file": "original-captures/1542-production-closed.png",
+      "recordedAt": "2026-10-05T01:11:41.994Z",
+      "provenance": "Original screenshot image recovered from session output. Timestamp is image-view record, not EXIF capture time."
+    }
+  ]
+}

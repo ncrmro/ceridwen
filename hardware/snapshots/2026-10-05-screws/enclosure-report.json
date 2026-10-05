@@ -1,0 +1,1309 @@
+{
+  "headerGridPass": true,
+  "headerGridError": 5.0242958677880805e-15,
+  "status": "complete parametric mechanical concept",
+  "bounds": {
+    "min": [
+      -6,
+      -3,
+      -2
+    ],
+    "max": [
+      88,
+      58,
+      36.25000000000001
+    ]
+  },
+  "topology": [
+    {
+      "id": "CASE_BASE",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 22579.113796044443
+    },
+    {
+      "id": "CASE_CARRIER",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 10980.447084757227
+    },
+    {
+      "id": "CASE_DECK",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 9047.821802105813
+    },
+    {
+      "id": "CASE_STOP1",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 433.50058491750565
+    },
+    {
+      "id": "CASE_STOP2",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 433.5005849175057
+    },
+    {
+      "id": "CASE_COVER",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 27559.667140250338
+    },
+    {
+      "id": "CAP1",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 525.5492915845659
+    },
+    {
+      "id": "CAP2",
+      "valid": true,
+      "solidCount": 1,
+      "volume": 525.5492915845659
+    }
+  ],
+  "intersections": [],
+  "contacts": [
+    {
+      "a": "BB1",
+      "b": "CASE_BASE",
+      "distance": 0
+    },
+    {
+      "a": "BB1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "U1",
+      "b": "CASE_BASE",
+      "distance": 5.442655601817924
+    },
+    {
+      "a": "U1",
+      "b": "CASE_CARRIER",
+      "distance": 0.5
+    },
+    {
+      "a": "U1",
+      "b": "CASE_DECK",
+      "distance": 5.721887800367987
+    },
+    {
+      "a": "U1",
+      "b": "CASE_COVER",
+      "distance": 5.350000000000002
+    },
+    {
+      "a": "DISP1",
+      "b": "CASE_DECK",
+      "distance": 0
+    },
+    {
+      "a": "DISP1",
+      "b": "CASE_COVER",
+      "distance": 0.3500000000000014
+    },
+    {
+      "a": "DISP1",
+      "b": "OLED_29.5_7",
+      "distance": 0
+    },
+    {
+      "a": "DISP1",
+      "b": "OLED_29.5_30",
+      "distance": 0
+    },
+    {
+      "a": "DISP1",
+      "b": "OLED_52.5_7",
+      "distance": 0
+    },
+    {
+      "a": "DISP1",
+      "b": "OLED_52.5_30",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "CASE_DECK",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "CASE_STOP1",
+      "distance": 0.19999999999999574
+    },
+    {
+      "a": "SW1",
+      "b": "CASE_COVER",
+      "distance": 3.373796081567467
+    },
+    {
+      "a": "SW1",
+      "b": "CAP1",
+      "distance": 0.14999999999999858
+    },
+    {
+      "a": "SW1",
+      "b": "W05",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "W06",
+      "distance": 0
+    },
+    {
+      "a": "SW1",
+      "b": "W07",
+      "distance": 4.116163493350308
+    },
+    {
+      "a": "SW1",
+      "b": "W08",
+      "distance": 3.5160843806184383
+    },
+    {
+      "a": "SW2",
+      "b": "CASE_DECK",
+      "distance": 0
+    },
+    {
+      "a": "SW2",
+      "b": "CASE_STOP2",
+      "distance": 0.19999999999999574
+    },
+    {
+      "a": "SW2",
+      "b": "CASE_COVER",
+      "distance": 3.373796081567467
+    },
+    {
+      "a": "SW2",
+      "b": "CAP2",
+      "distance": 0.14999999999999858
+    },
+    {
+      "a": "SW2",
+      "b": "W07",
+      "distance": 0
+    },
+    {
+      "a": "SW2",
+      "b": "W08",
+      "distance": 0
+    },
+    {
+      "a": "BAT1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "BAT1",
+      "b": "CASE_DECK",
+      "distance": 0.6000000000000014
+    },
+    {
+      "a": "BAT1",
+      "b": "CASE_COVER",
+      "distance": 6
+    },
+    {
+      "a": "BAT1",
+      "b": "W03",
+      "distance": 1.9232633672149615
+    },
+    {
+      "a": "BAT1",
+      "b": "W04",
+      "distance": 2.6000000000000014
+    },
+    {
+      "a": "BAT1",
+      "b": "W07",
+      "distance": 14.039107364128354
+    },
+    {
+      "a": "BAT1",
+      "b": "W08",
+      "distance": 14.875308893067054
+    },
+    {
+      "a": "BAT1",
+      "b": "BAT_W0",
+      "distance": 0
+    },
+    {
+      "a": "BAT1",
+      "b": "BAT_W1",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "CASE_DECK",
+      "distance": 2
+    },
+    {
+      "a": "PWR2",
+      "b": "CASE_COVER",
+      "distance": 7
+    },
+    {
+      "a": "PWR2",
+      "b": "POWER_49_33",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "POWER_49_47",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "POWER_71_33",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "POWER_71_47",
+      "distance": 0
+    },
+    {
+      "a": "PWR2",
+      "b": "W07",
+      "distance": 4.492384004276418
+    },
+    {
+      "a": "PWR2",
+      "b": "W08",
+      "distance": 0.3000000000000007
+    },
+    {
+      "a": "PWR2",
+      "b": "BAT_W0",
+      "distance": 2.4115493725912485
+    },
+    {
+      "a": "PWR2",
+      "b": "BAT_W1",
+      "distance": 1.530983342360053
+    },
+    {
+      "a": "J1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "J1",
+      "b": "CASE_DECK",
+      "distance": 0.6000000000000014
+    },
+    {
+      "a": "J1",
+      "b": "CASE_COVER",
+      "distance": 7
+    },
+    {
+      "a": "J1",
+      "b": "W06",
+      "distance": 0.6999999999999993
+    },
+    {
+      "a": "J1",
+      "b": "W07",
+      "distance": 4.579549159502338
+    },
+    {
+      "a": "J1",
+      "b": "W08",
+      "distance": 3.306937759374286
+    },
+    {
+      "a": "J1",
+      "b": "BAT_W0",
+      "distance": 0
+    },
+    {
+      "a": "J1",
+      "b": "BAT_W1",
+      "distance": 0
+    },
+    {
+      "a": "PWR1",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "PWR1",
+      "b": "CASE_DECK",
+      "distance": 1.535533905932738
+    },
+    {
+      "a": "PWR1",
+      "b": "CASE_COVER",
+      "distance": 2.23606797749979
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "CASE_CARRIER",
+      "distance": 0
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "COVER_-3.5_14",
+      "distance": 0.20000000000000107
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "COVER_-3.5_41",
+      "distance": 0.20000000000000107
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "COVER_85.5_14",
+      "distance": 0.20000000000000107
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "COVER_85.5_41",
+      "distance": 0.20000000000000107
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "DECK_2.5_2.5",
+      "distance": 1.6
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "DECK_79.5_2.5",
+      "distance": 1.6
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "DECK_2.5_52.5",
+      "distance": 1.6
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "DECK_79.5_52.5",
+      "distance": 1.6000000000000014
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "POWER_49_33",
+      "distance": 12.100000000000001
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "POWER_49_47",
+      "distance": 8.000624975587845
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "POWER_71_33",
+      "distance": 10.900458705944452
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "POWER_71_47",
+      "distance": 8.000624975587845
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "CASE_DECK",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "CASE_COVER",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BASE_-3.5_6",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BASE_-3.5_49",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "COVER_-3.5_14",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "COVER_-3.5_41",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BASE_85.5_6",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BASE_85.5_49",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "COVER_85.5_14",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "COVER_85.5_41",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "DECK_2.5_2.5",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "DECK_79.5_2.5",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "DECK_2.5_52.5",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "DECK_79.5_52.5",
+      "distance": 0
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W01",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W02",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W03",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W04",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W05",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W06",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W07",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "W08",
+      "distance": 2.168683859873516
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BAT_W0",
+      "distance": 0.9093386622447802
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "BAT_W1",
+      "distance": 1.2000000000000028
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "CASE_STOP1",
+      "distance": 0
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "CASE_STOP2",
+      "distance": 0
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "CASE_COVER",
+      "distance": 1.5
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "POWER_49_33",
+      "distance": 4.732778552787987
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "POWER_49_47",
+      "distance": 5.799999999999997
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "POWER_71_33",
+      "distance": 4.680993925995329
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "POWER_71_47",
+      "distance": 5.799999999999997
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W01",
+      "distance": 1.1999999999999993
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W02",
+      "distance": 1.1999999999999993
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W03",
+      "distance": 1.1999999999999993
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W04",
+      "distance": 0.49999999999999645
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W05",
+      "distance": 0.3000000000000007
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W06",
+      "distance": 0.29999999999999716
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W07",
+      "distance": 0.3000000000000007
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "W08",
+      "distance": 0.30000000000000426
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "BAT_W0",
+      "distance": 3.1644624402640034
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "BAT_W1",
+      "distance": 3.26405667743935
+    },
+    {
+      "a": "CASE_STOP1",
+      "b": "CASE_COVER",
+      "distance": 1.8000000000000043
+    },
+    {
+      "a": "CASE_STOP1",
+      "b": "CAP1",
+      "distance": 0.3999999999999986
+    },
+    {
+      "a": "CASE_STOP1",
+      "b": "STOP_1_17.333333333333332",
+      "distance": 0
+    },
+    {
+      "a": "CASE_STOP1",
+      "b": "STOP_1_37.33333333333333",
+      "distance": 0
+    },
+    {
+      "a": "CASE_STOP2",
+      "b": "CASE_COVER",
+      "distance": 1.8000000000000043
+    },
+    {
+      "a": "CASE_STOP2",
+      "b": "CAP2",
+      "distance": 0.3999999999999986
+    },
+    {
+      "a": "CASE_STOP2",
+      "b": "STOP_2_44.666666666666664",
+      "distance": 0
+    },
+    {
+      "a": "CASE_STOP2",
+      "b": "STOP_2_64.66666666666666",
+      "distance": 0
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "CAP1",
+      "distance": 0.20000000000000995
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "CAP2",
+      "distance": 0.20000000000000995
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BASE_-3.5_6",
+      "distance": 0.2999999999999989
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BASE_-3.5_49",
+      "distance": 0.2999999999999957
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BASE_85.5_6",
+      "distance": 0.29999999999999044
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BASE_85.5_49",
+      "distance": 0.299999999999996
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "DECK_2.5_2.5",
+      "distance": 2.5
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "DECK_79.5_2.5",
+      "distance": 2.5
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "DECK_2.5_52.5",
+      "distance": 2.5
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "DECK_79.5_52.5",
+      "distance": 2.5
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "POWER_49_33",
+      "distance": 16.550000000000004
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "POWER_49_47",
+      "distance": 7.100000000000001
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "POWER_71_33",
+      "distance": 10.100000000000009
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "POWER_71_47",
+      "distance": 7.100000000000001
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "OLED_29.5_7",
+      "distance": 0.75
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "OLED_29.5_30",
+      "distance": 0.75
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "OLED_52.5_7",
+      "distance": 0.75
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "OLED_52.5_30",
+      "distance": 0.75
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "STOP_1_17.333333333333332",
+      "distance": 0.20000000000000284
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "STOP_1_37.33333333333333",
+      "distance": 0.20000000000000284
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "STOP_2_44.666666666666664",
+      "distance": 0.20000000000000284
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "STOP_2_64.66666666666666",
+      "distance": 0.20000000000000284
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W01",
+      "distance": 7.650000000000002
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W02",
+      "distance": 7.650000000000002
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W03",
+      "distance": 7.650000000000002
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W04",
+      "distance": 7.410000000000002
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W05",
+      "distance": 10.054950506883175
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W06",
+      "distance": 9.950000000000001
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W07",
+      "distance": 10.054950506883175
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "W08",
+      "distance": 9.950000000000001
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BAT_W0",
+      "distance": 12.700000000000003
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "BAT_W1",
+      "distance": 12.700000000000003
+    },
+    {
+      "a": "POWER_49_33",
+      "b": "W07",
+      "distance": 6.6584364658246376
+    },
+    {
+      "a": "POWER_49_33",
+      "b": "W08",
+      "distance": 6.840553580854877
+    },
+    {
+      "a": "POWER_49_33",
+      "b": "BAT_W0",
+      "distance": 2.3119915773217965
+    },
+    {
+      "a": "POWER_49_33",
+      "b": "BAT_W1",
+      "distance": 1.3194134740701655
+    },
+    {
+      "a": "W01",
+      "b": "W02",
+      "distance": 0.842220510185595
+    },
+    {
+      "a": "W01",
+      "b": "W03",
+      "distance": 1
+    },
+    {
+      "a": "W01",
+      "b": "W04",
+      "distance": 3.726661530556787
+    },
+    {
+      "a": "W01",
+      "b": "W05",
+      "distance": 5.550000000162531
+    },
+    {
+      "a": "W01",
+      "b": "W06",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W01",
+      "b": "W07",
+      "distance": 5.5500000000029335
+    },
+    {
+      "a": "W01",
+      "b": "W08",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W01",
+      "b": "BAT_W0",
+      "distance": 2.5500000001137324
+    },
+    {
+      "a": "W01",
+      "b": "BAT_W1",
+      "distance": 2.589435686763429
+    },
+    {
+      "a": "W02",
+      "b": "W03",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "W02",
+      "b": "W04",
+      "distance": 2.284441020371193
+    },
+    {
+      "a": "W02",
+      "b": "W05",
+      "distance": 6.750000000280305
+    },
+    {
+      "a": "W02",
+      "b": "W07",
+      "distance": 6.750000000030167
+    },
+    {
+      "a": "W02",
+      "b": "BAT_W0",
+      "distance": 3.350000000007102
+    },
+    {
+      "a": "W02",
+      "b": "BAT_W1",
+      "distance": 3.3815198103268576
+    },
+    {
+      "a": "W03",
+      "b": "W04",
+      "distance": 0.8422205101855946
+    },
+    {
+      "a": "W03",
+      "b": "W05",
+      "distance": 7.9710267764128835
+    },
+    {
+      "a": "W03",
+      "b": "W06",
+      "distance": 4.479999999999999
+    },
+    {
+      "a": "W03",
+      "b": "W07",
+      "distance": 7.02
+    },
+    {
+      "a": "W03",
+      "b": "W08",
+      "distance": 4.479999999999999
+    },
+    {
+      "a": "W03",
+      "b": "BAT_W0",
+      "distance": 4.150000000000165
+    },
+    {
+      "a": "W03",
+      "b": "BAT_W1",
+      "distance": 4.176243293635907
+    },
+    {
+      "a": "W04",
+      "b": "W05",
+      "distance": 9.25000000012531
+    },
+    {
+      "a": "W04",
+      "b": "W06",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W04",
+      "b": "W07",
+      "distance": 9.15000000102805
+    },
+    {
+      "a": "W04",
+      "b": "W08",
+      "distance": 1.9399999999999995
+    },
+    {
+      "a": "W04",
+      "b": "BAT_W0",
+      "distance": 4.950000000000039
+    },
+    {
+      "a": "W04",
+      "b": "BAT_W1",
+      "distance": 4.972477007591281
+    },
+    {
+      "a": "W05",
+      "b": "W06",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "W05",
+      "b": "W07",
+      "distance": 0.9999999999999964
+    },
+    {
+      "a": "W05",
+      "b": "W08",
+      "distance": 0.1999999999999993
+    },
+    {
+      "a": "W06",
+      "b": "W07",
+      "distance": 1.9999999999999962
+    },
+    {
+      "a": "W07",
+      "b": "W08",
+      "distance": 0.19999999999999574
+    },
+    {
+      "a": "W07",
+      "b": "BAT_W0",
+      "distance": 5.149999999999999
+    },
+    {
+      "a": "W07",
+      "b": "BAT_W1",
+      "distance": 5.149999999999999
+    },
+    {
+      "a": "W08",
+      "b": "BAT_W0",
+      "distance": 4.350000000000001
+    },
+    {
+      "a": "W08",
+      "b": "BAT_W1",
+      "distance": 4.350000000000001
+    },
+    {
+      "a": "BAT_W0",
+      "b": "BAT_W1",
+      "distance": 0.3999999999999986
+    }
+  ],
+  "permittedContacts": [
+    {
+      "a": "BB1",
+      "b": "U1",
+      "reason": "Header pins inserted 3 mm into breadboard sockets",
+      "volume": 19.660800000000002
+    },
+    {
+      "a": "U1",
+      "b": "W01",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "U1",
+      "b": "W02",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "U1",
+      "b": "W03",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616325
+    },
+    {
+      "a": "U1",
+      "b": "W04",
+      "reason": "Named wire termination",
+      "volume": 0.0565486677646162
+    },
+    {
+      "a": "U1",
+      "b": "W05",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616325
+    },
+    {
+      "a": "U1",
+      "b": "W06",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "U1",
+      "b": "W07",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616325
+    },
+    {
+      "a": "U1",
+      "b": "W08",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461634
+    },
+    {
+      "a": "DISP1",
+      "b": "W01",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461609
+    },
+    {
+      "a": "DISP1",
+      "b": "W02",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616097
+    },
+    {
+      "a": "DISP1",
+      "b": "W03",
+      "reason": "Named wire termination",
+      "volume": 0.05654866776461609
+    },
+    {
+      "a": "DISP1",
+      "b": "W04",
+      "reason": "Named wire termination",
+      "volume": 0.056548667764616097
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "BASE_-3.5_6",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753947
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "BASE_-3.5_49",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753934
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "BASE_85.5_6",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753972
+    },
+    {
+      "a": "CASE_BASE",
+      "b": "BASE_85.5_49",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753956
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "POWER_49_33",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.7143360527015767
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "POWER_49_47",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.7143360527015767
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "POWER_71_33",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.7143360527015776
+    },
+    {
+      "a": "CASE_CARRIER",
+      "b": "POWER_71_47",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.7143360527015776
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "DECK_2.5_2.5",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.78584013175395
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "DECK_79.5_2.5",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.7858401317539645
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "DECK_2.5_52.5",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753934
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "DECK_79.5_52.5",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753947
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "OLED_29.5_7",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.71433605270158
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "OLED_29.5_30",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.7143360527015803
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "OLED_52.5_7",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.7143360527015816
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "OLED_52.5_30",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 2.714336052701582
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "STOP_1_17.333333333333332",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 5.428672105403152
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "STOP_1_37.33333333333333",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 5.428672105403157
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "STOP_2_44.666666666666664",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 5.428672105403145
+    },
+    {
+      "a": "CASE_DECK",
+      "b": "STOP_2_64.66666666666666",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 5.42867210540315
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "COVER_-3.5_14",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.78584013175395
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "COVER_-3.5_41",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753934
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "COVER_85.5_14",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753973
+    },
+    {
+      "a": "CASE_COVER",
+      "b": "COVER_85.5_41",
+      "reason": "M2 thread engagement in named pilot bore",
+      "volume": 6.785840131753957
+    },
+    {
+      "a": "W02",
+      "b": "W06",
+      "reason": "Common electrical net junction",
+      "volume": 1.4985396957623305
+    },
+    {
+      "a": "W02",
+      "b": "W08",
+      "reason": "Common electrical net junction",
+      "volume": 0.22619467105846502
+    },
+    {
+      "a": "W06",
+      "b": "W08",
+      "reason": "Common electrical net junction",
+      "volume": 0.2261946710584651
+    }
+  ],
+  "interferencePass": true,
+  "footprintPass": true,
+  "wireFootprintViolations": [],
+  "componentFootprintViolations": [],
+  "motionChecks": [
+    {
+      "id": "CAP1",
+      "downTravel": 0.4,
+      "upTravel": 0.2,
+      "actuatorTravel": 0.25,
+      "printedPartIntersections": []
+    },
+    {
+      "id": "CAP2",
+      "downTravel": 0.4,
+      "upTravel": 0.2,
+      "actuatorTravel": 0.25,
+      "printedPartIntersections": []
+    }
+  ],
+  "motionPass": true,
+  "componentCount": 11,
+  "printedCount": 8,
+  "screwCount": 24,
+  "wireCount": 10,
+  "minimumClearanceAccepted": false,
+  "manufacturingReady": false,
+  "blockers": [
+    "Dimensions are editable design assumptions; physical fit and print tolerances are unverified.",
+    "Power module and power switch represent mechanical interfaces; battery electronics still require selection and validation.",
+    "Wiring paths represent a routed mechanical harness; actual connector polarity and breadboard continuity need checking."
+  ]
+}

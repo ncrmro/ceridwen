@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "units": "mm",
+  "method": "Axis-aligned envelope clearance, not detailed part/assembly acceptance",
+  "geometryPass": true,
+  "releaseReady": false,
+  "footprint": {
+    "datum": "BB1",
+    "size": [
+      82,
+      55
+    ],
+    "pass": true,
+    "violations": []
+  },
+  "minimumGap": 0.3,
+  "envelope": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      82,
+      55,
+      38.05
+    ],
+    "size": [
+      82,
+      55,
+      38.05
+    ]
+  },
+  "violations": [],
+  "blockers": [
+    "This report checks conservative component envelopes. See enclosure-report.json for solid, motion and header-grid checks; physical fit remains unverified.",
+    "Assumed dimensions require physical verification before manufacturing.",
+    "Power module and switch are mechanical studies, not a completed battery circuit.",
+    "BB1: provisional dimensions",
+    "BB1: Replace assumed dimensions with selected-part measurements",
+    "U1: provisional dimensions",
+    "U1: Replace assumed dimensions with selected-part measurements",
+    "DISP1: provisional dimensions",
+    "DISP1: Replace assumed dimensions with selected-part measurements",
+    "SW1: provisional dimensions",
+    "SW1: Replace assumed dimensions with selected-part measurements",
+    "CAP1: provisional dimensions",
+    "CAP1: Replace assumed dimensions with selected-part measurements",
+    "SW2: provisional dimensions",
+    "SW2: Replace assumed dimensions with selected-part measurements",
+    "CAP2: provisional dimensions",
+    "CAP2: Replace assumed dimensions with selected-part measurements",
+    "BAT1: provisional dimensions",
+    "BAT1: Replace assumed dimensions with selected-part measurements",
+    "PWR2: provisional dimensions",
+    "PWR2: Replace assumed dimensions with selected-part measurements",
+    "J1: provisional dimensions",
+    "J1: Replace assumed dimensions with selected-part measurements",
+    "PWR1: provisional dimensions",
+    "PWR1: Replace assumed dimensions with selected-part measurements",
+    "USB1: provisional dimensions",
+    "USB1: Actual cable dimensions"
+  ],
+  "allowedMates": [
+    [
+      "BB1",
+      "U1"
+    ],
+    [
+      "U1",
+      "USB1"
+    ],
+    [
+      "CAP1",
+      "SW1"
+    ],
+    [
+      "CAP2",
+      "SW2"
+    ]
+  ]
+}
