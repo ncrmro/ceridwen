@@ -1,0 +1,115 @@
+{
+  "milestone": "2026-10-05-push-pins",
+  "archivedAt": "2026-10-05T02:08:44.305315+00:00",
+  "originalObservedAt": "2026-10-05T01:24:25.216Z",
+  "provenance": "Recovered push-pin CAD source rebuilt during archival; enclosure matches the preserved pre-simplification file byte for byte. Historical desktop image recovered separately. Mobile and other capture-set images are new reconstructions.",
+  "capture": {
+    "captures": [
+      {
+        "file": "desktop.png",
+        "capturedAt": "2026-10-05T02:07:31.154Z",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "mode": "closed"
+      },
+      {
+        "file": "exploded.png",
+        "capturedAt": "2026-10-05T02:07:37.753Z",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "mode": "transparent exploded"
+      },
+      {
+        "file": "mobile.png",
+        "capturedAt": "2026-10-05T02:07:43.910Z",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "mode": "closed"
+      }
+    ],
+    "parameterSha256": "6f895d1ef18dbc74d0734fc9bf2ded2e6bbcf3a796bcaf8c677fc80a715b7d7c",
+    "report": "Digital assembly: PASSButton travel: PASSHeader grid: PASSBreadboard footprint: PASSCase: 94.0 \u00d7 61.0 \u00d7 38.3 mm8 printed parts \u00b7 24 printed push-pins \u00b7 10 routed wires",
+    "browser": "148.0.7778.96"
+  },
+  "printedParts": 8,
+  "screws": 0,
+  "pushPins": 24,
+  "manufacturingReady": false,
+  "sha256": {
+    "assembly-with-case.step": "c58275028cc5ec55dc6519ebcd2bbdb14f542a9589bcd60f360be84a7407034f",
+    "assembly.json": "c4762b0660243175d4df591c4b53f0d7518399594d89b1aa7c3c2af3736f2e76",
+    "bom.csv": "cf120c606e11145b00be5e03a1b9b84256fdf84214ed8b186b2cdd3d9c1c967b",
+    "cad-source.zip": "e5c5a59fcaaa4601228b9c66ac3c2d6de29abed15a3196d3b79d44670fa7912f",
+    "captures/capture.json": "db397b00775b0c8042cc73ef670bf452d470fb49d1bc2b2ea7d216eb43807eea",
+    "captures/desktop.png": "6c644ee84c9a7167ed8488d4e58067214a231684197a3ef51f65f5e4404f3a36",
+    "captures/exploded.png": "61b2656e397b9e88be4e5f24aa57618fa3158020c6522fca423a7dc7885592a4",
+    "captures/mobile.png": "d785f46eca21f9ff390e1b2e474a4ed3ea87aec84d4cc755bde1b154af149065",
+    "component-metadata.json": "424a2bd9049b8e2ea14eab8226510bc36249a53f4a46730e54b4f22788c58d7c",
+    "components/BAT1.step": "eb44630f48b0c3f812d0610cf2d54f31b848d5c3a7cfe1c602e46d4af7a2c2c4",
+    "components/BAT1.stl": "b3ff4499a8b47959ca235f828119d6f1388668aa5049714ec74a17659672d9e0",
+    "components/BB1.step": "0746e16c3bf8943405b44582607e5392b0e5726510136e1f000f0b97ab815c57",
+    "components/BB1.stl": "63e9948a153bb98cc727daeb1c21fdb3051770b624f7a66e1f8ee73d42d68d89",
+    "components/CAP1.step": "b5052a127297b22e9e423ed604caab52e4066108d0dfa9a62525fb2483b5d14c",
+    "components/CAP1.stl": "d16b8f363392e30344094cc24333ad297d2a122f4f671b4fd55de5f8ca922e10",
+    "components/CAP2.step": "d5c7d8881224ae4941935db7c5c67942aba3c2cd1681c26be06fc67829df5a40",
+    "components/CAP2.stl": "d16b8f363392e30344094cc24333ad297d2a122f4f671b4fd55de5f8ca922e10",
+    "components/DISP1.step": "b0f981595d1c8d90702a1065d4517c9e2ef44c6973ca975c7448d4666915a4ec",
+    "components/DISP1.stl": "c83e558724335e1f2c39ceaa34ca3b240d59f90165716da0793f6d1e414b0568",
+    "components/J1.step": "b5a2e90adf71fb03e43e56b9ccca94d8163cf9f3995605c7265bf42dead1ac59",
+    "components/J1.stl": "12cd567a67ac34734b98aac85a8e5ce33c75c6433187c5d6fa74a4f4cefbd5eb",
+    "components/PUSH_PIN_4.step": "8ea02f9464caadf6290a0c92b7d2028c85e7dd106a5cd004c8dcc7cb6f91a662",
+    "components/PUSH_PIN_6.step": "5436db2fbe2e85b2d4cbe8e13acb28f68dfd4b96292c4805913a81d1315f0718",
+    "components/PUSH_PIN_8.step": "2cbd2f95f69b60b647544fb124ea2f4f0cc91b85f3b7dbbe9eeb43c6a55a80bd",
+    "components/PWR1.step": "2cca33cfca4882400d5f5e4b5e4ec387a3786e917f224ab154c039fb8bbf6932",
+    "components/PWR1.stl": "f7f4e00e7000a926190d294d5003aa59546d7a95445c9647aacc99e62f6b4dc8",
+    "components/PWR2.step": "51267d797db4a844c22c5b2e5924e33cfdc5091fd4c403031809af2847f98dcb",
+    "components/PWR2.stl": "7095e809630b78aad9bf18a3f806a4516f9d7d7110848b5625bd6cc5272decb0",
+    "components/SW1.step": "067c871546ba0c12066a6499a806a0c2f729b9d2c6637790c56c912e2f2310c1",
+    "components/SW1.stl": "3f25526d625456dce6e6d81e98eae1ed0305b37a7122635cb1a337bf8ff6a2fd",
+    "components/SW2.step": "f0d424328143b0a4b996a118959350ed8a37b86151dc8bf5675a573c46e28682",
+    "components/SW2.stl": "3f25526d625456dce6e6d81e98eae1ed0305b37a7122635cb1a337bf8ff6a2fd",
+    "components/U1.step": "3bf4dc7e0a71bd17ebecaa0298a01aa7becbe230ee06a65b9a7e984c4eab05f9",
+    "components/U1.stl": "9e4a3459bf57ed0b15635da931a69354320438ecb5e19542fbfa2e4b075fc088",
+    "enclosure/CAP1.step": "38f4c41b24156f33a9e9feb5590da4e09a9773c8d4ea2a4e48a8031c0c5a9342",
+    "enclosure/CAP1.stl": "4bb6a1cd46e466489434d6c67c2366e635e1f2ace04c4846f154231768cbca15",
+    "enclosure/CAP2.step": "be374e12789e23fb630debe45243c8eacac7b839763f7242699532179afcff32",
+    "enclosure/CAP2.stl": "ac098a4911d7e2a399e3495f2168ca91a3218fbe036ed59235c9422ad13e6c67",
+    "enclosure/CASE_BASE.step": "56a4774ee371369ee166455695bb01a21e79008ba6ec3658bf740b31cd2c805f",
+    "enclosure/CASE_BASE.stl": "45d8ac6165415c9bd7795080489192ed57dd3644d578eba91d906c2b3dbe7a77",
+    "enclosure/CASE_CARRIER.step": "c6fdacd10a0ecf02b65122df19e7e0db93c209922fa9360c1c716f48eef33c25",
+    "enclosure/CASE_CARRIER.stl": "54baba89a7800456b0a55079fdaa414f1cbb742c61bfbc680601ee5d8326fc81",
+    "enclosure/CASE_COVER.step": "932b1f65833fc2ebde32241f1425529b3615839e8d21abd5b04eb6a26e0f3753",
+    "enclosure/CASE_COVER.stl": "b289f40203f07d4352e9a9d805e3afcabdc3751ce6b9c4a99ae24b441b932aaa",
+    "enclosure/CASE_DECK.step": "2b98d38861cbdf08c7fb9afff092d9941bc584e9e3def210b90940f2ee2dfafa",
+    "enclosure/CASE_DECK.stl": "8cc1e6dae734c33d6b388d49c6023ca99f49d19618d12e1f0e61b5db0b8c5606",
+    "enclosure/CASE_STOP1.step": "32222092e71c08d3e1d5ac88abc3fde9a2621526e5df6d9392652f5869fcdbd3",
+    "enclosure/CASE_STOP1.stl": "2c47813b85e6ca2382956ae15bc4d71c7b0f2b322ba1843612b3487876e2b121",
+    "enclosure/CASE_STOP2.step": "33478548f2726f569dbda8c5e1115372ad7aad7f99f3ea7674b6f6c655ba4145",
+    "enclosure/CASE_STOP2.stl": "2463fbf363d7697295fa2b34ec6da5ded4da77185467cae59ab3b96d2f4fbe2d",
+    "enclosure/PUSH_PIN_4.stl": "89e765056acea5600d2a2d3e34072f6830606cb50a5e327a032c8bc455130da5",
+    "enclosure/PUSH_PIN_6.stl": "e2a6240ddd12c7cbfbf880187042ad835f1aecf201cbeb10c5f22e98995a1e3e",
+    "enclosure/PUSH_PIN_8.stl": "a089fda2150e9b47c1b3a4b33564a500ccb60af9cc8a617d015a8a0ebda83125",
+    "enclosure/README.txt": "df61bc69a809e06c87880075d99d75072597e59ee64e335520b426936a41a4fd",
+    "enclosure-report.json": "3247c3b7cd3080426c83aaaff7906896289c4479cbe4c686469bd00e0f1daf6e",
+    "fit-report.json": "74a52acc0ebc7ead8ebe596f803bfde6127e6845f28a932b508e274fa030925e",
+    "harness.json": "bb44f379df9fba6d01daf787e23ac18290bc4f01b17688e140551745e6d199ab",
+    "parameters.json": "6f895d1ef18dbc74d0734fc9bf2ded2e6bbcf3a796bcaf8c677fc80a715b7d7c",
+    "push-pins.json": "338ed2061f918eb70c59b315fa019e2adc3307f3f0eb4ecc699339b74ea40107",
+    "original-captures/1813-server-restarted.png": "6c644ee84c9a7167ed8488d4e58067214a231684197a3ef51f65f5e4404f3a36",
+    "README.md": "cd8204c48b2d5709aaa1afe0c60b0c1382463afda1328ebd534fd265ec2ba209",
+    "source-provenance.json": "4287775daa36eb8eb4384ab250bcc2e8e95c1f12d1fe99f256400a5286ecfc4a"
+  },
+  "originalCaptures": [
+    {
+      "file": "original-captures/1813-server-restarted.png",
+      "recordedAt": "2026-10-05T01:24:25.216Z",
+      "provenance": "Original screenshot image recovered from session output. Timestamp is image-view record, not EXIF capture time."
+    }
+  ]
+}

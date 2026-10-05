@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "session_id": "01a1070a-d3fa-78c3-8574-6d98d73a68be",
+  "timestamp_zone": "UTC",
+  "archival_notice": "This is a newly reconstructed historical snapshot, not an original historical commit. Model exports and mobile views generated during archival are reproductions; recovered historical images are identified separately.",
+  "validation": "Recovered TypeScript passed tsc --noEmit. Both reconstructed historical assemblies subsequently rebuilt with digital fit checks passing.",
+  "image_notice": "Historical PNGs were recovered from image-tool outputs and may have been resized by that tool. Recorded image timestamps are observation times, not independently known shutter times. No original historical mobile PNG was recovered.",
+  "milestone": "push-pins",
+  "milestone_completed_at": "2026-10-05T01:18:35.652Z",
+  "basis": "The recovered screw-stage source with recorded screw-to-push-pin edits applied as literal text transformations. No recovered shell command was executed.",
+  "source_files": [
+    {
+      "method": "reconstructed by recorded literal replacements",
+      "changed_at": [
+        "2026-10-05T01:14:01.315Z",
+        "2026-10-05T01:14:23.637Z"
+      ],
+      "files": [
+        "hardware/cad/src/enclosure.ts",
+        "hardware/cad/src/build-design.ts",
+        "hardware/cad/src/parameters.ts",
+        "hardware/cad/scripts/export.ts",
+        "hardware/cad/src/main.ts",
+        "hardware/cad/src/design.worker.ts",
+        "hardware/cad/src/print.ts",
+        "hardware/cad/index.html",
+        "hardware/cad/src/parameters.test.ts"
+      ]
+    },
+    {
+      "method": "exact literal source write",
+      "written_at": "2026-10-05T01:14:01.315Z",
+      "files": [
+        "hardware/cad/src/models/push-pin.ts"
+      ]
+    },
+    {
+      "method": "reconstructed by recorded literal replacements to recovered screw-stage test",
+      "changed_at": "2026-10-05T01:15:25.121Z",
+      "files": [
+        "hardware/cad/tests/workbench.spec.ts"
+      ]
+    },
+    {
+      "method": "removed in the recorded push-pin change",
+      "changed_at": "2026-10-05T01:14:01.315Z",
+      "files": [
+        "hardware/cad/src/models/fastener.ts"
+      ]
+    },
+    {
+      "method": "unchanged from recovered screw-stage source; see screw provenance for exact-read versus reconstructed versus supporting-file classifications",
+      "files": [
+        "all remaining source files"
+      ]
+    },
+    {
+      "method": "new archival screenshot harness added during recovery",
+      "files": [
+        "hardware/cad/scripts/capture.ts"
+      ]
+    }
+  ],
+  "independent_confirmation": "Recovered enclosure.ts is byte-identical to the separately preserved pre-simplification push-pin enclosure source.",
+  "historical_image": {
+    "file": "1813-server-restarted.png",
+    "observed_at": "2026-10-05T01:24:25.216Z",
+    "note": "Historical push-pin workbench after the server restart."
+  }
+}

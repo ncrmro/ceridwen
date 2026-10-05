@@ -1,0 +1,106 @@
+{
+  "schema": 2,
+  "parameters": {
+    "breadboard": {
+      "length": 82,
+      "width": 55,
+      "height": 9,
+      "pitch": 2.54,
+      "rows": 30,
+      "channel": 7.62
+    },
+    "esp32": {
+      "length": 22.5,
+      "width": 18,
+      "pcbThickness": 1.6,
+      "pitch": 2.54,
+      "rowSpacing": 15.24,
+      "pins": 8,
+      "pcbBase": 7,
+      "usbWidth": 9,
+      "usbHeight": 3.2
+    },
+    "oled": {
+      "width": 27,
+      "depth": 27,
+      "pcbThickness": 1.6,
+      "pcbBase": 4,
+      "glassWidth": 24,
+      "glassDepth": 14,
+      "glassThickness": 2,
+      "glassX": 1.5,
+      "glassY": 6,
+      "holeInset": 2,
+      "holeDiameter": 2.3,
+      "viewWidth": 21.7,
+      "viewDepth": 10.9
+    },
+    "button": {
+      "bodyWidth": 6,
+      "bodyDepth": 6,
+      "bodyHeight": 3.5,
+      "actuatorHeight": 1.5,
+      "actuatorDiameter": 3.4,
+      "leadLength": 3,
+      "leadSpacing": 6.5,
+      "travel": 0.25
+    },
+    "battery": {
+      "length": 32,
+      "width": 20.5,
+      "thickness": 5.3,
+      "leadSpace": 2
+    },
+    "power": {
+      "width": 26,
+      "depth": 18,
+      "height": 7,
+      "pcbThickness": 1.6,
+      "holeInset": 2
+    },
+    "connector": {
+      "width": 8,
+      "depth": 6,
+      "height": 5
+    },
+    "powerSwitch": {
+      "width": 10,
+      "depth": 5,
+      "height": 5,
+      "leverHeight": 3
+    },
+    "pushFit": {
+      "diameter": 2,
+      "headDiameter": 3.8,
+      "headHeight": 1.6,
+      "slotWidth": 0.5,
+      "radialInterference": 0.05
+    },
+    "case": {
+      "wall": 2,
+      "gap": 1,
+      "mountRail": 5,
+      "floor": 2,
+      "carrierThickness": 2,
+      "wireGap": 3,
+      "layerGap": 2,
+      "deckThickness": 2,
+      "standoff": 3,
+      "roof": 2,
+      "cornerRadius": 2.5,
+      "screenGap": 0.35,
+      "batteryClearance": 0.6
+    },
+    "cap": {
+      "width": 14,
+      "depth": 12,
+      "flangeThickness": 1.2,
+      "stemHeight": 0.6,
+      "stemWidth": 3,
+      "fingerHeight": 4,
+      "sideGap": 0.3,
+      "contactGap": 0.15,
+      "returnGap": 0.2
+    }
+  }
+}
