@@ -1,0 +1,21 @@
+{
+  "milestone": "2026-10-04-first-shell",
+  "archivedAt": "2026-10-05T02:03:03.368361+00:00",
+  "provenance": "Original image evidence only. No complete reproducible CAD source or matching model exports have been recovered for this early study.",
+  "originalCaptures": [
+    {
+      "file": "1021-case-closed.png",
+      "recordedAt": "2026-10-04T22:53:47.112Z",
+      "provenance": "Original screenshot recovered from the session image output; timestamp is the image-view record, not EXIF capture time."
+    },
+    {
+      "file": "1021-workbench-exploded.png",
+      "recordedAt": "2026-10-04T22:53:47.112Z",
+      "provenance": "Original screenshot recovered from the session image output; timestamp is the image-view record, not EXIF capture time."
+    }
+  ],
+  "sha256": {
+    "1021-workbench-exploded.png": "9a721065f9b318b231552bd7c3973331edfcc2f20e6555c38f7a3659145d7786",
+    "1021-case-closed.png": "35e27332b3c5931e0bfaaec618bbbd63ad2141945542d5db593e4d481c44e69a"
+  }
+}
